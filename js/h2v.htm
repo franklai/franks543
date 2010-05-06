@@ -1,0 +1,148 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<title>橫書轉直書</title>
+<style type="text/css">
+textarea {
+	font-size:10pt;
+	white-space: normal;
+	width: 600px;
+	height: 200px;}
+input#delimiter {
+	width: 20px;}
+</style>
+
+<script type="text/javascript">
+<!--
+window.onload = init;
+
+function init()
+{
+    document.getElementById("buttonSubmit").onclick = Convert;
+    
+    // test form element
+    //var str = listMember(document.getElementById("form1"), "\n");
+    //var str = listMember(navigator, "\n");
+    //document.getElementById("taOutput").value = str;
+}
+
+function Convert()
+{
+	// right to left, or left to right
+	var rtl = document.getElementById("rtl").checked;
+	
+	//
+	var delimiter = document.getElementById("delimiter").value;
+
+	// get output object
+	var outputObj = document.getElementById("taOutput");
+
+	// get input string
+	var str = document.getElementById("taInput").value;
+	var lines = str.split("\n");
+	for (var index in lines){
+		// erase Carriage Return
+		lines[index] = lines[index].replace(/\r/g, "");
+	}
+
+	// find the longest string length
+	var longest = findLongest(lines);
+
+	var vertical = new Array();
+	for (var i = 0; i < longest; i++){
+		vertical[i] = new String();
+	}
+
+	for (var index in lines){
+		var line = lines[index];
+		var length = line.length;
+
+		var i = 0;
+		if (rtl){ // right to left
+			for (i = 0; i < length; i++){
+				vertical[i] = line.charAt(i) + delimiter + vertical[i];
+			}
+			
+			if (i < longest){
+				for (; i < longest; i++){
+					vertical[i] = "　" + delimiter + vertical[i];
+				}
+			}
+		}
+		else { // left to right
+			for (i = 0; i < length; i++){
+				vertical[i] += line.charAt(i) + delimiter;
+			}
+			
+			if (i < longest){
+				for (; i < longest; i++){
+					vertical[i] += "　" + delimiter;
+				}
+			}
+		}
+	}
+
+	// output result
+	outputObj.value = "";
+
+	var start = 0;
+	var end = longest - 1;
+	var inc = 1;
+	if (rtl){
+		//vertical.reverse();
+	}
+	for (var index in vertical){
+		outputObj.value += vertical[index];
+		outputObj.value += "\n";
+	}
+}
+
+function findLongest(lines)
+{
+	var length = 0;
+
+	for (var index in lines){
+		var len = lines[index].length;
+		if (len > length){
+			length = len;
+		}
+	}
+	
+	return length;
+}
+
+
+function listMember(obj, tail)
+{
+	var str = "";
+
+	for (var item in obj){
+		str += item + ":" + obj[item] + tail;
+	}
+	
+	return str;
+}
+
+//-->
+</script>
+
+</head>
+<body>
+
+
+<form id="form1">
+<textarea id="taInput">登鸛雀樓　　　　王之渙
+
+白日依山盡，黃河入海流﹔
+欲窮千里目，更上一層樓。</textarea>
+<br />
+<input type="radio" name="mode" id="rtl" checked="checked" /><label for="rtl">由右到左輸出</label>
+<input type="radio" name="mode" id="ltr" /><label for="ltr">由左到右輸出</label>
+　分隔字元<input type="text" id="delimiter" value=" " />
+<input type="button" id="buttonSubmit" value="送出" />
+<br />
+<textarea id="taOutput"></textarea>
+
+</form>
+</body>
+</html>

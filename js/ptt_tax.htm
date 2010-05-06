@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="ptt,tax,money,p幣,贈與稅,PttBBS,Ptt幣" />
+<title>P幣 扣稅 計算程式</title>
+<style type="text/css">
+div#container {
+width: 660px;
+}
+#ta {
+width: 600px;
+height: 300px;
+}
+p {
+font-size: 12pt;
+text-indent: 24pt;
+font-family: sans serif;
+}
+ul li {
+list-style-type: none;
+margin-bottom: 3px;
+}
+.outputDiv {
+padding: 10px;
+}
+</style>
+<script type="text/javascript">
+<!--
+window.onload = init;
+
+function init()
+{
+    document.getElementById('form1').onsubmit = function (){
+        return false; // disable original submit function
+    };
+    document.getElementById('form2').onsubmit = function (){
+        return false; // disable original submit function
+    };
+
+    /**
+     * x means the amount of money before levying tax
+     * y means the amount of money after levying tax
+     */
+
+    // given y, calculating x
+    document.getElementById('submit1').onclick = function (){
+        var output = document.getElementById('output1');
+        var y = document.getElementById('text1').value;
+        var verfiedY = parseInt(y);
+
+        if ( isNaN(verfiedY) ){
+            output.innerHTML = '非合法輸入';
+            return false;
+        }
+
+        if ( verfiedY <= 0){
+            output.innerHTML = '要給錢有點誠意啊';
+            return false;
+        }
+
+        var x = give_original(verfiedY);
+
+        output.innerHTML = '你需要給：'+x;
+
+        output.innerHTML += '<br />(稅前：'+x+'；稅後：'+verfiedY+')';
+    };
+
+    // given x, calculating y
+    document.getElementById('submit2').onclick = function (){
+        var output = document.getElementById('output2');
+        var x = document.getElementById('text2').value;
+        var verfiedX = parseInt(x);
+
+        if ( isNaN(verfiedX) ){
+            output.innerHTML = '非合法輸入';
+            return false;
+        }
+
+        if ( verfiedX <= 0){
+            output.innerHTML = '要給錢有點誠意啊';
+            return false;
+        }
+
+        var y = give_discount(verfiedX);
+
+        output.innerHTML = 'Ptt贈與稅為：'+(verfiedX - y);
+        output.innerHTML += '<br />對方會收到：'+y;
+
+        output.innerHTML += '<br />(稅前：'+verfiedX+'；稅後：'+y+')';
+    };
+
+}
+
+function give_tax(money)
+{
+    var tax = 0;
+    var tax_bound = [1000000, 100000, 10000, 1000, 0];
+    var tax_rate = [0.4, 0.3, 0.2, 0.1, 0.08];
+    var tmp = money;
+
+    for (var index in tax_bound){
+        if (tmp > tax_bound[index] && tmp > 0){
+            tax += (tmp - tax_bound[index]) * tax_rate[index];
+            tax = Math.floor(tax);
+
+            tmp = tax_bound[index];
+        }
+    }
+
+    return (tax <= 0)? 1: tax;
+}
+
+function give_discount(money)
+{
+    var tax_bound = [1000000, 100000, 10000, 1000, 0];
+    var discount_rate = [0.6, 0.7, 0.8, 0.9, 0.92];
+    var discount_value = 0;
+    var tmp = money;
+
+    if (money <= 0){
+        return 0;
+    }
+    
+    if (money <= 24){
+        return money - 1;
+    }
+
+    for (var index in tax_bound){
+        if (tmp > tax_bound[index] && tmp > 0){
+            discount_value += (tmp - tax_bound[index]) * discount_rate[index];
+            discount_value = Math.ceil(discount_value);
+
+            tmp = tax_bound[index];
+        }
+    }
+
+    return discount_value;
+}
+function give_original(money)
+{
+    var bound = [711020, 81020, 9020, 920, 0];
+    var rate = [0.6, 0.7, 0.8, 0.9, 0.92];
+    var original = 0;
+    var tmp = money;
+
+    if (money <= 0){
+        return 0;
+    }
+    if (money <= 11){
+        return money + 1;
+    }
+
+    for (var index in bound){
+        if (money > bound[index]){
+            original += (tmp - bound[index]) / rate[index];
+            original = Math.floor(original);
+
+            tmp = bound[index];
+        }
+    }
+
+    while (give_discount(original - 1) == money){
+        original--;
+    }
+
+    return original;
+}
+//-->
+</script>
+</head>
+<body>
+<div id="container">
+
+<div id="inputDiv">
+<p>
+格式參考 <a href="http://www.cs.ccu.edu.tw/~tch93/tax.php" target="_blank">PttBBS 贈與稅計算程式</a>
+</p>
+<p>
+程式一為計算你要給對方多少錢, 才會讓對方得到你想要的金額
+<br />
+程式二為計算你給對方錢時, 對方實得的金錢與稅金
+</p>
+
+<form id="form1" action="">
+<ul>
+<li>〈程式一〉</li>
+<li>對方將欲收到：<input type="text" id="text1" value="" maxlength="6" />Ptt幣</li>
+<li><input type="submit" id="submit1" value="送出" /></li>
+<li><div id="output1" class="outputDiv"></div></li>
+</ul>
+</form>
+
+== 我是分隔線 ==
+
+<form id="form2" action="">
+<ul>
+<li>〈程式二〉</li>
+<li>你要給對方：<input type="text" id="text2" value="" maxlength="6" />Ptt幣</li>
+<li><input type="submit" id="submit2" value="送出" /></li>
+<li><div id="output2" class="outputDiv"></div></li>
+</ul>
+</form>
+
+</div>
+
+<div id="taDiv">
+<p>
+稅率說明：截自Ptt使用手冊 第八章 娛樂休閒
+</p>
+<textarea id="ta" rows="1" cols="1">
+    △ 給其他人錢：這裡提供把p幣送人的功能(使用者名單按g也可以)，但是會
+                   被系統扣稅，稅率如下。
+
+                   http://www.cs.ccu.edu.tw/~tch93/tax.php
+
+
+       稅前=x 稅後=y (小數點後無條件捨去)
+
+       x=2~24            →  y=x-1
+       x=25~1000         →  y=(x-1)*0.92+1
+       x=1000~10000      →  y=(x-1)*0.9+21
+       x=10000~100000    →  y=(x-1)*0.8+1021
+       x=100000~1000000  →  y=(x-1)*0.7+11021
+       x=1000000~        →  y=(x-1)*0.6+111021
+
+       y=1~23            →  x=y+1
+       y=24~920          →  x=(y-1)/0.92+1
+       y=920~9020        →  x=(y-21)/0.9+1
+       y=9020~81020      →  x=(y-1021)/0.8+1
+       y=81020~711020    →  x=(y-11021)/0.7+1
+       y=711020~         →  x=(y-111021)/0.6+1
+</textarea>
+</div>
+
+</div>
+</body>
+</html>

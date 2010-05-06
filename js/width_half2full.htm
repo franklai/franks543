@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Halfwidth spaces to Fullwidth (for Japanese lyric)</title>
+<style type="text/css">
+fieldset {
+float: left;
+position: relative;
+width: 36%;
+height: 500px;
+}
+textarea {
+width: 98%;
+height: 95%;
+}
+#btn_replace {
+float: left;
+position: relative;
+display: block;
+height: 30px;
+margin-top: 200px;
+}
+</style>
+<script type="text/javascript">
+(function (){
+    function $(name) {
+        return document.getElementById(name);
+    }
+	window.onload = function () {
+		$("btn_replace").onclick = function () {
+//             var pattern = /(?<=[^a-zA-Z]) | (?=[^a-zA-Z])/;
+//  unfortunatelly, JavaScript only supports look-ahead, no look-behind
+            var str = $("ta_input").value;
+
+            str = str.replace(/ (?=[^a-zA-Z0-9])/, "　");
+            $("ta_output").value = str.replace(/([^a-zA-Z0-9]) /, "$1　");
+        };
+    };
+	
+})();
+
+
+</script>
+</head>
+<body>
+<div id="container">
+
+<div id="taDiv">
+	<fieldset>
+		<legend>Input</legend>
+		<textarea id="ta_input">原歌詞貼在這裡</textarea>
+	</fieldset>
+	
+	<input type="button" id="btn_replace" value="half --&gt; full" />
+	
+	<fieldset>
+		<legend>Output</legend>
+		<textarea id="ta_output">這裡會出現結果</textarea>
+	</fieldset>
+</div>
+
+</div>
+</body>
+</html>
