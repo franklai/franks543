@@ -5,8 +5,8 @@
             link: '321-grid-right-click-test.htm'
         },
         {
-            title: 'right click on grid to select row',
-            link: '321-grid-right-click-test.htm'
+            title: 'Fix TriggerField in Toolbar, wrong trigger height',
+            link: '321-toolbar-trigger-fix.htm'
         }
 
     ]
