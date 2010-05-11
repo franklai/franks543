@@ -2,10 +2,12 @@
     links: [
         {
             title: 'right click on grid to select row',
+            version: '3.2.1',
             link: '321-grid-right-click-test.htm'
         },
         {
             title: 'Fix TriggerField in Toolbar, wrong trigger height (Webkit)',
+            version: '3.2.1',
             link: '321-toolbar-trigger-fix.htm'
         }
 

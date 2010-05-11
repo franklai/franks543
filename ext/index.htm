@@ -13,7 +13,7 @@ Ext.onReady(function(){
         autoLoad: true,
         root: 'links',
         fields: [
-            'title', 'link'
+            'title', 'version', 'link'
         ]
     });
     
@@ -22,6 +22,12 @@ Ext.onReady(function(){
         columns: [{
             header: '標題', 
             dataIndex: 'title', 
+            sortable: true
+        }, {
+            header: '版本',
+            dataIndex: 'version',
+            width: .1,
+            align: 'center',
             sortable: true
         }, {
             header: '連結', 
