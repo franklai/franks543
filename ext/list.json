@@ -5,7 +5,7 @@
             link: '321-grid-right-click-test.htm'
         },
         {
-            title: 'Fix TriggerField in Toolbar, wrong trigger height',
+            title: 'Fix TriggerField in Toolbar, wrong trigger height (Webkit)',
             link: '321-toolbar-trigger-fix.htm'
         }
 
