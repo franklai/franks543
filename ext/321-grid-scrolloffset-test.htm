@@ -88,32 +88,52 @@ Ext.onReady(function(){
 	};
 	var grid2 = new Ext.grid.GridPanel(obj2);
 	
+	var onLayout = function() {
+		var els = this.el.select('.x-grid3-scroller', this);
+		var scroller = els.elements[0];
+
+		if (scroller.clientWidth === scroller.offsetWidth) {
+			// no scroller
+			this.scrollOffset = 2;
+		} else {
+			// scroller
+			this.scrollOffset = undefined;
+		}
+		this.fitColumns(false);
+	};
+	
 	Ext.apply(obj, {
+		bbar: new Ext.PagingToolbar({
+			store: jsonStore
+		}),
+		viewConfig: {
+			onLayout: onLayout
+		}
+	});
+	var gridFixed = new Ext.grid.GridPanel(obj);
+
+	Ext.apply(obj2, {
 		bbar: new Ext.PagingToolbar({
 			store: jsonStoreMore
 		}),
 		viewConfig: {
-			onLayout: function() {
-				// store original scrollOffset
-				if (!this.orgScrollOffset) {
-					this.orgScrollOffset = this.scrollOffset;
-				}
-				
-				var scroller = Ext.select('.x-grid3-scroller', this).elements[0];
-				if (scroller.clientWidth === scroller.offsetWidth) {
-					// no scroller
-					this.scrollOffset = 0;
-				} else {
-					// scroller
-					this.scrollOffset = this.orgScrollOffset;
-				}
-				this.fitColumns(false);
-			}
+			onLayout: onLayout
 		}
 	});
-	
-	var gridFixed = new Ext.grid.GridPanel(obj);
+	var gridFixed2 = new Ext.grid.GridPanel(obj2);
 
+	var dummy = new Ext.Window({
+		//renderTo: 'container',
+		autoShow: true,
+		y: 10,
+		x: 10,
+		layout: 'fit',
+		width: 400,
+		height: 300,
+		items: [gridFixed2]
+	});
+	dummy.show();
+/*
 	var ct = new Ext.Panel({
 		renderTo: 'container',
 		border: false,
@@ -123,8 +143,9 @@ Ext.onReady(function(){
 		layoutConfig: {
 			columns: 2
 		},
-		items: [grid, grid2, gridFixed]
+		items: [grid, grid2, gridFixed, gridFixed2]
 	});
+*/
 });
 </script>
 </head>
