@@ -14,8 +14,12 @@
             title: 'Change scrollOffset of GridPanel dynamically',
             version: '3.2.1',
             link: '321-grid-scrolloffset-test.htm'
+        },
+        {
+            title: 'IE Press button will move background problem',
+            version: '3.2.1',
+            link: '321-ie-button-background-fix.htm'
         }
-
     ]
 }
 
