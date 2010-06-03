@@ -19,6 +19,11 @@
             title: 'IE Press button will move background problem',
             version: '3.2.1',
             link: '321-ie-button-background-fix.htm'
+        },
+        {
+            title: 'CSS cursor test',
+            version: '3.2.1',
+            link: '321-CSS-cursor.htm'
         }
     ]
 }

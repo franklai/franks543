@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 - CSS cursor test</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var store = new Ext.data.ArrayStore({
+		autoDestroy: true,
+		fields: [
+			'cursor',
+			'type'
+		],
+		data: [
+			//['', ''],
+			['all-scroll', 'Microsoft'],
+			['col-resize', 'Microsoft'],
+			['crosshair', 'W3C'],
+			['default', 'W3C'],
+			['hand', 'Microsoft'],
+
+			['-----', '-----'],
+
+			['help', 'W3C'],
+			['move', 'W3C'],
+			['no-drop', 'Microsoft'],
+			['not-allowed', 'Microsoft'],
+			['pointer', 'W3C'],
+			['progress', 'W3C'],
+
+			['-----', '-----'],
+
+			['row-resize', 'Microsoft'],
+			['text', 'W3C'],
+			['url', 'Microsoft'],
+			['vertical-text', 'Microsoft'],
+			['wait', 'W3C'],
+			['n-resize', 'W3C'],
+			['nw-resize', 'W3C'],
+			['w-resize', 'W3C'],
+			['sw-resize', 'W3C'],
+			['s-resize', 'W3C'],
+			['se-resize', 'W3C'],
+			['e-resize', 'W3C'],
+			['ne-resize', 'W3C']
+		]
+	});
+
+	var panel = new Ext.list.ListView({
+		store: store,
+		columns: [{
+			header: 'Cursor',
+			dataIndex: 'cursor',
+			width: .6,
+			tpl: '<div style="padding: 6px; cursor: {cursor};">{cursor}</div>'
+		}, {
+			header: 'Type',
+			dataIndex: 'type',
+			width: .4,
+			tpl: '<span style="font-weight: bold;">{type}</span>'
+		}]
+	});
+
+    var ct = new Ext.Panel({
+        renderTo: 'container',
+        title: 'Ext JS test page',
+        height: 600,
+        width: 500,
+        layout: 'fit',
+        items: panel
+    });
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div>
+Ext JS use 「Ext.isWebKit ? 'e-resize' : 'col-resize'」, but actually Chrome 5 and Safari 4 support 'col-resize'. The one does not support is Opera.
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+
