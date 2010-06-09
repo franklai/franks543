@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 with SoundManager2 HTML5 Edition</title>
+<script type="text/javascript">
+window.SM2_DEFER = true;
+</script>
+
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<!--
+<link rel="StyleSheet" type="text/css" href="/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="/ext-3.2.1/adapter/ext/ext-base-debug.js"></script>
+<script type="text/javascript" src="/ext-3.2.1/ext-all-debug.js"></script>
+-->
+<script type="text/javascript" src="soundmanagerv296a-20100606/script/soundmanager2.js"></script>
+<style type="text/css">
+body {
+    user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+}
+</style>
+<script type="text/javascript">
+(function() {
+    // soundmanager2 setting
+    window.soundManager = new SoundManager();
+    soundManager.url = 'soundmanagerv296a-20100606/swf/';
+    soundManager.useHTML5Audio = true;
+    soundManager.flashVersion = 9;
+    soundManager.useMovieStar = true;
+})();
+
+LOG = function() {
+    if (!window.console || !window.console.log) {
+        return;
+    }
+
+    window.console.log(arguments);
+};
+
+Ext.namespace('FrankLai.Player');
+
+FrankLai.Player = Ext.extend(Object, {
+    constructor: function() {
+        this.songList = [];
+        this.songIndex = 0;
+        this.id = 'mySound';
+        this.obj = null;
+    },
+    add: function(path) {
+        this.songList.push(path);
+    },
+    play: function(path) {
+        this.songList.push(path);
+        this.songIndex = this.songList.indexOf(path);
+        this.jump(this.songIndex);
+    },
+    getObj: function(song) {
+        var obj = soundManager.getSoundById(song);
+        if (obj) {
+            return obj;
+        }
+
+        soundManager.onready(this.onReady, this);
+        obj = soundManager.createSound({
+            url: song,
+            id: song,
+            volume: 50,
+            ondataerror: this.onDataError,
+            onload: this.onLoad.createDelegate(this),
+            onstop: this.onStop.createDelegate(this),
+            onplay: this.onPlay.createDelegate(this)
+        });
+
+
+        return obj;
+    },
+    jump: function(index) {
+        index = index || 0;
+
+        if (this.songList.length <= 0) {
+            return;
+        }
+
+        var song = this.songList[index];
+        if (!song) {
+            return;
+        }
+        this.obj = this.getObj(song);
+        soundManager.stopAll();
+        soundManager.play(song)
+    },
+    setVolume: function(val) {
+        LOG('setVolume:', val);
+        if (!this.obj) {
+            return;
+        }
+        this.obj.setVolume(val);
+    },
+
+    onDataError: function() {
+        LOG('onDataError, ', arguments);
+    },
+    onLoad: function(status) {
+        LOG('onLoad, ', arguments);
+    },
+    onReady: function(status) {
+        LOG('onReady, ', arguments);
+    },
+    onStop: function() {
+        LOG('soundManager onStop, ', arguments);
+        this.view.onStop();
+    },
+    onPlay: function() {
+        LOG('soundManager onPlay, ', arguments);
+        this.view.onPlay();
+    },
+
+    setView: function(view) {
+        this.view = view;
+    }
+
+});
+
+FrankLai.Grid = Ext.extend(Ext.grid.GridPanel, {
+    constructor: function(cfg) {
+        this.player = cfg.player;
+        this.player.setView(this);
+
+        this.createStore();
+        this.createColModel();
+        this.createActions();
+        this.createVolumeSlider();
+        this.createMenu();
+        this.createTBar();
+
+        var config = this.fillConfig(cfg);
+        FrankLai.Grid.superclass.constructor.call(this, config);
+    },
+    clearPlaying: function() {
+        this.store.each(function(record) {
+            record.set('playing', false);
+        }, this);
+        this.store.commitChanges();
+    },
+    onStop: function() {
+        this.clearPlaying();
+LOG('Grid onStop');
+    },
+    onPlay: function() {
+        this.clearPlaying();
+
+        var obj = this.player.obj;
+        var url = obj.url.replace('/js_test/audio/', '');
+        var index = this.store.findExact('path', url);
+        if (index === -1) {
+            LOG('Failed to find playing url in store. url:', obj.url);
+            return;
+        }
+        this.store.getAt(index).set('playing', true);
+        this.store.commitChanges();
+
+LOG('Grid onPlay');
+    },
+    createStore: function() {
+        this.store = new Ext.data.JsonStore({
+            url: '/js_test/audio/audio.json',
+            autoLoad: true,
+            root: 'items',
+            fields: [
+                'playing',
+                'path',
+                'artist', 'title', 'album', 
+                {name: 'track', type: 'int'}, 
+                {name: 'duration', type: 'number'},
+                {name: 'playable', type: 'auto', defaultValue: undefined}
+            ]
+        });
+    },
+    createColModel: function() {
+        this.colModel = new Ext.grid.ColumnModel({
+            defaults: {
+                sortable: true
+            },
+            columns: [
+                {
+                    header: '►', 
+                    dataIndex: 'playing', 
+                    width: 20, 
+                    type: 'boolean',
+                    renderer: function(val) {
+                        return (val) ? '♫' : '';
+                    }
+                },
+                {header: 'artist', dataIndex: 'artist'},
+                {header: 'title', dataIndex: 'title'},
+                {header: 'path', dataIndex: 'path'},
+                {
+                    header: 'playable', 
+                    dataIndex: 'playable',
+                    renderer: function(val) {
+                        if (Ext.isBoolean(val)) {
+                            if (val === true) {
+                                return '<span style="color: green;">OK</span>';
+                            } else {
+                                return '<span style="color: red;">NO</span>';
+                            }
+                        } else {
+                            return '<span style="color: black;">untested</span>';
+                        }
+                    }
+                }
+            ]
+        });
+    },
+    createVolumeSlider: function() {
+        this.volumeSlider = new Ext.slider.SingleSlider({
+            width: 200,
+            value: 50,
+            minValue: 0,
+            maxValue: 100,
+            plugins: new Ext.slider.Tip(),
+            listeners: {
+                change: {
+                    scope: this,
+                    fn: function(slider, newVal, thumb) {
+                        LOG('change, newVal:', newVal);
+                        this.player.setVolume(newVal);
+                    }
+                },
+                changecomplete: {
+                    scope: this,
+                    fn: function(slider, newVal, thumb) {
+                        LOG('changecomplete, newVal:', newVal);
+                    }
+                }
+            }
+        });
+    },
+    createActions: function() {
+        this.actionPlay = new Ext.Action({
+            text: 'Play',
+            scope: this,
+            handler: this.playHandler
+        });
+
+        this.actionStop = new Ext.Action({
+            text: 'Stop',
+            scope: this,
+            handler: this.stopHandler
+        });
+
+        this.actionTest = new Ext.Action({
+            text: 'Test Playable',
+            scope: this,
+            handler: this.testHandler
+        });
+    },
+    showPlaying: function(index) {
+        
+    },
+    playHandler: function() {
+        var grid = Ext.getCmp('myGrid');
+        var sm = grid.getSelectionModel();
+        var record = sm.getSelected();
+        var song = '/js_test/audio/' + record.get('path');
+
+        this.player.play(song);
+    },
+    stopHandler: function() {
+        soundManager.stopAll();
+    },
+    testHandler: function(btn, evt) {
+LOG('testHandler');
+        this.testPlayable();
+LOG(' end testHandler');
+    },
+    createTBar: function() {
+        this.tbar = new Ext.Toolbar({
+            items: [
+                this.actionPlay, 
+                this.actionStop,
+                this.actionTest,
+                this.volumeSlider
+            ]
+        });
+    },
+    createMenu: function() {
+        this.menu = new Ext.menu.Menu({
+            plain: true,
+            autoDestroy: true,
+            items: [this.actionPlay]
+        });
+    },
+    fillConfig: function(cfg) {
+        var obj = {
+            id: 'myGrid',
+            title: 'SoundManager2 HTML5 Edition test',
+            viewConfig: {
+                forceFit: true
+            },
+
+            colModel: this.colModel,
+            store: this.store,
+
+            tbar: this.tbar,
+
+            bbar: new Ext.PagingToolbar({
+                store: this.store
+            }),
+
+            listeners: {
+                rowdblclick: {
+                    scope: this,
+                    fn: this.onRowDblClick
+                },
+                rowcontextmenu: {
+                    scope: this,
+                    fn: this.onRowContextMenu
+                },
+                contextmenu: {
+                    scope: this,
+                    fn: this.onContextMenu
+                }
+            }
+        };
+
+        return Ext.apply(obj, cfg);
+    },
+    onRowDblClick: function(grid, rowIndex, evt) {
+        this.actionPlay.execute();
+    },
+    onRowContextMenu: function(grid, rowIndex, evt) {
+LOG('onRowContextMenu');
+        var sm = this.getSelectionModel();
+        sm.selectRow(rowIndex, sm.isSelected(rowIndex));
+        
+        var count = sm.getCount();
+        this.menu.showAt(evt.getXY());
+    },
+    onContextMenu: function(evt) {
+        evt.preventDefault();
+    },
+    testPlayable: function() {
+LOG('testPlayable');
+        var store = this.getStore();
+        store.each(function(record) {
+            var path = record.get('path');
+            var playable = soundManager.canPlayURL(path);
+LOG('playable: ', playable);
+            record.set('playable', playable);
+        }, this);
+
+        store.commitChanges();
+    }
+});
+
+Ext.onReady(function(){
+    var player = new FrankLai.Player();
+
+    var panel = new FrankLai.Grid({
+        player: player
+    });
+
+    var ct = new Ext.Panel({
+        renderTo: 'container',
+        border: false,
+        height: 300,
+        width: 500,
+        layout: 'fit',
+        items: panel
+    });
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+

@@ -1,0 +1,653 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Frank的五四三 - 2006年07月舊聞</title>
+    <link rel="StyleSheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="containerDiv">
+
+<!-- start of header -->
+<div id="bannerDiv">
+您現在所在的位置是：
+<a href="index.htm">首頁</a>--&gt;
+<a href="oldnews.htm">舊聞</a>--&gt;
+<b>2006年07月舊聞</b></div>
+<!-- end of header -->
+
+
+
+<!-- start of menu -->
+<div id="menuDiv"><ul id="menu"><li><a href="about.htm">關於本站</a></li><li><a href="nba.htm">NBA資料庫</a></li><li><a href="software.htm">軟體下載</a></li><li><a href="link.htm">網站連結</a></li><li><a href="article.htm">自由發揮</a></li><li><a href="http://www.csie.ntu.edu.tw/~b91072/php/gb/">留言討論</a></li></ul></div>
+<!-- end of menu -->
+
+
+<!-- start of main content -->
+<div id="contentDiv"><div id="blog"><h4>2006 Jul 31st 雜</h4><div>
+<p>
+又好幾天沒更新了…話說這幾天沒什麼成就感。
+MiKTeX使用utf8編碼，
+目前是弄到\begin{CJK}{UTF8}{}可以產生pdf檔出來了，
+但是手續還蠻麻煩的，
+除了網路上可以找到的cyberbit字型匯入之外，
+還要抓CJKutf8.sty，而程式要用兩段式，
+也就是先latex再dvipdfmx，
+沒辦法直接用pdflatex，
+目前產生出來的pdf檔，
+中文的部分不能copy and paste，
+看網路上在Linux下的好像都可以啊…
+</p>
+<p>
+另外是研究網路電視，
+所謂的P2P Streaming，
+現在目標放在「PPLive」和「沸点网絡电视」這兩套軟體。
+蠻有名氣的「PPStream」，我到現在好像只成功看過一次吧，
+而且掛AppLocale也不一定能完全正常顯示，
+頻道列表又一直自動更新(亂跳…)，
+所以目前不考慮。
+PPLive現在有paper在研究，
+而且程式界面寫的不錯，
+不需要用AppLocale就可以正常顯示，
+還可以選擇繁中、簡中、English。
+沸点，寫到一半發現出新版了，
+嗯…前幾天測試舊版時，
+軟體本身只有提供所謂的TV engine，
+沒有內建Player功能，
+實際使用時會把Windows Media Player叫出來，
+也可以設定用別的Player，
+界面必須使用AppLocale來看簡中，
+頻道數比PPLive少，播放順暢度還不錯，
+而新版剛剛試一下，做了內建Player，
+頻道好像有多一點，還是要用AppLocale。
+另外還有一個TVUPlayer在測試名單中，
+這個的好處是有不同上述兩者的頻道，
+有比較多英文台，例如ESPN, HBO，
+似乎和另一個軟體SopCast有關係？(之前Ethereal有看到sopcast這個字出現)。
+努力整理出頭緒來…沸点的windump log還沒處理。
+</p>
+<p>
+昨天下午、晚上都是在寫擷取程式，
+<a href="http://www.portableplaylist.com/" target="_blank">Portable Playlist</a>
+這個網站可以把mp3的連結放在上面，
+而實際運作是用Ajax去資料庫讀網址再餵給用Flash寫的Player來播放，
+網址新增後沒有辦法修改，
+所以理論上從瀏覽器是沒辦法看到網址，
+但是Ethereal開起來就一清兩楚，
+擷取程式是寫自動把全部的網址都抓下來，
+雖然到現在還是搞不懂ASP.NET_SessionId是如何來的，
+要擷取全部的網址是寫好了，
+session id就得手動去Ethereal抓。
+</p>
+<p>
+待辦事項：
+xslt and xml for `that' website
+, learning about Linux Kernel
+, IPTV paper study。
+寫是這樣寫啦，真正完成會有多少呢…
+</p>
+</div><h4>2006 Jul 27th makefile for xslt</h4><div>
+<p>
+在自由發揮裡新增了一篇文章，
+丟了個替xsltproc寫的makefile，
+就是五四三目前所使用的makefile
+</p>
+</div><h4>2006 Jul 26th 僕等がいた 第四話</h4><div>
+<p>
+這一集的ED<br />
+「好きだから」<br />
+作詞：大地丙太郎<br />
+作曲：安部純<br />
+編曲：武藤星児<br />
+歌：加藤いづみ<br />
+</p>
+<p>
+這首就是前幾集都有出現的插入曲，
+之前沒有歌詞，只有哼唱的人聲，
+在ED畫面可以看到「スキャット…加藤いづみ」，
+就是哼唱的聲音也是加藤いづみ負責的。
+</p>
+<p>
+根據
+<a href="http://katoizumi.com/" target="_blank">加藤いづみ官網</a>
+上所寫『このアニメは、複数のアーティストがED曲を担当しています。』，
+之後的ED還可以會出現其他歌手！？
+</p>
+<p>
+又，第二話的ED『ここにいて』，
+是大地丙太郎之前的作品
+『ナースエンジェルりりかSOS』的插入曲，
+這首歌是大地監督第一次嘗試填詞。
+這次用在僕等がいた，
+有改寫歌詞、重新編曲，
+當然也是再次請到麻生かほ里來做全新的錄音。
+上面這段是從僕等がいた動畫官網的制作ブログ看來的。
+</p>
+</div><h4>2006 Jul 26th Fifteen finalists for USA Team</h4><div>
+<p>
+15人名單公佈
+</p>
+<ul>
+<li>Carmelo Anthony</li>
+<li>Gilbert Arenas</li>
+<li>Shane Battier</li>
+<li>Chris Bosh</li>
+<li>Bruce Bowen</li>
+<li>Elton Brand</li>
+<li>Kirk Hinrich</li>
+<li>Dwight Howard</li>
+<li>LeBron James</li>
+<li>Antawn Jamison</li>
+<li>Joe Johnson</li>
+<li>Brad Miller</li>
+<li>Chris Paul</li>
+<li>Amaré Stoudemire</li>
+<li>Dwyane Wade</li>
+</ul>
+<p>
+Shawn Marion因為左膝受傷，
+今年沒辦法參加世錦賽。
+在24人名單中，
+有7人因為受傷或個人因素無法參加今年在日本的世錦賽，
+而剩下17人中，
+遭到割愛的是Adam Morrison和Luke Ridnour，
+不過這次不能參加，不代表之後不能打，
+因為這次的24人都是三年內的美國隊成員，
+會依照比賽前夕的狀況再選出參賽的成員。
+</p>
+</div><h4>2006 Jul 24th FIBA World Championship 2006</h4><div>
+<p>
+八月十九日於日本舉行的世界籃球錦標賽，
+今年的美國隊目前在Las Vegas集訓，
+K教練必須從24人名單中選出12人最終名單，
+目前的24人包括：
+</p>
+<ul>
+<li>Carmelo Anthony</li>
+<li>Gilbert Arenas</li>
+<li>Shane Battier</li>
+<li>Chauncey Billups</li>
+<li>Chris Bosh</li>
+<li>Bruce Bowen</li>
+<li>Elton Brand</li>
+<li>Kobe Bryant</li>
+<li>Kirk Hinrich</li>
+<li>Dwight Howard</li>
+<li>LeBron James</li>
+<li>Antawn Jamison</li>
+<li>Joe Johnson</li>
+<li>Shawn Marion</li>
+<li>Brad Miller</li>
+<li>Adam Morrison</li>
+<li>Lamar Odom</li>
+<li>Chris Paul</li>
+<li>Paul Pierce</li>
+<li>J.J. Redick</li>
+<li>Michael Redd</li>
+<li>Luke Ridnour</li>
+<li>Amare Stoudemire</li>
+<li>Dwyane Wade</li>
+</ul>
+<p>
+教練團由杜克大學Mike Krzyzewski領軍，
+助理教練有雪城大學Jim Boeheim、
+太陽隊Mike D'Antoni、
+拓荒者隊Nate McMillan。
+</p>
+<p>
+目前確定不會在最終名單的有：
+Chauncey Billups, Michael Redd,
+Lamar Odom, Paul Pierce, J.J. Redick,
+Greg Oden, Kobe Bryant。
+今年除了話題十足的03梯三人
+LeBron James, Carmelo Anthony, Dwyane Wade之外，
+出現了和以往不太一樣的人選，
+一般不會被稱為All Star的
+Luke Ridnour, Shane Battier, Bruce Bowen(！)，
+後兩者完全是防守組；
+今年的內線除了Elton Brand, Brad Miller, Shawn Marion，
+還有Chris Bosh和Dwight Howard，
+至於Amare就要看傷勢如何了。
+射手群原本是很豪華，
+不過現在Michael Redd和J.J.都無法出線，
+只剩Adam Morrison了。
+另外值得大家期待的球員就是本季新人王Chris Paul，
+Paul在目前的訓練營，相當受到K教練的看重。
+</p>
+</div><h4>2006 Jul 23rd Lebanon crisis</h4><div>
+<p>
+看這標題就是正經文的樣子，
+後來有找到一點題外話來講，
+不然就真的太正經。
+</p>
+<p>
+這幾週都渾渾噩噩，
+NHK News, BBC NEWS都沒看，
+聽昨天剛從新疆回來的同學講才知道，
+現在以色列在攻擊黎巴嫩，
+好吧，我只看得到Chien-Ming的新聞。
+這次中東的事件，
+是從七月12日開始講起，
+黎巴嫩的真主黨(Hezbollah)
+在黎巴嫩南部對準以色列發射
+Katyusha rocket，喔，這個之後會講一下。
+這場衝突造成8名以色列士兵死亡、
+2名以色列士兵被俘擄，
+以色列方面的回應相當強烈，
+首相Ehud Olmert指稱俘擄士兵是
+``戰爭的行為''，
+以色列不會妥協。
+過去以色列曾以釋放巴勒斯坦囚犯來達成談判，
+但是今年上任的首相否決這樣的回應，
+接著而來的是對黎巴嫩大量的空襲、轟炸，
+目前估計已超過350人死亡，
+以色列的轟炸目標不只是真主黨的據點，
+發電廠、國際機場都遭到攻擊，
+雖然開啟戰端的是真主黨，
+但是以色列現在的行為已經使無辜的平民受到傷害，
+不知道事情會如何發展下去…
+</p>
+<p>
+題外話，前面提到的Katyusha rocket，
+是蘇聯製的多火箭發射器(Katyusha multiple rocket launchers)。
+而有學過俄文的一定知道Катюша這首歌，
+很諷刺的是，
+在Wikipedia輸入Katyusha，
+先出現的會是rocket launchers的Katyusha，
+Katyusha (song)才是介紹歌曲。
+武器比較有名啊…
+</p>
+</div><h4>2006 Jul 22nd 閱讀！閱讀！</h4><div>
+<p>
+啊…最近都沒讀東西，不論是小說還是paper，
+其實手邊的電子書很多，
+當然大部分都是所謂的電腦書，
+小說的話，也是有很多來源啦，
+不過沒有個紙本的東西，
+好像沒什麼感覺，
+這也是為什麼paper要印出來讀？(明明就是砍樹…)。
+總之，待會要去書店看看，
+不知道會找到什麼呢…
+</p>
+</div><h4>2006 Jul 20th 僕等がいた 声優</h4><div>
+<ul>
+	<li>高橋七美　　ささきのぞみ</li>
+	<li>矢野元晴　　矢崎広</li>
+	<li>竹内匡史　　川久保拓司</li>
+	<li>山本有里　　中山恵里奈</li>
+	<li>水ちん　　　清水香里</li>
+	<li>タカちゃん　寺崎裕香</li>
+	<li>山本奈々　　ゆりん</li>
+</ul>
+<p>
+ささきのぞみ，漢字寫佐々木望，
+等一下！這不是浦飯幽助嗎？
+喔，就是因為漢字會讓人混淆，
+所以才換成全部用假名，
+是以本作出道的新人。
+</p>
+<p>
+矢崎広，演員，
+過完19歲生日沒多久，
+<a href="http://blog.livedoor.jp/hiroshiyazaki/" target="_blank">ぴろし日記</a>。
+川久保拓司，演員。
+中山恵里奈，聲優，2002年出道。
+寺崎裕香，Y・M・O所屬，資料好少。
+ゆりん，查到一個，不確定是不是同人。
+</p>
+<p>
+清水香里大家就聽過啦，
+最早對這個名字有印象，
+是她和小野坂昌也主持的Web Radio，
+非常有趣的節目。
+然後今天才知道，
+原來她配過lain的主角岩倉玲音，
+當時15歲！
+不過在僕等がいた的角色好像沒什麼印象，
+大概是台詞太少了…
+</p>
+</div><h4>2006 Jul 20th 網頁還是要放圖</h4><div>
+<p>
+放圖才會好看…，
+今天在做那採用xsltproc的網頁，
+首頁改了改之後，放上了一張圖，
+看起來好棒啊，不過自己看起來棒沒啥用，
+要長官覺得好才行。
+</p>
+<p>
+可是五四三還是沒圖啊，
+因為不會自己做圖，
+也沒有數位相機。
+喔，上述那張圖是該單位舊版網頁裡的，
+直接拿來用。
+</p>
+</div><h4>2006 Jul 20th 僕等がいた</h4><div>
+<p>
+監督：大地丙太郎，
+衝著這個名字就要看看，
+目前到第三集，
+畫風嚴格說起來不怎樣，
+聲優部分目前只看到一個清水香里是認識的名字，
+可能是找舞台劇演員吧？尚未確認。
+有趣的地方在於現在每集的ED都不同歌，
+而ED1、ED3都是已經發售過的歌曲，
+分別是「アイシテル」和「サンセット -album version-」，
+歌手Mi，同時也擔任OP曲「それぞれの夢」，將在8月23日發售。
+Mi最著名的曲目，或許是あいのり主題曲的「未来の地図」，
+あいのり耶，和這部號稱純愛少女漫畫會是絕妙的搭配？
+</p>
+<p>
+漫畫劇情如何走不清楚，
+但是目前動畫有給我小小的幸福的感覺
+</p>
+</div><h4>2006 Jul 18th CooRie Birthday Live</h4><div>
+<p>
+rino在日記公開了這項消息。
+為了感謝歌迷的支持，
+除了先前在6月4日舉辦的Acoustic Live，
+以及8月6日的第二場Acoustic Live，
+CooRie將在9月17日舉辦Birthday Live，
+地點是ESP学園本館ホール。
+詳細情形，之後官網會公佈。
+</p>
+<p>
+來看一下舉辦地點「ESP Musical Academy」，
+位於東京都新宿区高田馬場的音樂專門學校，
+畢業生中目前最有名的是EXILE的Vocal「ATSUSHI」，
+在學校網站的畢業生藝人名單，開頭有一段ATSUSHI的話。
+場地是在本館B1ホール，根據網站上的說法，
+是可以容納600人的場地。
+</p>
+</div><h4>2006 Jul 18th 真．三國無雙4 Special PC</h4><div>
+<p>
+終於全部的道具都拿到了，來寫一下心得。
+這代剛開始玩的第一個感覺就是，比真三三玩起來還順，
+硬體條件沒有變更的情形下，
+這是為什麼呢？不久後就發現啦，
+有修過Computer Graphics就會知道，
+在畫小兵的時候，要等武將靠近到一定距離後再畫出來，
+而這次PC上的四代，把特效全開後，
+畫小兵的距離比三代近很多，
+所以運算量減少很多，畫面自然就比較順。
+</p>
+<p>
+武將方面，這次新增角色分別有：
+星彩、關平、曹丕、龐德、凌統、左慈，
+其中左慈是大魔王，如果是玩PS2版的話，
+要先讓其他武將都出現後，才能使用左慈，
+而PC版是PS2的真三四加猛將傳，
+一開始就能使用全部武將，也能打全部關卡；
+既然有大魔王，當然就先練這隻了，
+其實最最一開始，是想練趙雲，
+當初真三三PC版也是先練趙雲，
+但是打了一場之後，不知道是因為操作尚未適應，
+還是四代趙雲改弱不少，用起來傷當不順手，
+想說試一下左慈，喔！一試就上手，
+unique武器也不會太難拿，雖然是要打敗呂布，
+不過虎牢關的等級比較低，還算簡單。
+相較之下，凌統的unique武器就比較辛苦，
+要打敗張遼四次，而且都是陽炎狀態…。
+凌統在這代裡也算作弊角色，本身攻速非常快，
+C3單挑武將用，可轉向；
+C4範圍技，強到可以無腦使用(就是狂放C4，不需要想太多)。
+左慈和凌統就是先練滿的兩隻，
+但是說到真三國無雙，傳統強將當然非小強莫屬，
+三代的時候沒有用過，
+這次一玩才知道…真的是無腦C3，
+可以說靠一招C3就打遍全場啊，
+偶而想到再放一下無雙就好了。
+</p>
+<p>
+除了上述三隻，無雙模式有全破的是：
+甄宓、星彩、姜維、馬超，
+其中星彩是easy過的，其實沒什麼練，
+另外三個是hard。
+甄宓就是「打小兵集氣-&gt;放無雙-&gt;打小兵集氣」循環；
+姜維的C3還不錯，要小心背後就是了；
+馬超是用馬上超人打法，就是騎絕影按charge。
+有玩幾次，無雙模式還沒全破的有：
+月英、關平，
+月英的C3連兩次就能接到30段，不過目前尚未用順手；
+關平的unique武器是輕重量，
+C3最後一下震波有破防，所以不用裝陽玉。
+</p>
+<p>
+好像蜀國武將玩比較多@@
+</p>
+</div><h4>2006 Jul 16th 笠原弘子 官網</h4><div>
+<p>
+官網換新設計了！採用XHTML 1.0 Transitional，
+還有RSS，整個畫面相當清爽。
+<br />
+<a href="http://www.hirokokasahara.com/" target="_blank">笠原弘子オフィシャルホームページ</a>
+</p>
+<p>
+後記：原來是用Movable Type做的^^
+</p>
+</div><h4>2006 Jul 15th HTML comment的規定</h4><div>
+<p>
+原來HTML comment也是有學問的，
+一般我們熟知的HTML comment就是『&lt;!--』開頭、『--&gt;』結尾，
+然後在comment裡不可以出現「--&gt;」，
+因為會被判定為comment結束。
+然而如果在comment中出現「-」的話呢？
+w3c的說法：結尾的「--」和「&gt;」中間可以有空白，
+所以在comment中出現兩次或更多的「-」，
+會造成問題，應該要避免；
+Web Design Group的說法：
+合法的SGML comment，
+『&lt;!』代表區塊開始，
+『&gt;』代表區塊結束，
+在區塊中有零至多個comment，
+comment的開始與結束都是用『--』來表示，
+所以「&lt;!------&gt; hello--&gt;」是合法的comment，
+共有兩個comment，分別是「----」和「--&gt;hello--」，
+但是這樣寫的話，在瀏覽器裡會看到「hello--&gt;」，
+事實上editor的highlight就已經告訴你了
+</p>
+<p>
+結論，開頭『&lt;!--』、結尾『--&gt;』，
+中間不要出現「&gt;」和「--」(「---」也算「--」的variant喔)
+</p>
+</div><h4>2006 Jul 14th 五四三新版上傳</h4><div>
+<p>
+完全看不出來吧，其實只是xsltproc加xml的東西大概弄好了，
+所以把舊的轉換一下，目前全部網頁都是utf-8，
+不像之前還有部分是big5。
+但是，明眼人應該有發現，有東西少了~~，
+因為那堆太過陳舊，加上轉換要耗不少功夫，就封藏起來了。
+目前NBA資料庫有幾頁會看起來怪怪的，
+因為是從table排版直接轉過來，
+之後應該會整修啦…。
+又，左邊那個選單應該有空也會改一下，
+試試最近研究的CSS圓角框。
+</p>
+</div><h4>2006 Jul 13th 用cl和link製作dll</h4><div>
+<p>
+關係到前(錢)途的重要功能，
+總於寫出來了！(？)
+</p>
+<pre class="code">
+// dll.c
+#include &lt;stdio.h&gt;
+
+void hello(int n, char *s){
+    fwrite(s, 1, n, stdout);
+}
+</pre>
+dll.def
+<pre class="code">
+LIBRARY dll
+
+EXPORTS
+hello @1
+</pre>
+<pre class="code">
+rem  compile.bat
+cl.exe /W3 /c dll.c
+link.exe /OUT:"dll.dll" /DLL /def:".\dll.def" dll.obj
+</pre>
+<p>
+然後會產生出dll.dll檔，用Python加ctypes(要另外安裝)，
+Python code as the following:
+</p>
+<pre class="code">
+import ctypes
+dyn=ctypes.cdll.LoadLibrary("./dll.dll")
+dyn.hello(6, 'hello\n')
+</pre>
+<p>
+基本上，離實用距離還很遠，
+但是咕了好幾天，segmentation fault不知道幾次，
+快把VS折片的情形下，終於有可以跑的東西出現…。
+參考網址：<br />
+http://www.logix4u.net/dll_tutorial1.htm
+</p>
+</div><h4>2006 Jul 13th космонавт</h4><div>
+<p>
+好久不見的俄文！
+其實這是「コスモナウト」的原文，
+英文寫Cosmonaut，是指astronaut，太空人。
+可是新海誠說這次沒有放SF要素進去？
+</p>
+<p>
+想到另外一個日文外來語從俄文來的，
+「スプートニク」，спутник，
+英文寫sputnik，在俄文還有companion，同伴的意思，
+不過日文只借用了「蘇聯製人工衛星」這個意思
+</p>
+<p>
+космонавт的重音在на；
+спутник的重音在пу
+</p>
+</div><h4>2006 Jul 12th Anime Japan Fes 2006</h4><div>
+<p>
+8月11, 12, 13於東京、8月20於大阪、8月27日於博多。
+mikuni會在12日深夜的
+『影山ヒロノブ・遠藤正明・きただにひろしの
+“ゆかいな仲間たち”～オレにもコスらせろっ！
+　オールナイトコンサート』出場
+<br />
+<a href="http://www15.ocn.ne.jp/~ajf/2006natsu.html" target="_blank">Official Site</a>
+</p>
+</div><h4>2006 Jul 11th 新海誠 - 秒速5センチメートル</h4><div>
+<p>
+「你知道嗎？」「櫻花花謝掉落的速度」
+</p>
+<p>
+好啦，一定感覺都沒有的翻譯。
+此次的作品預定於2007年春季在渋谷シネマライズ上映，
+三部連續的短編動畫，
+遠野貴樹和篠原明里，
+小學畢業後就離別了，
+描寫兩人重逢之日的「桜花抄」、
+之後以他人觀點來看貴樹的「コスモナウト」，
+以及「秒速5センチメートル」。
+官網上那個24.3MB的預告要載下來看喔，
+High Definition的畫質真是亂誇張的
+<br />
+<a href="http://5cm.yahoo.co.jp/" target="_blank">秒速5センチメートル</a>
+</p>
+</div><h4>2006 Jul 10th Wimbledon 2006</h4><div>
+<ul>
+	<li>Roger Federer (Gentlemen's Singles)</li>
+	<li>Amelie Mauresmo (Ladies' Singles)</li>
+	<li>Bob Bryan/Mike Bryan (Gentlemen's Doubles)</li>
+	<li>Zi Yan/Jie Zheng 晏紫/鄭潔 (Ladies' Doubles)</li>
+	<li>Andy Ram/Vera Zvonareva (Mixed Doubles)</li>
+</ul>
+</div><h4>2006 Jul 5th 福山芳樹來台演唱</h4><div>
+<p>
+http://tw.club.yahoo.com/clubs/fukuyama/
+<br />
+賀！最新消息是日方事務所代表與經紀人在
+7月2~3日時來台灣視察過了，
+而日方的正式回覆是「雖然還沒確定時間，不過一定會辦。」
+！！！
+</p>
+</div><h4>2006 Jul 4th NBA Draft 2006</h4><div>
+<p>
+好久不見的NBA相關消息更新……來看一下今年的選秀吧
+</p>
+<ol type="1">
+	<li>Andrea Bargnani, Forward, Italy (Toronto)</li>
+	<li>LaMarcus Aldridge, Forward, Texas (Chicago to Portland)</li>
+	<li>Adam Morrison, Forward, Gonzaga (Charlotte)</li>
+	<li>Tyrus Thomas, Forward, Louisiana State (Portland to Chicago)</li>
+	<li>Shelden Williams, Forward, Duke (Atlanta)</li>
+	<li>Brandon Roy, Guard, Washington (Minnesota to Portland)</li>
+	<li>Randy Foye, Guard, Villanova (Boston to Minnesota via Portland)</li>
+	<li>Rudy Gay, Forward, Connecticut (Houston)</li>
+	<li>Patrick O'Bryant, Center, Bradley (Golden State Warriors)</li>
+	<li>Saer Sene, Forward, Senegal (Seattle)</li>
+	<li>J.J. Redick, Guard, Duke (Orlando)</li>
+	<li>Hilton Armstrong, Center, Connecticut (N.O./Okla. City)</li>
+	<li>Thabo Sefolosha, Guard, Switzerland (Philadelphia to Chicago)</li>
+	<li>Ronnie Brewer, Guard, Arkansas (Utah)</li>
+	<li>Cedric Simmons, Forward, North Carolina State (N.O./Okla. City)</li>
+	<li>Rodney Carney, Forward, Memphis (Chicago to Philadelphia)</li>
+	<li>Shawne Williams, Forward, Memphis (Indiana)</li>
+	<li>Oleksiy Pecherov, Center, Ukraine (Washington)</li>
+	<li>Quincy Douby, Guard, Rutgers (Sacramento)</li>
+	<li>Renaldo Balkman, Forward, South Carolina (New York)</li>
+	<li>Rajon Rondo, Guard, Kentucky (Phoenix to Boston)</li>
+	<li>Marcus Williams, Guard, Connecticut (New Jersey)</li>
+	<li>Josh Boone, Forward, Connecticut (New Jersey)</li>
+	<li>Kyle Lowry, Guard, Villanova (Memphis)</li>
+	<li>Shannon Brown, Guard, Michigan State (Cleveland)</li>
+	<li>Jordan Farmar, Guard, UCLA (LAL)</li>
+	<li>Sergio Rodriguez, Guard, Spain (Phoenix to Portland)</li>
+	<li>Maurice Ager, Guard, Michigan State (Dallas)</li>
+	<li>Mardy Collins, Guard, Temple (New York)</li>
+	<li>Joel Freeland, Forward, United Kingdom (Portland)</li>
+</ol>
+<p>
+在第二輪，NCAA灌籃大賽最後對決兩名選手，
+James White在31位送到Indiana，David Noel在39位被Milwaukee選上；
+去年Boston College的主將Craig Smith在36位被Minnesota選上；
+去年亞軍Illinois主力James Augustine在41位被Orlando選上，
+Dee Brown在46位被Utah選上。
+</p>
+</div><h4>2006 Jul 3rd 新居昭乃</h4><div>
+<p>
+『VHmusic 2 the first euro tour』7月18日開始販售，
+然後店頭沒有賣耶，似乎只能從VHmart訂購。
+<br />
+<a href="http://vemall.jvcmusic.co.jp/VHmart/index.html" target="_blank">新居昭乃「VHmart」</a>
+</p>
+</div><h4>2006 Jul 3rd トレモロ</h4><div>
+<p>
+啦啦啦，這次專輯裡的曲目，
+除了單曲有收過的，最喜歡的一首就是『心編み』，
+然後啊，編曲是長田直之耶，
+你看那個『存在』也是長田直之(作曲、編曲)
+</p>
+</div><h4>2006 Jul 2nd 下載與轉檔flv</h4><div>
+<p>
+轉檔使用Riva FLV Encoder，
+使用方法：
+選擇Input Video，
+把Output Video的副檔名換成avi或是mpg，
+按下Encode即可，
+目前轉youtube的檔，Resolution選320x240似乎是比較好的選擇。
+需要注意的是，轉檔後的品質通常會再下降，
+原本品質就不是很好的flv檔，轉完之後，有可能會糊到一種難以接受的境界…
+</p>
+<p>
+下載部分，目前有不少網站可以把下載位置抓出來，
+例如<a href="http://javimoya.com/blog/youtube_en.php" target="_blank">這裡</a>。
+當然也可以自己寫，
+youtube的話，從網頁擷取出兩個參數：video_id和t，
+前面接上http://youtube.com/get_video就可以了，
+在該網頁搜尋watch_fullscreen或是player2.swf就會看到那兩個參數
+</p>
+</div></div><div><ul style="font-size: 9pt; list-style-type: disc;"><li>（月）00:00　N・H・Kにようこそ!</li><li>（火）02:00　僕等がいた</li><li>（火）19:00　銀魂</li><li>（水）00:50　桜蘭高校ホスト部</li><li>（水）02:00　ひぐらしのなく頃に</li></ul></div><div><ul style="font-size: 9pt; list-style-type: circle;"><li>樹海 - 恋人同士(2006/07/26 GNCX-4)</li></ul></div></div>
+<!-- end of main content -->
+</div>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+_uacct = "UA-879036-3";
+urchinTracker();
+</script>
+  </body>
+</html>

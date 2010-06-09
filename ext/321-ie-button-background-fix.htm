@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 - IE Press button will move background problem</title>
+
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+
+<style type="text/css">
+#image-btn {
+    border: 0;
+    height: 30px;
+    width: 30px;
+    background-repeat: no-repeat;
+    background-image: url(drop-add.gif);
+}
+#image-btn:hover {
+    background-image: url(drop-yes.gif);
+}
+#image-btn:active:hover {
+    background-image: url(drop-no.gif);
+    background-position: 1px 1px;
+}
+
+/* image-in-button */
+.x-toolbar-cell .image-in-button button {
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-image: url(drop-no.gif);
+}
+.image-in-button.x-btn-over button {
+    background-image: url(drop-yes.gif);
+}
+.image-in-button.x-btn-click button {
+    background-image: url(drop-add.gif);
+}
+.ext-ie .image-in-button.x-btn-over.x-btn-click button {
+    background-position: 1px 1px;
+}
+
+/* image-in-x-btn-mc */
+.x-toolbar-cell .image-in-x-btn-mc .x-btn-tl, .x-toolbar-cell .image-in-x-btn-mc .x-btn-tc,.x-toolbar-cell .image-in-x-btn-mc .x-btn-tr,
+.x-toolbar-cell .image-in-x-btn-mc .x-btn-ml, .x-toolbar-cell .image-in-x-btn-mc .x-btn-mr,
+.x-toolbar-cell .image-in-x-btn-mc .x-btn-bl, .x-toolbar-cell .image-in-x-btn-mc .x-btn-bc,.x-toolbar-cell .image-in-x-btn-mc .x-btn-br {
+    display: none;
+}
+.x-toolbar-cell .image-in-x-btn-mc .x-btn-mc {
+    /*margin: 2px 0;*/
+    width: 20px;
+    height: 20px;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url(drop-no.gif);
+}
+.x-toolbar-cell .image-in-x-btn-mc .x-btn-mc button {
+}
+.image-in-x-btn-mc.x-btn-over .x-btn-mc {
+    background-image: url(drop-yes.gif);
+}
+.image-in-x-btn-mc.x-btn-click .x-btn-mc {
+    background-image: url(drop-add.gif);
+}
+
+/* image-in-mc-no-text */
+.x-toolbar-cell .image-in-mc-no-text .x-btn-tl, .x-toolbar-cell .image-in-mc-no-text .x-btn-tc,.x-toolbar-cell .image-in-mc-no-text .x-btn-tr,
+.x-toolbar-cell .image-in-mc-no-text .x-btn-ml, .x-toolbar-cell .image-in-mc-no-text .x-btn-mr,
+.x-toolbar-cell .image-in-mc-no-text .x-btn-bl, .x-toolbar-cell .image-in-mc-no-text .x-btn-bc,.x-toolbar-cell .image-in-mc-no-text .x-btn-br {
+    display: none;
+}
+.x-toolbar-cell .image-in-mc-no-text {
+    margin-left: 20px;
+    margin-right: 12px;
+}
+.x-toolbar-cell .image-in-mc-no-text .x-btn-mc {
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-image: url(drop-no.gif);
+}
+.x-toolbar-cell .image-in-mc-no-text .x-btn-mc button {
+    padding: 0 8px;
+    width: 16px;
+    height: 16px;
+}
+.image-in-mc-no-text.x-btn-over .x-btn-mc {
+    background-image: url(drop-yes.gif);
+}
+.image-in-mc-no-text.x-btn-click .x-btn-mc {
+    background-image: url(drop-add.gif);
+}
+
+/* image-in-em */
+.x-toolbar-cell .image-in-em .x-btn-tl, .x-toolbar-cell .image-in-em .x-btn-tc,.x-toolbar-cell .image-in-em .x-btn-tr,
+.x-toolbar-cell .image-in-em .x-btn-ml, .x-toolbar-cell .image-in-em .x-btn-mr,
+.x-toolbar-cell .image-in-em .x-btn-bl, .x-toolbar-cell .image-in-em .x-btn-bc,.x-toolbar-cell .image-in-em .x-btn-br {
+    display: none;
+}
+.x-toolbar-cell .image-in-em em button {
+}
+.x-toolbar-cell .image-in-em .x-btn-mc {
+    background-image: none;
+}
+.x-toolbar-cell .image-in-em em {
+    padding-left: 20px;
+    height: 16px;
+    background-repeat: no-repeat;
+    background-image: url(drop-no.gif);
+}
+.image-in-em.x-btn-over em {
+    background-image: url(drop-yes.gif);
+}
+.image-in-em.x-btn-click em {
+    background-image: url(drop-add.gif);
+}
+.image-in-em.x-btn-over.x-btn-click em {
+}
+
+#hi-btn .x-btn-mc {
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-image: url(drop-no.gif);
+    background-position: 0 0;
+}
+#hi-btn.x-btn-over .x-btn-mc {
+    background-image: url(drop-yes.gif);
+}
+#hi-btn.x-btn-click.x-btn-over .x-btn-mc {
+    background-image: url(drop-add.gif);
+}
+
+</style>
+<script type="text/javascript">
+Ext.onReady(function(){
+    var panel = new Ext.form.FormPanel({
+        renderTo: 'container',
+        title: 'IE Press button will move background problem',
+        height: 300,
+        width: 800,
+        labelWidth: 200,
+        padding: 20,
+
+        items: [{
+            xtype: 'compositefield',
+            fieldLabel: 'combo and buttons',
+            width: 600,
+
+            items: [{
+                xtype: 'combo',
+                value: 1,
+                store: [1, 2, 3, 4, 5],
+                triggerAction: 'all'
+            }, {
+                xtype: 'button',
+                text: 'Button'
+            }, {
+                xtype: 'button',
+                text: 'Press ME'
+            }]
+        }, {
+            xtype: 'textfield',
+            labelWidth: 160,
+            fieldLabel: 'text'
+        }],
+        tbar: {
+            items: [{
+                text: 'image in Button',
+                cls: 'image-in-button'
+            }, {
+                text: 'image in x-btn-mc',
+                cls: 'image-in-x-btn-mc'
+            }, {
+                cls: 'image-in-mc-no-text'
+            }, {
+                text: 'image in em',
+                cls: 'image-in-em'
+            }, {
+                cls: 'image-in-em'
+            }, {
+                text: 'tbar'
+            }]
+        },
+        bbar: {
+            items: [{
+                text: 'image in Button',
+                cls: 'image-in-button'
+            }, {
+                text: 'image in x-btn-mc',
+                cls: 'image-in-x-btn-mc'
+            }, {
+                cls: 'image-in-mc-no-text'
+            }, {
+                text: 'image in em',
+                cls: 'image-in-em'
+            }, {
+                cls: 'image-in-em'
+            }, {
+                text: 'bbar'
+            }]
+        },
+        fbar: {
+            items: [{
+                text: 'image in Button',
+                cls: 'image-in-button'
+            }, {
+                text: 'image in x-btn-mc',
+                cls: 'image-in-x-btn-mc'
+            }, {
+                cls: 'image-in-mc-no-text'
+            }, {
+                text: 'image in em',
+                cls: 'image-in-em'
+            }, {
+                cls: 'image-in-em'
+            }, {
+                
+            }, {
+                text: 'fbar'
+            }]
+        }
+    });
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div>
+<button>This is a HTML button</button>
+<button id="image-btn" unselectable="on"></button>
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+

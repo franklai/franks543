@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Frank的五四三 - makefile for xslt (for Frank的五四三)</title>
+    <link rel="StyleSheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div id="containerDiv">
+
+<!-- start of header -->
+<div id="bannerDiv">
+您現在所在的位置是：
+<a href="index.htm">首頁</a>--&gt;
+<a href="article.htm">自由發揮</a>--&gt;
+<b>makefile for xslt (for Frank的五四三)</b></div>
+<!-- end of header -->
+
+
+
+<!-- start of menu -->
+<div id="menuDiv"><ul id="menu"><li><a href="about.htm">關於本站</a></li><li><a href="nba.htm">NBA資料庫</a></li><li><a href="software.htm">軟體下載</a></li><li><a href="link.htm">網站連結</a></li><li><a href="article.htm">自由發揮</a></li><li><a href="http://www.csie.ntu.edu.tw/~b91072/php/gb/">留言討論</a></li></ul></div>
+<!-- end of menu -->
+
+
+<!-- start of main content -->
+<div id="contentDiv">
+<h3>2006 Jul 26th</h3>
+<p>
+以下是Frank的五四三用來批次產生網頁用的makefile。
+注意！直接複製貼上時，有可能tab會不見
+(目前測試，Opera 8.54會有此情形，IE6和Firefox 1.5不會)。
+又，這是for Windows，
+用的是MinGW裡的GNU Make 3.80，
+如果要用在Unix上的話，
+CC要把.exe拿掉，當然前提是有裝xsltproc，
+還有，很多語法是GNU Make才有，
+在FreeBSD上請打gmake(當然也是要gmake有安裝的情形下)
+</p>
+<p>
+有什麼東西是比較有趣的嗎，
+首先是偷懶招：
+$(wildcard src/*.xml)，
+其實這是不推薦的用法，
+會把資料夾下所有的檔案都抓進來，
+比較好的是把檔案一個個列出來，
+不過看著左下角寫68 objects，
+還是偷懶一下^^|||。
+但是有些檔案沒有要輸出成html檔案，
+這時候就要用filter-out這個function，
+這個makefile裡用到的都是GNU make的
+Built-in Functions。
+</p>
+<p>
+$(HTML_FILE): menu.xml，
+這個也是偷懶招，
+讓HTML_FILE這個變數裡的檔案全都加上menu.xml成為prerequisite之一，
+這樣menu.xml有更新的時候，
+才會讓全部的檔案都更新。
+</p>
+<p>
+注解寫template，其實應該叫做Implicit Rules ，
+有了這一行，當prerequisite出現.htm，
+make就會去找對應的.xml是否存在，
+如果.xml比較新的話，就會執行command。
+</p>
+<pre class="code">
+# makefile for xsltproc
+# written by franklai, 2006 Jul 14th
+# last modified 2006 Jul 26th
+#
+# use `make --just-print' can test makefile
+CC := xsltproc.exe
+
+# set search path
+vpath %.xml src
+
+XSL_FILE := style.xsl
+
+# list the xml file in src directory that do not need to output
+DONT_OUTPUT := menu _default
+# append suffix `.htm' to each word in the word list
+FILE_DONT_OUTPUT := $(addsuffix .htm,$(DONT_OUTPUT))
+
+# make word list including all the xml file in the directory `src'
+ALL_XML_FILE := $(wildcard src/*.xml)
+# replace the suffix `.xml' to `.htm'
+ALL_HTML_FILE := $(notdir $(subst .xml,.htm,$(ALL_XML_FILE)))
+# take out those files we do not need
+HTML_FILE := $(filter-out $(FILE_DONT_OUTPUT), $(ALL_HTML_FILE))
+
+.PHONY: all
+all: $(HTML_FILE)
+
+# add this line to let makefile check if menu.xml is newer
+$(HTML_FILE): menu.xml
+
+
+# build template
+#   $&lt;: first prerequisite
+#   $@: the target
+#   $^: all the prerequisites
+%.htm:%.xml
+	$(CC) -output $@ $(XSL_FILE) $&lt;
+
+# xsltproc.exe parameter
+# -verbose
+# -output [filename]
+
+clean:
+	-if exist *.htm  del *.htm
+
+</pre>
+</div>
+<!-- end of main content -->
+</div>
+    <script src="http://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+    <script type="text/javascript">
+_uacct = "UA-879036-3";
+urchinTracker();
+</script>
+  </body>
+</html>
