@@ -21,7 +21,7 @@ body {
     user-select: text;
     -moz-user-select: text;
     -webkit-user-select: text;
-    -khtml-user-select: text;
+    -khtml-user-select: none;
 }
 </style>
 <script type="text/javascript">
@@ -42,7 +42,7 @@ LOG = function() {
     window.console.log(arguments);
 };
 
-Ext.namespace('FrankLai.Player');
+Ext.namespace('FrankLai');
 
 FrankLai.Player = Ext.extend(Object, {
     constructor: function() {
@@ -155,7 +155,7 @@ LOG('Grid onStop');
         this.clearPlaying();
 
         var obj = this.player.obj;
-        var url = obj.url.replace('/js_test/audio/', '');
+        var url = obj.url;
         var index = this.store.findExact('path', url);
         if (index === -1) {
             LOG('Failed to find playing url in store. url:', obj.url);
@@ -168,7 +168,7 @@ LOG('Grid onPlay');
     },
     createStore: function() {
         this.store = new Ext.data.JsonStore({
-            url: '/js_test/audio/audio.json',
+            url: 'audio.json',
             autoLoad: true,
             root: 'items',
             fields: [
@@ -198,7 +198,13 @@ LOG('Grid onPlay');
                 },
                 {header: 'artist', dataIndex: 'artist'},
                 {header: 'title', dataIndex: 'title'},
-                {header: 'path', dataIndex: 'path'},
+                {
+                    header: 'path',
+                    dataIndex: 'path',
+                    renderer: function(val) {
+                        return val.replace(/^.*\//, '');
+                    }
+                },
                 {
                     header: 'playable', 
                     dataIndex: 'playable',
@@ -267,7 +273,7 @@ LOG('Grid onPlay');
         var grid = Ext.getCmp('myGrid');
         var sm = grid.getSelectionModel();
         var record = sm.getSelected();
-        var song = '/js_test/audio/' + record.get('path');
+        var song = record.get('path');
 
         this.player.play(song);
     },
@@ -333,6 +339,7 @@ LOG(' end testHandler');
     },
     onRowDblClick: function(grid, rowIndex, evt) {
         this.actionPlay.execute();
+        evt.preventDefault();
     },
     onRowContextMenu: function(grid, rowIndex, evt) {
 LOG('onRowContextMenu');
