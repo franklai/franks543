@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hinet Radio using JW Player for Silverlight</title>
+</head>
+<body>
+	<div id="mediaspace"></div>
+	<div id="control">
+		<input type="button" id="btn_play" value="Play">
+		<input type="button" id="btn_stop" value="Stop">
+		<input type="button" id="btn_mute" value="Mute">
+	</div>
+	<div id="playlist">
+		<input type="button" id="btn_file_1" value="Load ICRT">
+		<input type="button" id="btn_file_2" value="Load 台北愛樂">
+		<input type="button" id="btn_file_3" value="Load 飛碟電台">
+	</div>
+	<div id="hinet_radio_list">
+		<a href="http://hichannel.hinet.net/xml/radioList.jsp" target="_blank">Hinet Radio List</a>
+	</div>
+	<div id="log">
+	</div>
+
+	<script type="text/javascript" src="silverlight.js"></script>
+	<script type="text/javascript" src="wmvplayer.js"></script>
+	<script type="text/javascript">
+		var cnt = document.getElementById("mediaspace");
+		var src = 'wmvplayer.xaml';
+		var cfg = {
+			file: 'mms://bcr.media.hinet.net/RA000018'
+		};
+		var player = new jeroenwijering.Player(cnt, src, cfg);
+	</script>
+	<script type="text/javascript">
+		var $ = function(id) {
+			return document.getElementById(id);
+		};
+		
+		$('btn_play').onclick = function() {
+			player.sendEvent('PLAY');
+		};
+		$('btn_stop').onclick = function() {
+			player.sendEvent('STOP');
+		};
+		$('btn_mute').onclick = function() {
+			player.sendEvent('MUTE');
+		};
+
+		
+		$('btn_file_1').onclick = function() {
+			// ICRT, 177
+			player.sendEvent('STOP');
+			player.sendEvent('LOAD', 'mms://bcr.media.hinet.net/RA000038');
+			player.sendEvent('PLAY');
+		};
+		$('btn_file_2').onclick = function() {
+			// 台北愛樂, 228
+			player.sendEvent('STOP');
+			player.sendEvent('LOAD', 'mms://bcr.media.hinet.net/RA000018');
+			player.sendEvent('PLAY');
+		};
+		$('btn_file_3').onclick = function() {
+			// 飛碟, 232
+			player.sendEvent('STOP');
+			player.sendEvent('LOAD', 'mms://bcr.media.hinet.net/RA000072');
+			player.sendEvent('PLAY');
+		};
+		
+		// 警廣 全國交通網, 1100
+		// 警廣竟然另外要DRM...
+		// mms://bcr.media.hinet.net/RADRM049
+	</script>
+	<script type="text/javascript">
+		var log = $('log');
+		
+		var setListeners = function() {
+			if (!player.view) {
+				setTimeout(setListeners, 100);
+				return;
+			}
+			
+			player.addListener('STATE', function(oldState, newState) {
+				log.innerHTML += '[STATE] old: ' + oldState + ', new: ' + newState;
+				log.innerHTML += '<br>';
+			});
+			player.addListener('TIME', function(elapsed, total) {
+				if (elapsed === 0) {
+					return;
+				}
+				if (1) {
+					return;
+				}
+				log.innerHTML += '[TIME] elapsed: ' + elapsed + ', total: ' + total;
+				log.innerHTML += '<br>';
+			});
+			player.addListener('VOLUME', function(percentage) {
+				log.innerHTML += '[VOLUME] percentage: ' + percentage;
+				log.innerHTML += '<br>';
+			});
+		};
+		
+		setListeners();
+	</script>
+
+</body>
+</html>
