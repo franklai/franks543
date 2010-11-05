@@ -1,6 +1,11 @@
 {
     links: [
         {
+            title: 'test reload store using TaskRunner',
+            version: '3.2.1',
+            link: '321-grid-polling-test.htm'
+        },
+        {
             title: 'right click on grid to select row',
             version: '3.2.1',
             link: '321-grid-right-click-test.htm'
