@@ -34,6 +34,11 @@
             title: 'CSS cursor test',
             version: '3.2.1',
             link: '321-CSS-cursor.htm'
+        },
+        {
+            title: 'Grid Bulk Update Performance problem',
+            version: '3.2.1',
+            link: '321-grid-bulk-update-test.htm'
         }
     ]
 }

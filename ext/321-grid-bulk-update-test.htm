@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 bulk update test page</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var links = [];
+	var json = {};
+	var i;
+
+	for (i = 0; i < 800; i++) {
+		links.push({
+			enable: true,
+			name: i + '',
+			size: i
+		});
+	}
+	json['links'] = links;
+
+	var store = new Ext.data.JsonStore({
+		data: json,
+		autoLoad: true,
+		root: 'links',
+		fields: [
+			'enable', 'name', 'size'
+		]
+	});
+	
+// 	var panel = new Ext.grid.GridView({
+	var panel = new Ext.list.ListView({
+		store: store,
+		columns: [{
+			header: 'checked', 
+			dataIndex: 'enable',
+		}, {
+			header: 'name', 
+			dataIndex: 'name', 
+			width: .5,
+			align: 'center',
+		}, {
+			header: 'size',
+			dataIndex: 'size',
+			align: 'right'
+		}]
+	});
+
+	var showRunningTime = function(time) {
+		var field = Ext.getCmp('running_time');
+
+		if (time < 0) {
+			field.setValue('is running...');
+		} else {
+			field.setValue(time + ' ms');
+		}
+	};
+
+	var checked = true;
+
+	var checkAll = function() {
+		var count = store.getCount();
+		var x,
+			rec;
+
+		showRunningTime(-1);
+		var aa = (new Date()).getTime();
+
+		checked = !checked;
+
+		for (x = 0; x < count; x++) {
+			rec = store.getAt(x);
+
+			rec.set('enable', checked);
+		}
+
+		var zz = (new Date()).getTime();
+		showRunningTime(zz - aa);
+	};
+
+	var checkAllWithAdjustment = function() {
+		var count = store.getCount();
+		var x,
+			rec;
+
+		showRunningTime(-1);
+		var aa = (new Date()).getTime();
+
+		checked = !checked;
+
+		store.suspendEvents();
+		for (x = 0; x < count; x++) {
+			rec = store.getAt(x);
+
+			rec.set('enable', checked);
+		}
+
+		panel.refresh();
+		store.resumeEvents();
+
+		var zz = (new Date()).getTime();
+		showRunningTime(zz - aa);
+	};
+
+	var ct = new Ext.Panel({
+		renderTo: 'container',
+		title: 'Ext JS grid bulk update test page',
+		height: 300,
+		width: 500,
+		layout: 'fit',
+		items: panel,
+		bbar: {
+			items: [{
+				text: 'Set each record',
+				handler: checkAll
+			}, '-', {
+				xtype: 'textfield',
+				id: 'running_time'
+			}, '-', {
+				text: 'Also Set each, but suspendEvents',
+				handler: checkAllWithAdjustment
+			}]
+		}
+	});
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+
