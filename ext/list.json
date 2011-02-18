@@ -36,10 +36,16 @@
             link: '321-CSS-cursor.htm'
         },
         {
+            title: 'IE9 file input text disappear test',
+            version: '3.2.1',
+            link: '321-ie9-file-input-test.htm'
+        },
+        {
             title: 'Grid Bulk Update Performance problem',
             version: '3.2.1',
             link: '321-grid-bulk-update-test.htm'
         }
+
     ]
 }
 
