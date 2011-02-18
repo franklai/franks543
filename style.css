@@ -1,0 +1,211 @@
+/* common */
+body {
+    color: #000;
+    background-color: #FFE;
+    padding: 0;
+    margin: 0;}
+.secret{
+    color: #FFE}
+a:link, a:visited {
+    color: #39F;
+    text-decoration: underline;}
+a:hover, a:active {
+    color: #C93;
+    text-decoration: none;}
+.sf {
+    font-size: 10pt;}
+.jp1 {
+    font-family: 'MS Gothic';}
+table {
+    border-color: #000;}
+td {
+    border-color: #000;}
+tr {
+    border-color: #000;}
+th {
+    border-color: #000;}
+p {
+    text-indent: 24pt;}
+pre.code {
+    margin: 3px;
+    background: #DDD;
+    color: #000;
+    font-size: 9pt;
+    padding: 5px;}
+
+/* */
+div#containerDiv {
+    margin: 0;
+    padding: 0;}
+#containerDiv #bannerDiv {
+    /*border: 1px solid #000;*/
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 40px;
+    font-size: 12pt;
+    height: 30px;}
+#containerDiv #menuDiv {
+    /*border: 1px solid #000;*/
+    position: absolute;
+    width: 150px;
+    margin-top: 60px;
+    margin-left: 30px;}
+#containerDiv #contentDiv {
+    /*border: 1px solid #000;*/
+    position: absolute;
+    width: 530px;
+    margin-top: 60px; /* height and margin-top of banner*/
+    margin-left: 200px;
+    padding: 0;}
+
+
+/******************************
+ * style for blog
+ */
+div#contentDiv div#blog {
+    /*border: 1px solid black;*/
+    margin: 0 auto;
+    width: 470px;
+}
+div#contentDiv div#blog h4{
+    /*border: 1px solid red;*/
+    width: 99%;
+    color: #000;
+    font-size: 12pt;
+    margin: 0;
+    margin-top: 12pt;
+    margin-bottom: 3px;
+    padding: 2px;
+    background: #69F;
+    cursor: pointer;}
+div#contentDiv div#blog p{
+    /*text-indent: 24pt;*/
+    margin: 0;
+    /*margin-bottom: 12pt;*/}
+div#contentDiv div#blog ul {
+    padding: 0;
+    margin-top: 0;
+    margin-left: 20pt;
+    margin-bottom: 10pt;
+    font-size: 10pt;
+    }
+
+/******************************
+ * style for menu
+ */
+#menu {
+    position: fixed;
+    top: 60px;
+    left: 30px;
+    width: 130px;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    border: 1px solid #000;
+    font-size: 16pt;}
+#menu li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: left;}
+#menu li a {
+    display: block;
+    /*width: 100%;*/
+    padding: 3px 6px;
+    margin: 0;
+    border-top: 2px solid #970;
+    border-right: 2px solid #970;
+    border-bottom: 2px solid #530;
+    border-left: 2px solid #530;
+    color: #EC2;
+    background: #750;
+    text-decoration: none;}
+#menu li a:hover {
+    border-color: #530;
+    color: #FD2;
+    background: #530;}
+/* hack for mozilla, IE need width: 100% */
+/*#menu li>a { width: auto; }*/
+/* End of style for menu */
+
+
+/******************************
+ * style for link
+ * added on Apr 7th 2006
+ */
+div#contentDiv div#link {
+    margin: 0;
+    margin-top: 20px;}
+div#contentDiv div#link dl {
+    margin: 0;
+    padding: 0;
+    margin-left: 30px;
+    margin-right: 50px;}
+div#contentDiv div#link dl dt {
+    padding: 3px;
+    background: #CEF;}
+div#contentDiv div#link dl dd {
+    margin: 0;
+    padding: 2px;
+    margin-bottom: 10px;}
+div#contentDiv div#link dl dt a {
+    color: #632;}
+/* End of style for link */
+
+
+/******************************
+ * style for link
+ * added on Mar 3rd 2006
+ */
+/*
+div#contentDiv div#link {
+    margin: 0;
+    margin-top: 20px;}
+*/
+div#contentDiv div#link ul {
+    margin: 0;
+    padding: 0;}
+div#contentDiv div#link ul li {
+    position: relative;
+    list-style: none;
+    display: block;
+    width: 500px;
+    margin: 0;
+    margin-bottom: 20px;
+    margin-left: 30px;}
+div#contentDiv div#link ul li a{
+    display: block;
+    padding: 3px;
+    color: #632;
+    background: #CEF;}
+
+/* End of style for link */
+
+/******************************
+ * style for nba
+ * added on Jul 23rd 2006
+ */
+.nbaTable {
+	margin-bottom: 20px;
+	width: 99%;
+	border: 1px solid #89C;
+	border-collapse: collapse;
+	font-size: 9pt;}
+.nbaTable td {
+	padding: 3px;
+	border: 1px solid #89C;}
+.nbaTable th {
+	padding: 3px;
+	border: 1px solid #89C;
+	background: #89C;}
+td.firstYear {
+	background: #ABF;}
+span.firstYear {
+	background: #ABF;}
+.celtics {
+	background: #090;}
+.lakers {
+	background: #CC0;}
+.bulls {
+	background: #C30;}
+/* End of style for nba */
