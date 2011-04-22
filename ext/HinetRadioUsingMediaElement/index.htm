@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hinet Radio using mediaelement.js</title>
+<style type="text/css">
+.me-plugin {
+	position: absolute;
+	top: -100px;
+	left: -100px;
+}
+</style>
+</head>
+<body>
+	<div id="mediaspace">
+		<audio id="player1" src="" autoplay="false" type="audio/wma"></audio>
+	</div>
+	<div id="timeupdate">
+		<div id="time">
+	</div>
+	<div id="control">
+		<input type="button" id="btn_play" value="Play">
+		<input type="button" id="btn_stop" value="Stop">
+		<input type="button" id="btn_mute" value="Mute">
+	</div>
+	<div id="playlist">
+		<input type="button" id="btn_file_1" value="Load ICRT">
+		<input type="button" id="btn_file_2" value="Load 台北愛樂">
+		<input type="button" id="btn_file_3" value="Load 飛碟電台">
+	</div>
+	<div id="hinet_radio_list">
+		<a href="http://hichannel.hinet.net/xml/radioList.jsp" target="_blank">Hinet Radio List</a>
+	</div>
+	<div id="log">
+	</div>
+
+	<script type="text/javascript" src="mediaelement.min.js"></script>
+	<script type="text/javascript">
+		var $ = function(id) {
+			return document.getElementById(id);
+		};
+		
+		var player = new MediaElement('player1', {
+			success: function(me, obj) {
+			
+			}
+		});
+
+/*
+		MediaElement('player1', {success: function(me) {
+
+			me.play();
+			
+			me.addEventListener('timeupdate', function() {
+				document.getElementById('time').innerHTML = me.currentTime;
+			}, false);
+
+			document.getElementById('pp')['onclick'] = function() {
+				if (me.paused)
+					me.play();
+				else
+					me.pause();
+			};
+
+		}});
+*/
+		$('btn_play').onclick = function() {
+			player.play();
+		};
+		$('btn_stop').onclick = function() {
+			player.stop();
+		};
+		$('btn_mute').onclick = function() {
+			player.setMuted(!player.muted);
+		};
+
+		var changeURI = function(uri) {
+			player.stop();
+			console.log(player.src);
+			player.setSrc(uri);
+			console.log(player.src);
+			player.load();
+		};
+		
+		$('btn_file_1').onclick = function() {
+			changeURI('mms://bcr.media.hinet.net/RA000038');
+		};
+		$('btn_file_2').onclick = function() {
+			changeURI('mms://bcr.media.hinet.net/RA000018');
+		};
+		$('btn_file_3').onclick = function() {
+			changeURI('mms://bcr.media.hinet.net/RA000072');
+		};
+		
+		// 警廣 全國交通網, 1100
+		// 警廣竟然另外要DRM...
+		// mms://bcr.media.hinet.net/RADRM049
+	</script>
+	<script type="text/javascript">
+
+	</script>
+
+</body>
+</html>
