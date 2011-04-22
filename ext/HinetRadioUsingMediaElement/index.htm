@@ -12,7 +12,7 @@
 </head>
 <body>
 	<div id="mediaspace">
-		<audio id="player1" src="" autoplay="false" type="audio/wma"></audio>
+		<audio id="player1" src="" autoplay="false" type="audio/mpeg"></audio>
 	</div>
 	<div id="timeupdate">
 		<div id="time">
@@ -26,6 +26,7 @@
 		<input type="button" id="btn_file_1" value="Load ICRT">
 		<input type="button" id="btn_file_2" value="Load 台北愛樂">
 		<input type="button" id="btn_file_3" value="Load 飛碟電台">
+		<input type="button" id="btn_file_4" value="Load SHOUTcast">
 	</div>
 	<div id="hinet_radio_list">
 		<a href="http://hichannel.hinet.net/xml/radioList.jsp" target="_blank">Hinet Radio List</a>
@@ -76,6 +77,7 @@
 		var changeURI = function(uri) {
 			player.stop();
 			console.log(player.src);
+			player.setSrc('');
 			player.setSrc(uri);
 			console.log(player.src);
 			player.load();
@@ -90,6 +92,12 @@
 		$('btn_file_3').onclick = function() {
 			changeURI('mms://bcr.media.hinet.net/RA000072');
 		};
+
+		$('btn_file_4').onclick = function() {
+			changeURI('http://streaming29.radionomy.com:80/ABC-Lounge');
+		};
+
+		
 		
 		// 警廣 全國交通網, 1100
 		// 警廣竟然另外要DRM...

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hinet Radio using mediaelement.js</title>
+<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css">
+<style type="text/css">
+#container {
+	width: 800px;
+	margin: 0 auto;
+	margin-top: 50px;
+}
+.icon-play {
+	cursor: pointer;
+}
+
+.me-plugin {
+	position: absolute;
+	top: -100px;
+	left: -100px;
+}
+</style>
+<script type="text/javascript" src="mediaelement.min.js"></script>
+<script type="text/javascript" src="extjs/ext-all.js"></script>
+<script type="text/javascript">
+Ext.require([
+	'Ext.grid.*',
+	'Ext.data.*',
+	'Ext.util.*'
+]);
+
+Ext.onReady(function() {
+	var myData = [
+		['aa', 12],
+		['bb', 33]
+	];
+
+	Ext.regModel('Radio', {
+		fields: ['id', 'title', 'uri']
+	});
+
+	var player = new MediaElement('player1', {
+		success: function(me, obj) {
+		
+		}
+	});
+
+	var changeURI = function(uri) {
+		player.stop();
+		player.setSrc(uri);
+		player.load();
+	};
+
+	var store = Ext.create('Ext.data.Store', {
+		model: 'Radio',
+		proxy: {
+			type: 'ajax',
+			url: 'hinet_radio_list.json',
+			reader: {
+				type: 'json',
+				root: 'items'
+			}
+		},
+		autoLoad: true
+	});
+
+	var gridPanel = Ext.create('Ext.grid.Panel', {
+		title: 'Hinet Radio List',
+		store: store,
+		columnLines: true,
+		columns: [
+			{text: 'Title', dataIndex: 'title', flex: 1},
+			{text: 'ID', dataIndex: 'id', align: 'right', width: 60},
+			{text: 'URL', dataIndex: 'uri', width: 240},
+			{
+				xtype: 'actioncolumn',
+				width: 30,
+				items: [{
+					tooltip: 'play',
+					iconCls: 'icon-play',
+					icon: 'play.png',
+					handler: function(grid, rowIndex, colIndex) {
+						console.log(rowIndex, colIndex);
+						var model = grid.store.getAt(rowIndex);
+						var uri = model.get('uri');
+						var title = model.get('title');
+
+						changeURI(uri);
+						console.log(gridPanel);
+						gridPanel.getComponent('bbar').getComponent('bbar_uri').setText(title);
+
+					}
+				}]
+			}
+		],
+		height: 360,
+		width: 600,
+		title: 'Hinet Radio List',
+		renderTo: 'container',
+		viewconfig: {
+			stripeRows: true
+		},
+		tbar: [
+			{
+				xtype: 'button', 
+				text: 'Stop', 
+				handler: function() {
+					player.stop();
+				}
+			}
+		],
+		bbar: {
+			itemId: 'bbar',
+			items: [{
+				xtype: 'tbtext',
+				text: 'Now playing:'
+			}, {
+				itemId: 'bbar_uri',
+				xtype: 'tbtext',
+				text: ''
+			}]
+		}
+	});
+});
+</script>
+</head>
+<body>
+<audio id="player1" src="" autoplay="false" type="audio/wma"></audio>
+<div id="container">
+</div>
+</body>
+</html>
+
