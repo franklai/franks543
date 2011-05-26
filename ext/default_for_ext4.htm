@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 4.0.1 test page</title>
+
+<link rel="StyleSheet" type="text/css" href="http://dev.sencha.com/deploy/ext-4.0.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://dev.sencha.com/deploy/ext-4.0.1/ext-all.js"></script>
+<!--
+<link rel="StyleSheet" type="text/css" href="/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/ext-3.2.1/ext-all.js"></script>
+-->
+<script type="text/javascript">
+Ext.onReady(function(){
+	Ext.define('LinkModel', {
+		extend: 'Ext.data.Model',
+		fields: ['title', 'link']
+	});
+
+	var store = Ext.create('Ext.data.JsonStore', {
+		model: 'LinkModel',
+		proxy: {
+			type: 'ajax',
+			url: 'list.json',
+			reader: {
+				type: 'json',
+				root: 'links'
+			}
+		}
+	});
+	store.load();
+
+	var listView = Ext.create('Ext.grid.Panel', {
+		width: 500,
+		height: 300,
+		renderTo: 'container',
+		title: 'Ext JS test page',
+		
+		store: store,
+		
+		columns: [{
+			text: '標題',
+			dataIndex: 'title',
+			flex: 75,
+			sortable: true
+		}, {
+			text: '連結',
+			dataIndex: 'link',
+			flex: 25,
+			align: 'center',
+			xtype: 'templatecolumn',
+			tpl: '<a href="{link}" target="_blank">Link</a>'
+		}]
+	});
+
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+
