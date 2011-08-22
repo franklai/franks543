@@ -7,9 +7,14 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.css" />
 <script src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.0b2/jquery.mobile-1.0b2.min.js"></script>
+<style type="text/css">
+.max-width-page {
+	max-width: 800px;
+}
+</style>
 </head>
 <body>
-<div data-role="page" id="common">
+<div data-role="page" id="common" class="max-width-page">
 	<div data-role="header">
 		<h1>Common</h1>
 	</div>
@@ -92,7 +97,7 @@
 	</div><!-- /footer -->
 </div>
 
-<div data-role="page" id="reference">
+<div data-role="page" id="reference" class="max-width-page">
 	<div data-role="header">
 		<h1>Reference</h1>
 	</div>
@@ -125,7 +130,7 @@
 </div>
 
 
-<div data-role="page" id="ura">
+<div data-role="page" id="ura" class="max-width-page">
 	<div data-role="header">
 		<h1>うら</h1>
 	</div>
@@ -196,6 +201,22 @@
 	</div><!-- /footer -->
 </div>
 
+<script type="text/javascript">
+	$('#common').live('swipeleft', function() {
+		$.mobile.changePage('#reference');
+	});
+
+	$('#reference').live('swipeleft', function() {
+		$.mobile.changePage('#ura');
+	});
+	$('#reference').live('swiperight', function() {
+		$.mobile.changePage('#common');
+	});
+
+	$('#ura').live('swiperight', function() {
+		$.mobile.changePage('#reference');
+	});
+</script>
 </body>
 </html>
 
