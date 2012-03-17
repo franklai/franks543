@@ -1,8 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="ja" xml:lang="ja">
+<!DOCTYPE html>
+<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Lyric Search</title>
 
 <style type="text/css">
@@ -343,19 +342,19 @@ function get_query_type()
      p_type="cat_index" p_artist="uta" p_title="song"
      p_query="keyword" p_suffix=""/>
     <a href="http://www.kasi-time.com/" target="_blank">歌詞タイム</a>
-
-    <input type="checkbox" checked="checked"
-     p_url="http://www.anicashi.jp/view_song_list.php" p_encoding="utf-8"
-     p_type="_anicashi" p_artist="txt_singer_name" p_title="txt_song_name"
-     p_query="" p_suffix="txt_production_name=&txt_lyric="/>
-    <a href="http://www.anicashi.jp/" target="_blank">アニカシ</a>
 </div>
 
 <div>
+<!--
+http://search.music.yahoo.co.jp/
+musicsearch?cc=ls&n1=a&cp=%BA%E4%CB%DC%BF%BF%B0%BD
+
+musicsearch?cc=ls&n1=t&cp=tune+the+rainbow
+-->
     <input type="checkbox" checked="checked"
-     p_url="http://m.search.music.yahoo.co.jp/bin/lyricssearch" p_encoding="euc-jp"
-     p_type="cc" p_artist="as" p_title="ss"
-     p_query="cp" p_suffix=""/>
+     p_url="http://search.music.yahoo.co.jp/musicsearch" p_encoding="euc-jp"
+     p_type="n1" p_artist="a" p_title="t"
+     p_query="cp" p_suffix="cc=ls"/>
     <a href="http://music.yahoo.co.jp/lyrics/" target="_blank">Yahoo!ミュージック - 歌詞</a>
 
     <input type="checkbox" checked="checked"
@@ -377,6 +376,54 @@ function get_query_type()
      p_type="in" p_artist="artist" p_title="title"
      p_query="keyword" p_suffix="page=0"/>
     <a href="http://anison.kenichimaehashi.com/" target="_blank">アニソン★歌詞検索</a>
+
+<!--
+http://joysound.com/ex/search/songsearchword.htm
+?karaokeall=1
+&wiiall=1
+&keitaiall=1
+&searchType=01
+&searchWord=tune%20the%20rainbow
+&searchWordType=2
+&searchLikeType=2
+
+http://joysound.com/ex/search/artistsearchword.htm?karaokeall=1
+&wiiall=1
+&keitaiall=1
+&searchType=01
+&searchWord=%E5%9D%82%E6%9C%AC%E7%9C%9F%E7%B6%BE
+&searchWordType=1
+&searchLikeType=2
+
+-->
+    <input type="checkbox"
+     p_url="http://joysound.com/ex/search/songsearchword.htm" p_encoding="utf-8"
+     p_type="searchWordType" p_artist="1" p_title="2"
+     p_query="searchWord" p_suffix="searchLikeType=2&searchType=01&keitaiall=1&wiiall=1&karaokeall=1"/>
+    <a href="http://joysound.com/" target="_blank">JOYSOUND.com</a>
+
+<!--
+http://petitlyrics.com/search/searchLyrics.php?
+search_type=1&swd=tune%20the%20rainbow
+-->
+    <input type="checkbox"
+     p_url="http://petitlyrics.com/search/searchLyrics.php" p_encoding="utf-8"
+     p_type="search_type" p_artist="2" p_title="1"
+     p_query="swd" p_suffix=""/>
+    <a href="http://petitlyrics.com/" target="_blank">PetitLyrics</a>
+
+<!--
+http://atsound.jp/a/search/result_list.php
+?cont_type=text&search_word=tune+the+rainbow&search_opt=title&btn_submit=%8C%9F%8D%F5
+
+ttp://atsound.jp/a/search/result_list.php
+?cont_type=text&search_word=coorie&search_opt=artist&btn_submit=%8C%9F%8D%F5
+-->
+    <input type="checkbox"
+     p_url="http://atsound.jp/a/search/result_list.php" p_encoding="Shift_JIS"
+     p_type="search_opt" p_artist="artist" p_title="title"
+     p_query="search_word" p_suffix="cont_type=text"/>
+    <a href="http://atsound.jp/" target="_blank">@sound</a>
 
 <input type="button" id="selectAll" value="Select All" />
 <input type="button" id="selectNone" value="Select None" />
