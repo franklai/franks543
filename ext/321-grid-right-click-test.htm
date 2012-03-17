@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 - right click on grid to select row</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var arrayStore = new Ext.data.JsonStore({
+		url: '321-grid-right-click-test.json',
+		autoLoad: true,
+		root: 'items',
+		fields: [
+			'artist', 'title', 'album', 
+			{name: 'track', type: 'int'}, 
+			{name: 'duration', type: 'number'}
+		]
+	});
+
+	var contextMenu = new Ext.menu.Menu({
+		plain: true,
+		autoDestroy: true,
+		items: [{
+			xtype: 'menuseparator'
+		}, {
+			xtype: 'displayfield',
+			itemId: 'selected'
+		}, {
+			xtype: 'menuseparator'
+		}]
+	});
+
+
+	var grid = new Ext.grid.GridPanel({
+		renderTo: 'container',
+		title: 'right click to select row test',
+		height: 300,
+		width: 600,
+		viewConfig: {
+			forceFit: true
+		},
+
+		colModel: new Ext.grid.ColumnModel({
+			defaults: {
+				sortable: true
+			},
+			columns: [
+				{header: 'artist', dataIndex: 'artist'},
+				{header: 'title', dataIndex: 'title'},
+				{header: 'album', dataIndex: 'album'},
+				{header: 'track', dataIndex: 'track', align: 'right'},
+				{header: 'duration', dataIndex: 'duration', align: 'right',
+					renderer: function(value) {
+						var sec = value % 60;
+						var min = Math.floor(value / 60);
+						return String.format('{0}:{1}', min, String.leftPad(sec, 2, '0'));
+					}}
+			]
+		}),
+
+		store: arrayStore,
+
+		bbar: new Ext.PagingToolbar({
+			store: arrayStore
+		}),
+
+		listeners: {
+			rowcontextmenu: function(grid, rowIndex, evt) {
+				var sm = grid.getSelectionModel();
+				sm.selectRow(rowIndex, sm.isSelected(rowIndex));
+				
+				var count = sm.getCount();
+				var item = contextMenu.get('selected');
+				item.setValue(String.format('已選擇{0}個項目', count));
+				contextMenu.showAt(evt.getXY());
+			},
+			contextmenu: function(evt) {
+				evt.preventDefault();
+			}
+		}
+	});
+});
+</script>
+</head>
+<body>
+<h1 style="padding: 10px; font-weight: bold; font-size: 160%;">Ext JS 3.2.1 - right click on grid to select row</h1>
+
+<div id="container">
+</div>
+
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+

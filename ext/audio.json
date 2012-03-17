@@ -1,0 +1,40 @@
+{
+    items: [{
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.aac.m4a'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.aiff'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.alac.m4a'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.au'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.flac'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.flac.in.ogg'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.mp3'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.ogg'
+    }, {
+        title: 'チョコと勇気',
+        artist: '坂本真綾',
+        path: 'http://bunny.tw/~franklai/audio/choko.wav'
+    }]
+}
+

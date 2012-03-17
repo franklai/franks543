@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-tw" lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Expires" content="0" />
+
+<title>dictionary</title>
+<style type="text/css">
+html {
+height: 99%;
+}
+body {
+    background-color: skyblue;
+    margin: 0;
+    padding: 0;
+    height: 99%;}
+#child_frame{
+    width: 99%;
+    height: 90%;
+    margin: 0;
+    padding: 0;
+}
+div {
+    margin: 0;
+    padding: 0;}
+form {
+    /*border: 1px solid red;*/
+    padding: 0;
+    margin: 0;}
+form#input_form {
+    text-align: center;
+    padding: 6px;
+}
+label {
+    border: 1px solid #999;
+    background: #DD6;
+    padding: 3px;
+    margin: 0;
+    margin-right: 10px;
+}
+label:hover {
+    background: #993;
+    color: #EEE;}
+#text_input {
+    font-size: 12pt;
+    font-family: 'MS Gothic';}
+</style>
+
+
+<script type="text/javascript">
+<!--
+/**
+ * Javascript Multi-language Dictionary Wrapper
+ *
+ * Object version
+ * since 2006 Mar 15th
+ */
+
+/**
+ * link property class
+ */
+function DictionaryLink(name, nickname, host, method, parameter, query, encoding){
+    this.name        = name;
+    this.nickname    = nickname;
+    this.host        = host;
+    this.method      = method;
+    this.parameter   = parameter;
+    this.query       = query;
+    this.encoding    = encoding;
+
+    function getFullUrl(str){
+        return (url + str);
+    }
+}
+
+function DictionaryController(dicArray, defaultIndex){
+    this.array = dicArray;
+    this.defaultDic = defaultIndex;
+    this.textInput = null;
+    this.dicForm = null;
+    this.childFrame = null;
+    this.listDiv = null;
+    this.dicHidden = null;
+    this.hiddenDiv = null;
+    this.selectedDic = null;
+
+    this.setTextInput = function (obj){
+        this.textInput = obj;
+    }
+    this.setChildFrame = function (obj){
+        this.childFrame = obj;
+    }
+    this.setListDiv = function (obj){
+        this.listDiv = obj;
+    }
+    this.setDicForm = function (obj){
+        this.dicForm = obj;
+    }
+    this.setDicHidden = function (obj){
+        this.dicHidden = obj;
+    }
+    this.setHiddenDiv = function (obj){
+        this.hiddenDiv = obj;
+    }
+
+    this.generateDicList = function (){
+        // <input type="button" name="dic" id="" value="" />
+        for (var item in this.array){
+            var tempObj = document.createElement("input");
+            var dicObj = this.array[item];
+            tempObj.setAttribute("type", "radio");
+            tempObj.setAttribute("name", "radioList");
+            tempObj.setAttribute("id", dicObj.nickname);
+            tempObj.setAttribute("value", dicObj.nickname);
+
+            // register event handler
+            //tempObj.onclick = this.clickHandler;
+            // solve the problem 'this' conflict
+            var listController = this;
+            tempObj.onclick = function (e){
+                e = (!e)? window.event: e;
+                listController.clickHandler(e);
+            };
+
+            this.listDiv.appendChild(tempObj);
+            
+            // generate label
+            var tempLabel = document.createElement("label");
+            tempLabel.setAttribute("for", dicObj.nickname);
+            tempLabel.appendChild(document.createTextNode(dicObj.nickname));
+            
+            this.listDiv.appendChild(tempLabel);
+        }
+
+    }
+    
+    this.setTitle = function (str){
+        window.document.title = "Dictionary - " + str;
+    }
+
+    this.loadHandler = function (){
+        // generate button list
+        // parse window.location.search
+        // change iframe.location
+        // select text input
+       
+        // generate button list
+        this.generateDicList();
+        
+        this.selectedDic = document.getElementById(this.array[this.defaultDic].nickname);
+        
+        // focus text input
+        this.focusTextInput();
+    }
+    
+    this.generateHidden = function (dicIndex){
+        // parse the search string
+        // clear hidden_div
+        // dynamically generate hidden elements
+        var dicObj = this.array[dicIndex];
+        
+        // remove all child of hidden div
+        while (this.hiddenDiv.hasChildNodes()){
+            this.hiddenDiv.removeChild(this.hiddenDiv.childNodes.item(0));
+        }
+        
+        // parse and append child
+        var pattern = "(([a-z]|[A-Z])+)=(([0-9]|[a-z]|[A-Z]|%|[+]|-|_)*)";
+        var urlRegExp = new RegExp(pattern, "g");
+        var source = dicObj.parameter;
+        var result = null;
+        
+        while ((result = urlRegExp.exec(source)) != null){
+            var tempObj = document.createElement("input");
+            tempObj.setAttribute("type", "hidden");
+            tempObj.setAttribute("name", result[1]);
+            tempObj.setAttribute("value", result[3]);
+            
+            this.hiddenDiv.appendChild(tempObj);
+        }
+        
+        // generate query hidden element
+        var tempObj = document.createElement("input");
+        tempObj.setAttribute("type", "hidden");
+        tempObj.setAttribute("name", dicObj.query);
+        tempObj.setAttribute("value", this.textInput.value);
+        
+        this.hiddenDiv.appendChild(tempObj);
+    }
+    
+    this.sendQuery = function (dicIndex){
+        // according to which dictionary
+        // generate input element
+        // then submit it
+        this.focusTextInput();
+        
+        this.generateHidden(dicIndex);
+        
+        // change action and acceptCharset
+        var dicObj = this.array[dicIndex];
+        this.dicForm.action = dicObj.host;
+        // Opera (tested in 9.26) and Safari (tested in win32 3.04) implement both charset and charsetSet
+        
+        this.dicForm.submit();
+        return false;
+    }
+
+    this.clickHandler = function (e){
+        // change the encoding property
+        // change dictionary no
+        // submit the form
+
+        // retrieve target
+        var obj = null;
+        if (e.target){
+            obj = e.target;
+        }
+        else if (e.srcElement){
+            obj = e.srcElement;
+        }
+
+        var arrayIndex = obj.id;
+        var dicObj = this.array[arrayIndex];
+
+        this.dicForm.acceptCharset = dicObj.encoding;
+        if (document.charset) {
+            // for IE
+            document.charset = dicObj.encoding;
+        }
+
+        this.dicHidden.value = dicObj.nickname;
+        this.selectedDic = document.getElementById(dicObj.nickname);
+
+        this.sendQuery(this.dicHidden.value);
+    }
+
+    this.focusTextInput = function (){
+        // modify title
+        this.setTitle(this.array[this.selectedDic.id].name);
+
+        this.selectedDic.checked = 'checked';
+        this.textInput.focus();
+        this.textInput.select();
+    }
+
+    this.keypressHandler = function (e){
+        if (e.keyCode == 13){ // 13 means Enter (Carriage Return)
+            if (this.dicHidden.value == ""){
+                var dicObj = this.array[this.defaultDic];
+                this.dicForm.acceptCharset = dicObj.encoding;
+                this.dicHidden.value = dicObj.nickname;
+            }
+            
+            this.sendQuery(this.dicHidden.value);
+            return false;
+        }
+    }
+}
+
+// register event handler
+window.onload = init;
+
+function init(){
+	var tmp = document.getElementById("child_frame");
+	clientH = tmp.clientHeight;
+	bodyH = document.getElementsByTagName("body")[0].clientHeight;
+	//tmp.offsetWidth = '300px';
+	tmp.style.height = bodyH - 24 +'px';
+
+    var dicArray = new Array();
+    dicArray["goo"] = new DictionaryLink(
+        "goo 国語辞典 完全一致", 
+        "goo", 
+        "http://dictionary.goo.ne.jp/search.php",
+        "get",
+        "kind=jn&mode=1",
+        "MT",
+        "EUC-JP");
+// http://dictionary.www.infoseek.co.jp/?sc=1&se=on&lp=0&gr=ml&qt=%BA%A3%C5%D9&sm=3&sv=KO
+    dicArray["infoseek"] = new DictionaryLink(
+        "infoseek マルチ辞書",
+        "infoseek",
+        "http://dictionary.www.infoseek.co.jp/",
+        "get",
+        "sc=1&se=on&lp=0&gr=ml&sm=3&sv=KO",
+        "qt",
+        "EUC-JP");
+    dicArray["is_e"] = new DictionaryLink(
+        "infoseek マルチ辞書 英和・和英",
+        "is_e",
+        "http://dictionary.www.infoseek.co.jp/",
+        "get",
+        "sc=1&se=on&lp=0&gr=ml&sm=1&sv=2T",
+        "qt",
+        "EUC-JP");
+    dicArray["webster"] = new DictionaryLink(
+        "Merriam-Webster Online Dictionary",
+        "webster",
+        "http://www.webster.com/cgi-bin/dictionary",
+        "get",
+        "",
+        "va",
+        "iso-8859-1");
+    dicArray["Eng2Ru"] = new DictionaryLink(
+        "Eng2Ru",
+        "Eng2Ru",
+        "http://www-utf8.rambler.ru/dict/scripts/go.cgi",
+        "get",
+        "where=enru&start=0&count=15",
+        "query",
+        "utf-8");
+    dicArray["Ru2Eng"] = new DictionaryLink(
+        "Ru2Eng",
+        "Ru2Eng",
+        "http://www-utf8.rambler.ru/dict/scripts/go.cgi",
+        "get",
+        "where=ruen",
+        "query",
+        "utf-8");
+    dicArray["Yahoo"] = new DictionaryLink(
+        "Yahoo!奇摩字典",
+        "Yahoo",
+        "http://tw.dictionary.yahoo.com/search",
+        "get",
+        "ei=UTF-8",
+        "p",
+        "utf-8");
+    dicArray["cht"] = new DictionaryLink(
+        "教育部國語辭典",
+        "cht",
+        //"http://140.111.34.46/cgi-bin/dict/newsearch.cgi",
+        "http://140.111.34.46/cgi-bin/newDict/dict.sh",
+        "post",
+        //"Database=dict&QueryScope=Name&QueryCommand=find&GraphicWord=yes",
+        "pieceLen=50&fld=1&imgFont=1",
+        "cond",
+        "Big5");
+    // http://www.ee.tku.edu.tw/~rexchen/cdict/wwwcdict.cgi?word=promiscuous
+/*
+    dicArray["tku"] = new DictionaryLink(
+        "英漢字典",
+        "tku",
+        "http://www.ee.tku.edu.tw/~rexchen/cdict/wwwcdict.cgi",
+        "get",
+        "",
+        "word",
+        "Big5");
+*/
+    // http://cdict.giga.net.tw/?q=mathematic
+    dicArray["giga"] = new DictionaryLink(
+        "giga英漢/英英字典",
+        "giga",
+        "http://cdict.giga.net.tw/",
+        "get",
+        "",
+        "q",
+        "Big5");
+
+//=====*=====*=====
+// 教育部國語辭典
+// action: http://140.111.34.46/cgi-bin/dict/newsearch.cgi
+// method: POST
+// Database=dict
+// QueryScope=Name  (Name, Whole)
+// QueryCommand=find  (find, fsearch)
+// GraphicWord=yes  (no, yes)
+// QueryString
+
+
+    // new DictionaryController instance
+    // 1st parameter: the whole dictionary array
+    // 2nd parameter: index of default dictionary
+    var controller = new DictionaryController(dicArray, "Yahoo");
+    // set object
+    controller.setChildFrame(document.getElementById("child_frame"));
+    controller.setTextInput(document.getElementById("text_input"));
+    controller.setListDiv(document.getElementById("list_div"));
+    controller.setDicForm(document.getElementById("dic_form"));
+    controller.setDicHidden(document.getElementById("dic_hidden"));
+    controller.setHiddenDiv(document.getElementById("hidden_div"));
+    // execute onload handler
+    controller.loadHandler();
+
+    document.getElementById("child_frame").onload = function (){
+        controller.focusTextInput();
+    };
+
+    document.getElementById("text_input").onkeypress = function (e){
+        e = (!e)? window.event: e;
+        controller.keypressHandler(e);
+    };
+    
+    document.getElementById("input_form").onsubmit = function (){
+        return false;
+    };
+    
+    document.onfocus = function (e){
+        controller.focusTextInput();
+    };
+
+/*
+    document.onkeypress = function(e){
+        e = (!e)? window.event: e;
+        if (e.keyCode == 16
+         || e.keyCode == 17){
+        
+        }
+        else {
+            alert(e.keyCode);
+        }
+        return false;
+    };
+*/
+
+    //alert(listMember(document.getElementById("child_frame"), "\n"));
+
+}
+
+function listMember(obj, token)
+{
+    var str = "";
+
+    for (var item in obj){
+        str += item + ":" + obj[item] + token;
+    }
+    
+    return str;
+}
+
+//-->
+</script>
+
+
+</head>
+
+<body>
+
+<form id="input_form">
+<input type="hidden" id="dic_hidden" value="" />
+<input type="text" id="text_input" value="" />
+<div id="list_div" style="display: inline;"></div>
+<!-- <div id="test_div" style="display: inline;"></div> -->
+</form>
+
+<form id="dic_form" action="about:blank" accept-charset="big5" target="child_frame">
+<div id="hidden_div"></div>
+</form>
+
+<iframe id="child_frame" name="child_frame" frameborder="0" src="about:blank">
+</iframe>
+
+</body>
+</html>

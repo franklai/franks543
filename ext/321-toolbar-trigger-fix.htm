@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 test page (Fix TriggerField in Toolbar, wrong trigger height (Webkit))</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+
+<style type="text/css">
+.ext-webkit .fix-trigger .x-small-editor .x-form-text {
+    padding-top: 1px;
+}
+
+</style>
+
+<script type="text/javascript">
+Ext.onReady(function(){
+    var config = {
+        title: 'Fix TriggerField in Toolbar, wrong trigger height (Webkit)',
+        width: 400,
+        labelWidth: 200,
+        labelAlign: 'right',
+
+        tbar: [{
+            text: 'Default is button'
+        }, {
+            xtype: 'trigger',
+            value: 'trigger'
+        }],
+        bbar: [{
+            text: 'Default is button'
+        }, {
+            xtype: 'trigger',
+            value: 'trigger'
+        }],
+        fbar: [{
+            text: 'Default is button'
+        }, {
+            xtype: 'trigger',
+            value: 'trigger'
+        }],
+
+        items: [{
+            xtype: 'displayfield',
+            value: 'displayfield value',
+            fieldLabel: 'displayfield fieldLabel'
+        }, {
+            xtype: 'textfield',
+            value: 'textfield value',
+            fieldLabel: 'textfield fieldLabel'
+        }, {
+            xtype: 'trigger',
+            value: 'trigger',
+            fieldLabel: 'trigger fieldLabel'
+        }]
+    };
+
+
+    var ct = new Ext.Panel({
+        renderTo: 'container',
+        border: false,
+        layout: 'hbox',
+        layoutConfig: {
+            padding: 20
+        },
+        items: [
+            new Ext.form.FormPanel(Ext.apply(config, {
+                cls: 'default-trigger'
+            })), 
+            {
+                xtype: 'panel',
+                border: false,
+                width: 10
+            }, new Ext.form.FormPanel(Ext.apply(config, {
+                cls: 'fix-trigger'
+            }))]
+    });
+});
+</script>
+</head>
+<body>
+
+<div id="description" style="padding: 10px;">
+<p>This only happens in Webkit-based Browser (Google Chrome, Safari) with strict mode.</p>
+</div>
+
+<div id="container">
+</div>
+
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+

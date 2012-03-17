@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>md4, md5, sha1</title>
+<style type="text/css">
+#ta {
+width: 600px;
+height: 300px;
+}
+ul li {
+list-style-type: none;
+}
+input[type=text] {
+width: 300px;
+}
+input[type=submit] {
+border: 1px solid #000;
+padding: 2px 10px;
+margin: 3px;
+}
+input[type=button]:hover {
+background: #000;
+color: #CCC;
+}
+</style>
+
+<script type="text/javascript" src="md4.js"></script>
+<script type="text/javascript" src="md5.js"></script>
+<script type="text/javascript" src="sha1.js"></script>
+<script type="text/javascript">
+window.onload = init;
+
+function init()
+{
+    var text = document.getElementById("text1");
+
+    document.getElementById("submit1").onclick = function (){
+        var plain = text.value;
+        var md4_str = hex_md4(plain);
+        var md5_str = hex_md5(plain);
+        var sha1_str = hex_sha1(plain);
+
+        var result = "";
+        result += "[plain]\n「" + plain + "」\n\n";
+        result += "[md4]  \n" + md4_str + "\n\n";
+        result += "[md5]  \n" + md5_str + "\n\n";
+        result += "[sha1] \n" + sha1_str + "\n\n";
+
+        document.getElementById("ta").value = result;
+    };
+
+    // disable form action
+    document.getElementById("form1").onsubmit = function (){
+        return false;
+    };
+    
+    // set focus on text input
+    text.focus();
+}
+</script>
+</head>
+<body>
+<div id="container">
+
+<div id="inputDiv">
+
+<form id="form1" action="">
+<ul>
+<li><input type="text" id="text1" value="" /></li>
+<li><input type="submit" id="submit1" value="submit" /></li>
+</ul>
+</form>
+
+</div>
+
+<div id="taDiv">
+<textarea id="ta"></textarea>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 test page</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+
+    var form1 = new Ext.form.FormPanel({
+        title: 'BB',
+        hideMode: 'offsets',
+
+        items: [{
+            xtype: 'combo',
+            hiddenName: 'no',
+            hiddenId: Ext.id(),
+            width: 300,
+            mode: 'local',
+            triggerAction: 'all',
+            store: [
+                [1, 'one'],
+                [2, 'two'],
+                [3, 'three'],
+                [4, 'four']
+            ],
+            value: '1'
+        }, {
+            xtype: 'displayfield',
+            name: 'oh',
+            value: '234j23lk4j2l34'
+        }, {
+            xtype: 'textfield',
+            name: 'my love',
+            value: 'I am TextField'
+        }, {
+            xtype: 'compositefield',
+            name: 'stop it',
+            width: 500,
+
+            items: [{
+                xtype: 'combo',
+                hiddenName: 'number',
+                hiddenId: Ext.id(),
+                width: 300,
+                mode: 'local',
+                triggerAction: 'all',
+                store: [
+                    [1, 'one'],
+                    [2, 'two'],
+                    [3, 'three'],
+                    [4, 'four']
+                ],
+                value: '1'
+            }]
+        }]
+    });
+
+
+    var tab = new Ext.TabPanel({
+        renderTo: 'container',
+        plain: true,
+        border: false,
+        deferredRender: false,
+        height: 300,
+        activeTab: 0,
+
+        buttons: [{
+            text: 'halo',
+            handler: function(btn, evt) {
+                var result = {};
+                for (var i = 0; i < tab.items.length; i++) {
+                    var values = tab.get(i).getForm().getValues();
+                    Ext.apply(result, values);
+                }
+
+                alert(Ext.urlEncode(result) + ', length:'+tab.items.length);
+            }
+        }, {
+            text: 'never',
+            handler: function(btn, evt) {
+                var result = {};
+                var values = tab.getActiveTab().getForm().getValues();
+                Ext.apply(result, values);
+
+                alert(Ext.urlEncode(result));
+            }
+        }],
+
+        items: [{
+            xtype: 'form',
+            title: 'oo',
+
+            items: [{
+                xtype: 'displayfield',
+                value: 'aa'
+            }, {
+                xtype: 'displayfield',
+                value: 'aa'
+            }, {
+                xtype: 'displayfield',
+                value: 'aa'
+            }, {
+                xtype: 'checkboxgroup',
+                //name: 'groupOfChec:box',
+
+                items: [{
+                    boxLabel: 'oh',
+                    width: 50,
+                    name: 'cbingrp1'
+                }, {
+                    boxLabel: 'FLAC/APE',
+                    width: 100,
+                    name: 'flactranscoding'
+                }, {
+                    boxLabel: 'AAC',
+                    width: 80,
+                    name: 'aactranscoding'
+                }]
+            }, {
+                xtype: 'checkbox',
+                name: 'chAA394'
+            }, {
+                xtype: 'checkbox',
+                name: 'ch88'
+            }, {
+                xtype: 'checkbox',
+                name: 'newCheck',
+                checked: true
+            }]
+        }, 
+        form1, {
+            xtype: 'form',
+            title: 'CC',
+
+            items: [{
+                xtype: 'displayfield',
+                name: 'c1',
+                value: 'aa'
+            }, {
+                xtype: 'displayfield',
+                name: 'c2',
+                value: 'qq'
+            }, {
+                xtype: 'displayfield',
+                name: 'c3',
+                value: 'kk'
+            }]
+
+        }]
+    });
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+</body>
+</html>
+

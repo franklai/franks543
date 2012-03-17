@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.2.1 IE9 file input test page</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.2.1/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.2.1/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var panel = new Ext.form.FormPanel({
+		items: [{
+			xtype: 'displayfield',
+			itemId: 'normal',
+			value: 'normal: <input type="file">'
+		}, {
+			xtype: 'displayfield',
+			itemId: 'visibility',
+			value: 'visibility: <input type="file" style="visibility: hidden;">'
+		}, {
+			xtype: 'displayfield',
+			itemId: 'offsets',
+			value: 'offsets: <input type="file" style="position: absolute; top: -230px; left: -16px;">'
+		}, {
+			xtype: 'textfield',
+			fieldLabel: 'visibility',
+			hideMode: 'visibility',
+			hidden: true,
+			inputType: 'file',
+			itemId: 'visibility2'
+		}, {
+			xtype: 'textfield',
+			fieldLabel: 'offsets',
+			hideMode: 'offsets',
+			hidden: true,
+			inputType: 'file',
+			itemId: 'offsets2'
+		}, {
+			xtype: 'textfield',
+			fieldLabel: 'display',
+			hideMode: 'display',
+			hidden: true,
+			inputType: 'file',
+			itemId: 'display2'
+		}, {
+			xtype: 'displayfield',
+			itemId: 'status',
+			value: 'status'
+		}],
+		bbar: {
+			items: [{
+				xtype: 'button',
+				text: 'show',
+				handler: function(btn, evt) {
+					var field;
+
+					field = panel.get('display2');
+					field.setVisible(!field.isVisible());
+
+					field = panel.get('offsets2');
+					field.setVisible(!field.isVisible());
+
+					field = panel.get('visibility2');
+					field.setVisible(!field.isVisible());
+
+					// try local
+					var elem = Ext.get('fileO');
+					Ext.get('fileO').setStyle({
+						'top': '500px',
+						'left': '200px'
+					});
+					Ext.get('fileD').setStyle({
+						'display': 'block'
+					});
+					Ext.get('fileV').setStyle({
+						'visibility': 'visible'
+					});
+				}
+			}]
+		},
+		listeners: {
+			afterrender: function(comp) {
+// 				var field = comp.getComponent('status');
+// 
+// 				field.setValue('test status');
+// 
+// 				comp.get('visibility2').show();
+// 				comp.get('offsets2').show();
+// 				comp.get('display2').show();
+			}
+		}
+	});
+
+	var ct = new Ext.Panel({
+		renderTo: 'container',
+		title: 'Ext JS test page',
+		height: 300,
+		width: 500,
+		layout: 'fit',
+		items: panel
+	});
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div id="yard">
+	<input type="file" id="fileShow">
+	<br>
+	<input type="file" id="fileO" style="position: absolute; top: -20px; left: -230px;">
+	<br>
+	<input type="file" id="fileD" style="display: none;">
+	<br>
+	<input type="file" id="fileV" style="visibility: hidden;">
+	<br>
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+

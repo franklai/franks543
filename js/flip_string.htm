@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-tw" xml:lang="zh-tw">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Flip String</title>
+<style type="text/css">
+#ta {
+width: 600px;
+height: 300px;
+}
+li {
+list-style-type: none;
+margin: 6px;
+}
+</style>
+<script type="text/javascript">
+window.onload = init;
+
+function init()
+{
+    document.getElementById("submit1").onclick = function(){
+        var input = document.getElementById("text1").value;
+        var output = flip(input);
+        document.getElementById("ta").value = output;
+    };
+
+    document.getElementById("form1").onsubmit = function(){
+        var input = document.getElementById("text1").value;
+        var output = flip(input);
+        document.getElementById("ta").value = output;
+        return false;
+    };
+}
+
+function flip(input)
+{
+    var strArray = input.split("");
+    strArray = strArray.reverse();
+    var output = strArray.join('');
+    return output;
+}
+
+</script>
+</head>
+<body>
+<div id="container">
+
+<div id="inputDiv">
+<form id="form1">
+<ul>
+<li>請輸入您想要左右顛倒的字串：</li>
+<li><input type="text" id="text1" value="" /></li>
+<li><input type="submit" id="submit1" value="送出" /></li>
+</ul>
+</form>
+</div>
+
+<div id="taDiv">
+<textarea id="ta"></textarea>
+</div>
+
+</div>
+</body>
+</html>
