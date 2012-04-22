@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.4.0 test page</title>
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.4.0/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
+<!--
+<link rel="StyleSheet" type="text/css" href="/ext-3.4.0/resources/css/ext-all.css">
+<script type="text/javascript" src="/ext-3.4.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/ext-3.4.0/ext-all.js"></script>
+-->
+<script type="text/javascript">
+Ext.onReady(function(){
+    var store = new Ext.data.JsonStore({
+        url: 'list.json',
+        autoLoad: true,
+        root: 'links',
+        fields: [
+            'title', 'link'
+        ]
+    });
+    
+	var panel = new Ext.list.ListView({
+        store: store,
+        columns: [{
+            header: '標題', 
+            dataIndex: 'title', 
+            sortable: true
+        }, {
+            header: '連結', 
+            dataIndex: 'link', 
+            width: .2,
+            align: 'center',
+            tpl: '<a href="{link}" target="_blank">Link</a>'
+        }]
+	});
+
+    var ct = new Ext.Panel({
+        renderTo: 'container',
+        title: 'Ext JS test page',
+        height: 300,
+        width: 500,
+        layout: 'fit',
+        items: panel
+    });
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+
