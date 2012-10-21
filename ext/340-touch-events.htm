@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Ext JS 3.4.0 Touch Events</title>
+<!--
+<link rel="StyleSheet" type="text/css" href="http://extjs.cachefly.net/ext-3.4.0/resources/css/ext-all.css">
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
+-->
+<link rel="StyleSheet" type="text/css" href="/ext-3.4.0/resources/css/ext-all.css">
+<style type="text/css">
+body {
+	-webkit-touch-callout: none !important;
+}
+#touch_area {
+	background-color: skyblue;
+
+	position: absolute;
+	top: 100px;
+	left: 100px;
+	width: 600px;
+	height: 300px;
+}
+#msg {
+	background-color: green;
+
+	position: absolute;
+	top: 500px;
+	left: 20px;
+	width: 600px;
+	height: 100px;
+}
+</style>
+<script type="text/javascript" src="/ext-3.4.0/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="/ext-3.4.0/ext-all.js"></script>
+<script type="text/javascript">
+Ext.onReady(function(){
+	var idx,
+		doc = Ext.getDoc(),
+		gestures = [];
+
+	Ext.ns('Fujirou.Gesture');
+
+	function ECHO(abc) {
+		var div = Ext.get('msg');
+
+		div.dom.innerHTML += abc + '<br>';
+		console.log(arguments);
+	};
+
+	function createMouseEvent(eventName, e) {
+		var newEvent = null;
+
+		if (document.createEvent) {
+			newEvent = document.createEvent('MouseEvents');
+			newEvent.initMouseEvent(
+				eventName,
+				e.bubbles, e.cancelBubble, e.view,
+				e.detail, e.screenX, e.screenY, e.clientX, e.clientY,
+				e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+				e.button, e.relatedTarget
+			);
+ECHO('YES createEvent');
+		} else {
+ECHO('no createEvent');
+		}
+
+		return newEvent;
+	}
+
+	Fujirou.Gesture.BaseGesture = Ext.extend(Ext.util.Observable, {
+		constructor: function() {
+		},
+		onTouchStart: Ext.emptyFn,
+		onTouchEnd: Ext.emptyFn,
+		onTouchMove: Ext.emptyFn
+	});
+
+	Fujirou.Gesture.LongPress = Ext.extend(Fujirou.Gesture.BaseGesture, {
+		config: {
+			minDuration: 1000
+		},
+		fireLongPress: function(evt, elem) {
+			var newEvent,
+				e = evt.browserEvent;
+
+			this.isLongPressFired = true;
+
+			createMouseEvent('contextmenu', evt.browserEvent);
+
+ECHO(' gonna dispatchEvent, newEvent:', newEvent);
+			evt.stopEvent();
+			elem.dispatchEvent(newEvent);
+
+// 			Ext.get(elem).fireEvent('longpress', evt, elem);
+		},
+		getMinDuration: function() {
+			return this.config.minDuration;
+		},
+		onTouchStart: function(evt, elem, obj) {
+			var me = this;
+
+// ECHO('damn touchstart, evt:', evt, ', elem:', elem, ', obj:', obj);
+			this.isLongPressFired = false;
+			this.timer = setTimeout(function() {
+				me.fireLongPress(evt, elem);
+			}, this.getMinDuration());
+		},
+		onTouchEnd: function(evt, elem, obj) {
+			return this.fail();
+		},
+		onTouchMove: function(evt, elem, obj) {
+			return this.fail();
+		},
+		fail: function() {
+			clearTimeout(this.timer);
+		}
+	});
+
+	Fujirou.Gesture.DoubleTagp = Ext.extend(Fujirou.Gesture.BaseGesture, {
+		config: {
+			minDuration: 1000
+		},
+		fireLongPress: function(evt, elem) {
+			var newEvent,
+				e = evt.browserEvent;
+
+			this.isLongPressFired = true;
+
+			createMouseEvent('contextmenu', evt.browserEvent);
+
+ECHO(' gonna dispatchEvent, newEvent:', newEvent);
+			evt.stopEvent();
+			elem.dispatchEvent(newEvent);
+
+// 			Ext.get(elem).fireEvent('longpress', evt, elem);
+		},
+		getMinDuration: function() {
+			return this.config.minDuration;
+		},
+		onTouchStart: function(evt, elem, obj) {
+			var me = this;
+
+// ECHO('damn touchstart, evt:', evt, ', elem:', elem, ', obj:', obj);
+			this.isLongPressFired = false;
+			this.timer = setTimeout(function() {
+				me.fireLongPress(evt, elem);
+			}, this.getMinDuration());
+		},
+		onTouchEnd: function(evt, elem, obj) {
+			return this.fail();
+		},
+		onTouchMove: function(evt, elem, obj) {
+			return this.fail();
+		},
+		fail: function() {
+			clearTimeout(this.timer);
+		}
+	});
+
+	gestures.push(new Fujirou.Gesture.LongPress());
+
+	for (idx = 0, len = gestures.length; idx < len; ++idx) {
+		gesture = gestures[idx];
+		Ext.EventManager.on(doc, 'touchstart', gesture.onTouchStart, gesture);
+		Ext.EventManager.on(doc, 'touchend', gesture.onTouchEnd, gesture);
+		Ext.EventManager.on(doc, 'touchmove', gesture.onTouchMove, gesture);
+	}
+
+	Ext.EventManager.on(doc, 'contextmenu', function() {
+// 		ECHO('contextmenu got');
+	});
+
+	Ext.get('touch_area').on('contextmenu', function(evt) {
+		ECHO('got contextmenu event in touch_area');
+		evt.stopEvent();
+	});
+
+	
+});
+</script>
+</head>
+<body>
+<div id="container" style="width: 500px;">
+	<div id="touch_area">
+		Touch Area
+	</div>
+
+	<div id="msg"> </div>
+</div>
+<div id="footer" style="font-size: 80%; width: 90%; bottom: 0px; position: fixed; padding: 5px;"><a href="http://franks543.blogspot.com/" target="_blank">Frank的五四三</a></div>
+</body>
+</html>
+
