@@ -1,6 +1,16 @@
 {
     links: [
         {
+            title: 'Touch Events Test',
+            version: '3.4.0',
+            link: '340-touch-events.htm'
+        },
+        {
+            title: '<hr>',
+            version: '3.2.1',
+            link: '321-ie-button-background-fix.htm'
+        },
+        {
             title: 'test reload store using TaskRunner',
             version: '3.2.1',
             link: '321-grid-polling-test.htm'
