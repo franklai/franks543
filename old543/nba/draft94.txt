@@ -1,0 +1,14 @@
+Pick:INT,No:INT,Name,Team,School
+1,,Glenn Robinson,Milwaukee Bucks,Purdue
+2,,Jason Kidd,Dallas Mavericks,California
+3,,Grant Hill,Detroit Pistons,Duke
+4,,Donyell Marshall,Minnesota Timberwolves,Connecticut
+5,,Juwan Howard,Washington Bullets,Michigan
+6,,Sharone Wright,Philadelphia 76ers,Clemson
+7,,Lamond Murray,Los Angeles Clippers,California
+8,,Brian Grant,Sacramento Kings,Xavier(Ohio)
+9,,Eric Montross,Boston Celtics,North Carolina
+10,,Eddie Jones,Los Angeles Lakers,Temple
+13,,Jalen Rose,Denver Nuggets,Michigan
+17,,Aaron McKie,Portland Trail Blazers,Temple
+26,,Charlie Ward,New York Knicks,Florida State

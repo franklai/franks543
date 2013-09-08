@@ -1,0 +1,118 @@
+<HTML>
+<HEAD>
+<TITLE>NBA小問答IV(綽號篇)</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+</HEAD>
+
+<script>
+<!--
+//以下是按下button後所執行的Script
+function Score()
+{
+var markIQ=0;
+var popup;
+var scoreIQ;
+var RorW=new Array()
+
+for(n=1;n<=NBAquiz.length;n++){ //檢查答案是否正確的迴圈
+eval("WaTaShi=document.quizform.q"+n+".selectedIndex");
+if(WaTaShi==NBAquiz[n-1].cAns){markIQ+=1;RorW[n]="black";}
+else {RorW[n]="red";}
+}
+
+
+if (markIQ ==NBAquiz.length) //全對
+{scoreIQ="Wow！！超強的！";}
+else if (markIQ >=4)
+{scoreIQ="不錯，想必您一定是位NBA球迷";}
+else
+{scoreIQ="這算是正常";}
+
+
+var comment="<html>"+ //將會顯示的解答頁
+"<title>NBA問答結果</title>"+
+"<LINK REL='StyleSheet' TYPE='text/css' HREF='../samelink.css'>"+
+"<body text='black'>"+
+"<p>您現在所在的位置是：<a href='nba.htm'>NBA Zone</a>/<a href='nba_data.htm'>NBA 資料庫</a>/<a href='nbaquiz4.htm'>NBA小問答IV</a>/<b>NBA小問答IV結果</b></p>"+
+"<blockquote>"+
+"<p>你在 "+NBAquiz.length+" 題當中答對 "+markIQ+" 題。"+
+"<p>你的NBA評分為："+scoreIQ+"</p>"+
+"<hr width='30%'>"+
+"<p>以下是測驗解答(答錯的題目以紅色顯示)：<p>";
+
+var showAnswer='';
+for(x=1;x<=NBAquiz.length;x++){
+y=NBAquiz[x-1].cAns;
+eval('CorrectAns=NBAans[x-1].a'+y);
+showAnswer+=x+'.'+NBAquiz[x-1].text+"<br><B><FONT COLOR="+RorW[x]+">"+CorrectAns+"</FONT></B><P>";
+}
+var End="</blockquote></body></html>";
+
+popup = window.open("","_self")
+popup.document.write(comment+showAnswer+End)
+popup.document.close()
+}
+//Score函數結束
+
+
+//物件導向寫法！？問題部份
+function makeQuiz(question,cAns){this.text=question;this.cAns=cAns;}
+
+//物件導向寫法！？答案部份
+function makeAns(ans1,ans2,ans3,ans4){this.a1=ans1;this.a2=ans2;this.a3=ans3;this.a4=ans4;}
+
+//以下是需要變更的部份
+
+NBAquiz=new Array(); //問題陣列
+NBAans=new Array(); //答案陣列
+NBAquiz[0]=new makeQuiz("馬龍(Karl Malone)的別稱？",1);
+NBAans[0]=new makeAns("郵差","惡漢","瞌睡蟲","鎖喉手");
+NBAquiz[1]=new makeQuiz("基德(Jason Kidd)的綽號？",3);
+NBAans[1]=new makeAns("手套","大嘴","神奇小子","外星人");
+NBAquiz[2]=new makeQuiz("大衛．羅賓森(David Robinson)有什麼別名？",1);
+NBAans[2]=new makeAns("海軍上將","","陸軍准將","大頭兵");
+NBAquiz[3]=new makeQuiz("葛林．羅賓森(Glenn Robinson)又被稱為？",4);
+NBAans[3]=new makeAns("野獸","加拿大空軍","人類精彩影片","大狗");
+NBAquiz[4]=new makeQuiz("賴瑞．強森(Larry Johnson)又叫？",2);
+NBAans[4]=new makeAns("大鏢客","祖母","巨猩","酋長");
+NBAquiz[5]=new makeQuiz("d",1);
+NBAans[5]=new makeAns("飛人","滑翔人","大鳥","魔術");
+NBAquiz[6]=new makeQuiz("d",1);
+NBAans[6]=new makeAns("白色巧克力","勉族","荷蘭佬","天行者");
+NBAquiz[7]=new makeQuiz("d",1);
+NBAans[7]=new makeAns("Zo","Rock","3D","d");
+NBAquiz[8]=new makeQuiz("d",1);
+NBAans[8]=new makeAns("太空飛鼠","岩石","d","d");
+NBAquiz[9]=new makeQuiz("d",1);
+NBAans[9]=new makeAns("d","d","d","d");
+
+//-->
+</script>
+<BODY>
+<p>您現在所在的位置是：<a href="nba.htm">NBA Zone</a>/<a href="nba_data.htm">NBA 資料庫</a>/<b>NBA小問答IV</b></p>
+<div class="center">
+NBA球員有很多的綽號，你知道這些人的綽號嗎？<br>
+<div style="font-size:10pt">人物的中文都是自己翻的，請參照英文。</div>
+</div>
+<p><Blockquote>
+<FORM NAME="quizform" >
+<script language="JavaScript">
+for(i=1;i<=NBAquiz.length;i++){
+document.write(i+'.'+NBAquiz[i-1].text);
+document.write('<SELECT NAME=q'+i+'>');
+document.write('<OPTION selected VALUE="0">這個嗎...');
+document.write('<OPTION>'+NBAans[i-1].a1);
+document.write('<OPTION>'+NBAans[i-1].a2);
+document.write('<OPTION>'+NBAans[i-1].a3);
+document.write('<OPTION>'+NBAans[i-1].a4);
+document.write('</SELECT><P>');
+}
+</script>
+<p align="center"><input onclick="Score()" type="button" value="看問答結果"></p>
+</FORM>
+</Blockquote>
+
+<p class="center">Made by Frank, 2000/08/29</p>
+</BODY>
+</HTML>

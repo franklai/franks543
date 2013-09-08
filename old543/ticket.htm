@@ -1,0 +1,115 @@
+<HTML>
+<HEAD>
+<TITLE>統一發票對獎程式</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="samelink.css">
+<SCRIPT language="JavaScript">
+<!--
+var ticketNo=4;//共有4+1組發票號碼
+
+whichOne=new Array();
+whichOne[0]="特";
+whichOne[1]="頭";
+whichOne[2]="貳";
+whichOne[3]="參";
+whichOne[4]="肆";
+whichOne[5]="伍";
+whichOne[6]="陸";
+howMuch=new Array();
+howMuch[0]="二百萬";
+howMuch[1]="二十萬";
+howMuch[2]="四萬";
+howMuch[3]="一萬";
+howMuch[4]="四千";
+howMuch[5]="一千";
+howMuch[6]="二百";
+
+//定義統一發票號碼
+function Dim(FORM){
+Select(FORM.number);
+
+ for(n=0;n<=ticketNo;n++){
+  eval('checkee=FORM.no'+n);
+  Checking(checkee);
+ }
+
+Ticket=new Array();
+for(i=0;i<=ticketNo;i++){eval('Ticket['+i+']=FORM.no'+i+'.value');}
+
+//取出各獎項的數字
+for (i=1;i<=ticketNo;i++){
+abcd=Ticket[i];
+Ticket[i]=new Array();
+Ticket[i][1]=abcd;
+Ticket[i][2]=abcd.substring(1,8);
+Ticket[i][3]=abcd.substring(2,8);
+Ticket[i][4]=abcd.substring(3,8);
+Ticket[i][5]=abcd.substring(4,8);
+Ticket[i][6]=abcd.substring(5,8);}
+}
+
+//清除函式
+function Clear(FORM){
+FORM.value='';
+Select(FORM);}
+//反白函式
+function Select(FORM){FORM.select();FORM.focus();}
+
+//顯示中獎函式
+function howMany(Iget,FORM,no){
+FORM.conclusion.value="恭喜您中了"+whichOne[Iget]+"獎，有獎金"+howMuch[Iget]+"元！　發票號碼是"+no;
+window.alert("恭喜您中了"+whichOne[Iget]+"獎\n有獎金"+howMuch[Iget]+"元！");
+Clear(FORM.number);}
+
+//輸入八位數字後聚焦確定函式
+function Jumping(FORM){
+var thisNum=FORM.number.value;
+if (thisNum.length==8) {FORM.ok.focus();}
+}
+
+//檢查函式
+function Checking(NO){
+noVal=NO.value;
+noLen=NO.value.length;
+if (noVal==''){window.alert('請輸入號碼');Select(NO);return false}
+if (noLen!=8){window.alert("請輸入完整的號碼！");Select(NO);return false}
+if (isNaN(noVal)) {window.alert('請輸入數字');Select(NO);return false}
+return true
+}
+
+//對獎函式
+function TicketDot(FORM){
+var ourNumber=FORM.number.value;
+if(Checking(FORM.number)){
+ if (ourNumber==Ticket[0]){howMany(0,FORM,ourNumber);return false} //特獎部份
+  for (k=1;k<=6;k++){
+    for (l=1;l<=ticketNo;l++){
+        if (ourNumber==Ticket[l][k]){howMany(k,FORM,FORM.number.value);return false}  //其它獎部份
+    }
+   ourNumber=ourNumber.substring(1,8);
+  }
+FORM.conclusion.value="這張"+FORM.number.value+"太可惜了，再對下一張吧！";
+ }
+Clear(FORM.number);}
+//-->
+</SCRIPT>
+</HEAD>
+<BODY onLoad="Dim(document.TICKET)">
+
+<CENTER>
+<h2>統一發票對獎程式</h2>
+<FORM NAME="TICKET">
+<INPUT DISABLED TYPE="text" NAME="conclusion" VALUE=" * * * * * * * * * * * * * * * * 這裡將會顯示對獎結果 * * * * * * * * * * * * * * * * " SIZE="60"><P>
+	<INPUT TYPE="text" NAME="number" VALUE="請在這裡輸入號碼!" SIZE="15" MAXLENGTH="8" onKeyUp="Jumping(this.form)">
+	<INPUT TYPE="button" NAME="ok" VALUE="對獎" onClick="TicketDot(this.form)">
+	<INPUT TYPE="button" NAME="clear" VALUE="清除" onClick="Clear(this.form.number)">
+<P>
+特獎號碼：<INPUT TYPE="text" NAME="no0" MAXLENGTH="8" SIZE="10" VALUE="93155208"><BR>
+頭獎號碼：<INPUT TYPE="text" NAME="no1" MAXLENGTH="8" SIZE="10" VALUE="11565875"><BR>
+　　　　　<INPUT TYPE="text" NAME="no2" MAXLENGTH="8" SIZE="10" VALUE="56859397"><BR>
+　　　　　<INPUT TYPE="text" NAME="no3" MAXLENGTH="8" SIZE="10" VALUE="93843699"><BR>
+　　　　　<INPUT TYPE="text" NAME="no4" MAXLENGTH="8" SIZE="10" VALUE="95730935"><BR>
+<INPUT TYPE="button" NAME="newno" VALUE="更新號碼" onClick="Dim(this.form)"><BR>
+</FORM>
+</CENTER>
+</BODY>
+</HTML>

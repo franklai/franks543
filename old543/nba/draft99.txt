@@ -1,0 +1,11 @@
+Pick:INT,Name,Team,School
+1,Elton Brand,Chicago Bulls,Duke
+2,Steve Francis,Vancouver,Maryland
+3,Baron Davis,Charlotte Hornets,UCLA
+4,Lamar Odom,Los Angeles Clippers,Rhode Island
+5,Jonathan Bender,Toronto Raptors,picayune(Miss.)H.S.
+6,Wally Szczerbiak,Minnesota Timberwolves,Miami(Ohio)
+7,Richard Hamilton,Washington Wizards,Connecticut
+8,Andre Miller,Cleveland Cavaliers,Utah
+9,Shawn Marion,Phoenix Suns,UNLV
+10,Jason Terry,Atlanta Hawks,Arizona

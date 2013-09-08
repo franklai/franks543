@@ -1,0 +1,319 @@
+<HTML>
+<HEAD>
+<TITLE>NBA小問答</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+</HEAD>
+
+<script>
+<!--
+function Score()
+{
+var markIQ=0
+var popup
+var scoreIQ
+var scoreEQ
+if (document.quizform.q1.selectedIndex==3)
+{markIQ=markIQ+1;}
+if (document.quizform.q2.selectedIndex==3)
+{markIQ=markIQ+1;}
+if (document.quizform.q3.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q4.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q5.selectedIndex==4)
+{markIQ=markIQ+1;}
+if (document.quizform.q6.selectedIndex==1)
+{markIQ=markIQ+1;}
+if (document.quizform.q7.selectedIndex==4)
+{markIQ=markIQ+1;}
+if (document.quizform.q8.selectedIndex==1)
+{markIQ=markIQ+1;}
+if (document.quizform.q9.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q10.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q11.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q12.selectedIndex==3)
+{markIQ=markIQ+1;}
+if (document.quizform.q13.selectedIndex==5)
+{markIQ=markIQ+1;}
+if (document.quizform.q14.selectedIndex==2)
+{markIQ=markIQ+1;}
+if (document.quizform.q15.selectedIndex==1)
+{markIQ=markIQ+1;}
+if (document.quizform.q16.selectedIndex==3)
+{markIQ=markIQ+1;}
+if (document.quizform.q17.selectedIndex==4)
+{markIQ=markIQ+1;}
+if (document.quizform.q18.selectedIndex==1)
+{markIQ=markIQ+1;}
+if (document.quizform.q19.selectedIndex==3)
+{markIQ=markIQ+1;}
+if (document.quizform.q20.selectedIndex==2)
+{markIQ=markIQ+1;}
+
+
+if (markIQ ==20)
+{scoreIQ="厲害！！可以當球評了"}
+else if (markIQ >15)
+{scoreIQ="不簡單，想必您一定是位超級NBA球迷"}
+else if (markIQ >11)
+{scoreIQ="不錯喔，有在注意NBA的動態"}
+else if (markIQ >5)
+{scoreIQ="這算是正常"}
+else if (markIQ >0)
+{scoreIQ="您需要再惡補一下"}
+else
+{scoreIQ="嗯......潛能難以估計"}
+
+var comment="<html>"+
+"<title>NBA問答結果</title>"+
+"<LINK REL='StyleSheet' TYPE='text/css' HREF='../samelink.css'>"+
+"<body bgcolor='#C6EFF7' text='black'>"+
+"<p>您現在所在的位置是：<a href='nba.htm'>NBA Zone</a>/<a href='nba_data.htm'>NBA 資料庫</a>/<a href='nbaquiz.htm'>NBA小問答</a>/<b>NBA小問答結果</b></p>"+
+"<blockquote>"+
+"<p>你在 20 題當中答對 "+markIQ+" 題。"+
+"<p>你的NBA評分為："+scoreIQ+"</p>"+
+"<hr width='30%'>"+
+"<p>以下是測驗解答："+
+"<p>1.在本季結束後於退休的爵士球員是誰？"+
+"<br><B>何納塞克(Jeff Hornacek)</B>"+
+"<p>2.本季最佳教練是誰？"+
+"<br><B>瑞佛斯(Doc Rivers)</B>"+
+"<p>3.本季的最有價值球員是誰？"+
+"<br><B>歐尼爾(Shaquille O'neal)</B>"+
+"<p>4.本季的灌籃大賽冠軍得主是誰？"+
+"<br><B>卡特(Vince Carter)</B>"+
+"<p>5.本季的年度總冠軍是？"+
+"<br><B>湖人(LA Lakers)</B>"+
+"<p>6.布萊恩(Kobe Bryant)當初選秀時是被那一隊選上？"+
+"<br><B>黃蜂(Charlotte Hornets)</B>"+
+"<p>7.下列那一位是卡特(Vince Carter)的親戚？"+
+"<br><B>麥葛雷迪(Tracy McGrady)</B>"+
+"<p>8.大衛．羅賓森(David Robinson)是從那一個學校畢業的？"+
+"<br><B>NAVY</B>"+
+"<p>9.尤恩(Patrick Ewing)和莫寧(Alonzo Mourning)是那所學校的學長及學弟？"+
+"<br><B>GeoreoTown</B>"+
+"<p>10.那一位球員有太空飛鼠的稱號？"+
+"<br><B>史陶德邁爾(Damon Stoudmire)</B>"+
+"<p>11.希爾(Grant Hill)曾為那一種飲料代言？"+
+"<br><B>雪碧</B>"+
+"<p>12.法蘭西斯(Steve Francis)在第二順位被選上後，就交易到火箭，選他的是那一隊？"+
+"<br><B>灰熊(Vancouver Grizzlies)</B>"+
+"<p>13.以下那一位球員不是高中生進NBA？"+
+"<br><B>艾佛森(Allen Iverson)</B>"+
+"<p>14.以下那一位球員沒有幫NIKE代言？"+
+"<br><B>布萊恩(Kobe Bryant)</B>"+
+"<p>15.本季的助攻王是誰？"+
+"<br><B>基德(Jason Kidd)</B>"+
+"<p>16.喬丹(Michael Jordan)在1984年的選秀會上，在第幾順位被選走？"+
+"<br><B>第三順位</B>"+
+"<p>17.喬丹手上總共有幾枚冠軍戒指？"+
+"<br><B>6</B>"+
+"<p>18.首度在灌籃大賽中罰球起跳灌籃成功的是誰？"+
+"<br><B>J博士(Julius Erving)</B>"+
+"<p>19.喬丹拿過幾次得分王？"+
+"<br><B>10</B>"+
+"<p>20.喬丹畢業自那一所大學？"+
+"<br><B>North Carolina</B>"+
+"</blockquote></body></html>"
+
+popup = window.open("","_self")
+popup.document.write(comment)
+popup.document.close()
+}
+
+
+//---
+-->
+</script>
+
+<BODY>
+<p>您現在所在的位置是：<a href="nba.htm">NBA Zone</a>/<a href="nba_data.htm">NBA 資料庫</a>/<b>NBA小問答</b></p>
+<div class="center">
+哈哈！以下的題目都是NBA迷的基本題喔！<br>
+<div style="font-size:10pt">以下題目中出現的本季都是指1999/2000球季，人物的中文都是自己翻的，請參照英文。</div>
+</div>
+<p>
+
+
+<Blockquote>
+<FORM NAME="quizform" >
+1.在本季結束後於退休的爵士球員是誰？
+  <SELECT NAME="q1">
+    <OPTION selected VALUE="0">這個嗎...
+    <OPTION VALUE="1">馬龍(Karl Malone)
+    <OPTION VALUE="2">羅素(Bryon Russell)
+    <OPTION VALUE="3">何納塞克(Jeff Hornacek)
+    <OPTION VALUE="4">史塔克頓(John Stockton)
+    <OPTION VALUE="5">波勒尼斯(Olden Polynice)
+  </SELECT>
+<P>
+2.本季最佳教練是誰？
+  <SELECT NAME="q2">
+    <OPTION selected VALUE="0">這個嗎...
+    <OPTION VALUE="1">傑克森(Phil Jackson)
+    <OPTION VALUE="2">萊利(Pat Raily)
+    <OPTION VALUE="3">瑞佛斯(Doc Rivers)
+    <OPTION VALUE="4">威肯斯(Lenny Wilkens)
+    <OPTION VALUE="4">博德(Larry Bird)
+  </SELECT>
+<P>
+3.本季的最有價值球員是誰？
+<SELECT NAME="q3">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">當肯(Tim Duncan)
+<OPTION VALUE="2">歐尼爾(Shaquille O'neal)
+<OPTION VALUE="3">艾佛森(Allen Iverson)
+<OPTION VALUE="4">米勒(Reggie Miller)
+<OPTION VALUE="5">賈奈特(Kevin Granett)
+</SELECT>
+<P>
+4.本季的灌籃大賽冠軍得主是誰？
+<SELECT NAME="q4">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">法蘭西斯(Steve Francis)
+<OPTION VALUE="2">卡特(Vince Carter)
+<OPTION VALUE="3">麥葛雷迪(Tracy McGrady)
+<OPTION VALUE="4">史塔克豪斯(Jerry Stackhouse)</SELECT>
+<P>
+5.本季的年度總冠軍是？
+<SELECT NAME="q5">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">拓荒者(Portland Trail Blazers)
+<OPTION VALUE="2">尼克(New York Knicks)
+<OPTION VALUE="3">溜馬(Indiana Pacers)
+<OPTION VALUE="4">湖人(LA Lakers)</SELECT>
+<P>
+6.布萊恩(Kobe Bryant)當初選秀時是被那一隊選上？
+<SELECT NAME="q6">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">黃蜂(Charlotte Hornets)
+<OPTION VALUE="2">湖人(LA Lakers)
+<OPTION VALUE="3">國王(Sacramento Kings)
+<OPTION VALUE="4">快艇(LA Clippers)</SELECT>
+<P>
+7.下列那一位是卡特(Vince Carter)的親戚？
+<SELECT NAME="q7">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">歐克利(Charles Olakley)
+<OPTION VALUE="2">克利斯迪(Doug Christie)
+<OPTION VALUE="3">布朗(Dee Brown)
+<OPTION VALUE="4">麥葛雷迪(Tracy McGrady)</SELECT>
+<P>
+8.大衛．羅賓森(David Robinson)是從那一個學校畢業的？
+<SELECT NAME="q8">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">NAVY
+<OPTION VALUE="2">Duke
+<OPTION VALUE="3">North Carolina
+<OPTION VALUE="4">UCLA</SELECT>
+<P>
+9.尤恩(Patrick Ewing)和莫寧(Alonzo Mourning)是那所學校的學長及學弟？
+<SELECT NAME="q9">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">Kentucky
+<OPTION VALUE="2">GeoreoTown
+<OPTION VALUE="3">Duke
+<OPTION VALUE="4">Air Force</SELECT>
+<P>
+10.那一位球員有太空飛鼠的稱號？
+<SELECT NAME="q10">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">卡特(Vince Carter)
+<OPTION VALUE="2">史陶德邁爾(Damon Stoudmire)
+<OPTION VALUE="3">史普瑞威爾(Latrell Sprewell)
+<OPTION VALUE="4">馬許本(Jamal Mashburn)</SELECT>
+<P>
+11.希爾(Grant Hill)曾為那一種飲料代言？
+<SELECT NAME="q11">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">可口可樂
+<OPTION VALUE="2">雪碧
+<OPTION VALUE="3">百事可樂
+<OPTION VALUE="4">七喜</SELECT>
+<P>
+12.法蘭西斯(Steve Francis)在第二順位被選上後，就交易到火箭，選他的是那一隊？
+<SELECT NAME="q12">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">快艇(LA Clippers)
+<OPTION VALUE="2">公牛(Chicago Bulls)
+<OPTION VALUE="3">灰熊(Vancouver Grizzlies)
+<OPTION VALUE="4">籃網(New Jersey Nets)</SELECT>
+<P>
+13.以下那一位球員不是高中生進NBA？
+<SELECT NAME="q13">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">布萊恩(Kobe Bryant)
+<OPTION VALUE="2">賈奈特(Kevin Garnett)
+<OPTION VALUE="3">麥葛雷迪(Tracy McGrady)
+<OPTION VALUE="4">摩西．馬龍(Moses Malone))
+<OPTION VALUE="5">艾佛森(Allen Iverson)</SELECT>
+<P>
+14.以下那一位球員沒有幫NIKE代言？
+<SELECT NAME="q14">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">當肯(Tim Duncan)
+<OPTION VALUE="2">布萊恩(Kobe Bryant)
+<OPTION VALUE="3">傑森．威廉斯(Jason Williams)
+<OPTION VALUE="4">賈奈特(Kevin Garnett)</SELECT>
+<P>
+15.本季的助攻王是誰？
+<SELECT NAME="q15">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">基德(Jason Kidd)
+<OPTION VALUE="2">布蘭登(Terrel Brandon)
+<OPTION VALUE="3">史塔克頓(John Stockton)
+<OPTION VALUE="4">傑克森(Mark Jackson)
+<OPTION VALUE="5">傑森．威廉斯(Jason Williams))</SELECT>
+<P>
+16.喬丹(Michael Jordan)在1984年的選秀會上，在第幾順位被選走？
+<SELECT NAME="q16">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">第一順位
+<OPTION VALUE="2">第二順位
+<OPTION VALUE="3">第三順位
+<OPTION VALUE="4">第四順位</SELECT>
+<P>
+17.喬丹手上總共有幾枚冠軍戒指？
+<SELECT NAME="q17">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">3
+<OPTION VALUE="2">4
+<OPTION VALUE="3">5
+<OPTION VALUE="4">6
+<OPTION VALUE="5">7</SELECT>
+<P>
+18.首度在灌籃大賽中罰球起跳灌籃成功的是誰？
+<SELECT NAME="q18">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">J博士(Julius Erving)
+<OPTION VALUE="2">喬丹(Michael Jordan)
+<OPTION VALUE="3">巴瑞(Brent Barry)
+<OPTION VALUE="4">布萊恩(Kobe Bryant)</SELECT>
+<P>
+19.喬丹拿過幾次得分王？
+<SELECT NAME="q19">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">6
+<OPTION VALUE="2">8
+<OPTION VALUE="3">10
+<OPTION VALUE="4">12</SELECT>
+<P>
+20.喬丹畢業自那一所大學？
+<SELECT NAME="q20">
+    <OPTION selected VALUE="0">這個嗎...
+<OPTION VALUE="1">GeorgeTown
+<OPTION VALUE="2">North Carolina
+<OPTION VALUE="3">Duke
+<OPTION VALUE="4">Indiana
+<OPTION VALUE="5">Connecticut</SELECT>
+<p align="center"><input onclick="Score()" type="button" value="看問答結果"></p>
+</FORM>
+</Blockquote>
+
+<p class="center">Made by Frank, 2000/07/03</p>
+</BODY>
+</HTML>

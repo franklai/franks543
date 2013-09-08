@@ -1,0 +1,11 @@
+Pick:INT,No:INT,Name,Team,School
+1,34,Michael Olowokandi,Los Angeles Clippers,Pacific
+2,10,Mike Bibby,Vancouver Grizzlies,Arizona
+3,45,Raef LaFrentz,Denver Nuggets,Kansas
+4,33,Antawn Jamison,Toronto Raptors,North Carolina
+5,15,Vince Carter,Golden State Warrories,North Carolina
+6,41,Robert Traylor,Dallas Mavericks,Michigan
+7,55,Jason Williams,Sacramento Kings,Florida
+8,20,Larry Hughes,Phildelphia 76ers,St. Louis
+9,41,Dirk Nowitzki,Milwaukee Bucks,Germany
+10,34,Paul Pierce,Boston Celtics,Kansas

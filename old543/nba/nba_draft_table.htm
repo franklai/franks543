@@ -1,0 +1,58 @@
+<HTML>
+<HEAD>
+<TITLE>NBA歷年順秀順位</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+
+<STYLE TYPE="text/css">
+<!--
+a{color:red ; cursor : nw-resize;}
+.default{color:red}
+.over{color:navy}
+-->
+</STYLE>
+
+<script language="JavaScript">
+<!--
+sIndex=parent.document.menuForm.menu.selectedIndex;
+SRC=parent.document.menuForm.menu.options[sIndex].value;
+
+if (SRC!='nolink'){
+xyz=SRC.substring(2,4);
+fileName="draft"+xyz;
+draftYear=SRC;}
+
+function draftOver(n){eval('A'+n+'.className="over"');}
+function draftDefault(n){eval('A'+n+'.className="default"');}
+//-->
+</script>
+
+</HEAD>
+<BODY>
+<script language="Javascript">
+<!--
+if (document.layers){document.write('本頁使用ActiveX技術，請以IE瀏覽。');}
+document.write('<OBJECT ID="draft" CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83">');
+document.write('<PARAM NAME="DataURL" VALUE="'+fileName+'.txt">');
+document.write('<PARAM NAME="UseHeader" VALUE="TRUE"></OBJECT>');
+//-->
+</script>
+<TABLE width="100%"><TR>
+<TD width="8%"><A id="A1" onMouseOver="draftOver(1)" onMouseOut="draftDefault(1)" onClick="draft.sortColumn='Pick';draft.reset()">順位</A></TD>
+<TD width="32%"><A id="A2" onMouseOver="draftOver(2)" onMouseOut="draftDefault(2)" onClick="draft.sortColumn='Name';draft.reset()">姓名</A></TD>
+<TD width="32%"><A id="A3" onMouseOver="draftOver(3)" onMouseOut="draftDefault(3)" onClick="draft.sortColumn='Team';draft.reset()">選走的球隊</A></TD>
+<TD width="28%"><A id="A4" onMouseOver="draftOver(4)" onMouseOut="draftDefault(4)" onClick="draft.sortColumn='School';draft.reset()">學校</A></TD>
+</TR>
+</TABLE>
+
+<TABLE width="100%" BORDER="1" DATASRC="#draft">
+<TR>
+<TD width="8%"><DIV DATAFLD="Pick">Player Picked At</DIV></TD>
+<TD width="32%"><DIV DATAFLD="Name">Player Name</DIV></TD>
+<TD width="32%"><DIV DATAFLD="Team">Team Name</DIV></TD>
+<TD width="28%"><DIV DATAFLD="School">Where player come from</DIV></TD>
+</TR>
+</TABLE>
+
+</BODY>
+</HTML>

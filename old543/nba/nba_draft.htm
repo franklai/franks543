@@ -1,0 +1,39 @@
+<HTML>
+<HEAD>
+<TITLE>NBA歷年順秀順位選單</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<script language="JavaScript">
+<!--
+function Mswitch(){
+
+sIndex=document.menuForm.menu.selectedIndex;
+SRC=menuForm.menu.options[sIndex].value;
+
+if (SRC!='nolink'){draftFrame.location="nba_draft_table.htm";}
+}
+//-->
+</script>
+
+</HEAD>
+<BODY>
+
+<p>您現在所在的位置是：<a href="nba.htm">NBA Zone</a>/<a href="nba_data.htm">NBA 資料庫</a>/<b>NBA歷年選秀順位</b></p>
+
+<FORM name="menuForm">
+請選擇您要瀏覽的年代：
+<SELECT NAME="menu" onChange="javascript:Mswitch()">
+<OPTION value="1999" selected>1999年</OPTION>
+<OPTION value="1998">1998年</OPTION>
+<OPTION value="1997">1997年</OPTION>
+<OPTION value="1996">1996年</OPTION>
+<OPTION value="1995">1995年</OPTION>
+<OPTION value="1994">1994年</OPTION>
+<OPTION value="1993">1993年</OPTION>
+<OPTION value="1992">1992年</OPTION>
+</SELECT></form>
+
+<IFRAME src="nba_draft_table.htm" name="draftFrame" height="79%" width="100%" scrolling="auto" frameborder="no"></IFRAME>
+
+</BODY>
+</HTML>

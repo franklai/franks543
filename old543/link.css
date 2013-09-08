@@ -1,0 +1,12 @@
+td {text-align: center;vertical-align: middle}
+table{text-align: center;}
+tr{text-align: center;}
+a:link {color: #0077FF;	text-decoration: none}
+a:visited {color: Navy;text-decoration: none}
+a:active {color: Olive;	text-decoration: underline;}
+a:hover {color: Olive;text-decoration: underline;}
+.name {color:green}
+.left{text-align: left;}
+.right{	text-align: right;}
+.center{text-align: center;}
+body{background-color:#CCEEFF}

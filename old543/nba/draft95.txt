@@ -1,0 +1,13 @@
+Pick:INT,Name,Team,School
+1,Joe Smith,Gold State Warriors,Maryland
+2,Antonio McDyess,Los Angeles Clippers,Alabama
+3,Jerry Stackhouse,Philadelphia 76ers,North Carolina
+4,Rasheed Wallace,Portland Trail Blazers,North Carolina
+5,Kevin Garnett,Minnesota Timberwolves,Farragut Academy(Ill.)
+6,Bryant Reeves,Vancouver Grizzlies,Oklahoma State
+7,Damon Stoudamire,Toronto Raptors,Arizona
+8,Shawn Respert,Portland Trail Blazers,Michigan State
+9,Ed O'Bannon,New Jersey Nets,UCLA
+10,Kurt Thomas,Miami Heats,Texas Christian
+18,Theo Ratliff,Detroit Pistons,Wyoming
+21,Michael Finley,Phoenix Suns,Wisconsin

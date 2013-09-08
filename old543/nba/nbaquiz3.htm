@@ -1,0 +1,122 @@
+<HTML>
+<HEAD>
+<TITLE>NBA小問答III(總冠軍戰篇)</TITLE>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=big5">
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+</HEAD>
+
+<script>
+<!--
+//以下是按下button後所執行的Script
+function Score()
+{
+var markIQ=0;
+var popup;
+var scoreIQ;
+var RorW=new Array()
+
+for(n=1;n<=NBAquiz.length;n++){ //檢查答案是否正確的迴圈
+eval("WaTaShi=document.quizform.q"+n+".selectedIndex");
+if(WaTaShi==NBAquiz[n-1].cAns){markIQ+=1;RorW[n]="black";}
+else {RorW[n]="red";}
+}
+
+
+if (markIQ ==NBAquiz.length) //全對
+{scoreIQ="Wow！！超強的！";}
+else if (markIQ >=7)
+{scoreIQ="厲害，想必您一定有研究過";}
+else if (markIQ >=2)
+{scoreIQ="還好啦！";}
+else
+{scoreIQ="快去看本站的<b>NBA歷年總冠軍與總冠軍戰MVP</b>惡補一下吧！";}
+
+
+var comment="<html>"+ //將會顯示的解答頁
+"<title>NBA問答結果</title>"+
+"<LINK REL='StyleSheet' TYPE='text/css' HREF='../samelink.css'>"+
+"<body text='black'>"+
+"<p>您現在所在的位置是：<a href='nba.htm'>NBA Zone</a>/<a href='nba_data.htm'>NBA 資料庫</a>/<a href='nbaquiz3.htm'>NBA小問答III</a>/<b>NBA小問答III結果</b></p>"+
+"<blockquote>"+
+"<p>你在 "+NBAquiz.length+" 題當中答對 "+markIQ+" 題。"+
+"<p>你的NBA評分為："+scoreIQ+"</p>"+
+"<hr width='30%'>"+
+"<p>以下是測驗解答(答錯的題目以紅色顯示)：<p>";
+
+var showAnswer='';
+for(x=1;x<=NBAquiz.length;x++){
+y=NBAquiz[x-1].cAns;
+eval('CorrectAns=NBAans[x-1].a'+y);
+showAnswer+=x+'.'+NBAquiz[x-1].text+"<br><B><FONT COLOR="+RorW[x]+">"+CorrectAns+"</FONT></B><P>";
+}
+var End="</blockquote></body></html>";
+
+popup = window.open("","_self")
+popup.document.write(comment+showAnswer+End)
+popup.document.close()
+}
+//Score函數結束
+
+
+//物件導向寫法！？問題部份
+function makeQuiz(question,cAns){this.text=question;this.cAns=cAns;}
+
+//物件導向寫法！？答案部份
+function makeAns(ans1,ans2,ans3,ans4){this.a1=ans1;this.a2=ans2;this.a3=ans3;this.a4=ans4;}
+
+//以下是需要變更的部份
+
+NBAquiz=new Array(); //問題陣列
+NBAans=new Array(); //答案陣列
+NBAquiz[0]=new makeQuiz("這10年總共有幾隻不同的球隊參加過總冠軍戰？",2);
+NBAans[0]=new makeAns("10","11","15","20");
+NBAquiz[1]=new makeQuiz("獲得總冠軍戒指的有幾隻不同的球隊？",1);
+NBAans[1]=new makeAns("4","6","8","10");
+NBAquiz[2]=new makeQuiz("總共產生幾位不同的總冠軍MVP？",2);
+NBAans[2]=new makeAns("2","4","6","8");
+NBAquiz[3]=new makeQuiz("兩隊種子順位相差最大的是那一年？",3);
+NBAans[3]=new makeAns("1994~95","1996~97","1998~99","1999~2000");
+NBAquiz[4]=new makeQuiz("總冠軍戰場數最少的是那一年？",3);
+NBAans[4]=new makeAns("1992~93","1993~94","1994~95","1995~96");
+NBAquiz[5]=new makeQuiz("四人之中，最晚參加總冠軍賽的是？",3);
+NBAans[5]=new makeAns("歐拉朱萬(Hakeem Olajuwon)","尤恩(Patrick Ewing)","大衛．羅賓森(David Robinson)","歐尼爾(Shaquille O'neal)");
+NBAquiz[6]=new makeQuiz("四人之中，參加總冠軍賽次數最少的是？",3);
+NBAans[6]=new makeAns("歐拉朱萬(Hakeem Olajuwon)","尤恩(Patrick Ewing)","大衛．羅賓森(David Robinson)","歐尼爾(Shaquille O'neal)");
+NBAquiz[7]=new makeQuiz("四人之中，尚未拿到總冠軍戒指的是？",2);
+NBAans[7]=new makeAns("歐拉朱萬(Hakeem Olajuwon)","尤恩(Patrick Ewing)","大衛．羅賓森(David Robinson)","歐尼爾(Shaquille O'neal)");
+NBAquiz[8]=new makeQuiz("四人之中，總冠軍戒指最多的是？",1);
+NBAans[8]=new makeAns("歐拉朱萬(Hakeem Olajuwon)","尤恩(Patrick Ewing)","大衛．羅賓森(David Robinson)","歐尼爾(Shaquille O'neal)");
+NBAquiz[9]=new makeQuiz("四個人的總冠軍戒指加起來總共有幾枚？",3);
+NBAans[9]=new makeAns("2","3","4","5");
+
+//-->
+</script>
+<BODY>
+<p>您現在所在的位置是：<a href="nba.htm">NBA Zone</a>/<a href="nba_data.htm">NBA 資料庫</a>/<b>NBA小問答III</b></p>
+<div class="center">
+這裡的題目僅以1991~2000年，這10年內的總冠軍戰為的答案來源。<br>
+<div style="font-size:10pt">人物與球隊的中文都是自己翻的，請參照英文。</div>
+</div>
+<p><Blockquote>
+<FORM NAME="quizform" >
+<script language="JavaScript">
+for(i=1;i<=NBAquiz.length;i++){
+document.write(i+'.'+NBAquiz[i-1].text);
+document.write('<SELECT NAME=q'+i+'>');
+document.write('<OPTION selected VALUE="0">我怎麼會知道啊！');
+document.write('<OPTION>'+NBAans[i-1].a1);
+document.write('<OPTION>'+NBAans[i-1].a2);
+document.write('<OPTION>'+NBAans[i-1].a3);
+document.write('<OPTION>'+NBAans[i-1].a4);
+document.write('</SELECT><P>');
+if (i==5)
+{document.write("<P><b>五大中鋒除了Alozo Mourning之外，Hakeem Olajuwon、Patrick Ewing、David Robinson、Shaquille O'neal都有總冠軍戰的經驗，請問：</b></P>");}
+}
+</script>
+<p align="center"><input onclick="Score()" type="button" value="看問答結果"></p>
+</FORM>
+</Blockquote>
+
+<p class="center">Made by Frank, 2000/10/04</p>
+</BODY>
+</HTML>

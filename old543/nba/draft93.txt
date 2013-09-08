@@ -1,0 +1,14 @@
+Pick:INT,Name,Team,School
+1,Chris Webber,Orlando Magic,Michigan
+2,Shawn Bradley,Philadelphia,Brigham Young
+3,Anfernee Hardaway,Golden State Warriors,Memphis State
+4,Jamal Mashburn,Dallas Mavericks,Kentucky
+5,Isaiah Rider,Minnesota Timberwolves,Nevada-Las Vegas
+6,Calbert Cheaney,Washington Bullets,Indiana
+7,Bobby Hurley,Sacramento Kings,Duke
+8,Vin Baker,Milwaukee Bucks,Hartford
+9,Rodney Rogers,Denver Nuggets,Wake Forest
+10,Lindsey Hunter,Detroit Pistons,Jackson State
+11,Allan Houston,Detroit Pistons,Tennessee
+12,George Lynch,Los Angeles Lakers,North Carolina
+24,Sam Cassell,Houston Rockets,Florida State
