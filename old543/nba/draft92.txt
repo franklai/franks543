@@ -1,0 +1,13 @@
+Pick:INT,Name,Team,School
+1,Shaquille O'neal,Orlando Magic,Louisiana State
+2,Alonzo Mourning,Charlotte Hornets,Georgetown
+3,Christian Laettner,Minnesota Timberwolves,Duke
+4,Jimmy Jackson,Dallas Mavericks,Ohio State
+5,LaPhonso Ellis,Denver Nuggets,Notre Dame
+6,Tom Gugliotta,Washington,North Carolina State
+7,Walt Williams,Sacramento Kings,Maryland
+8,Todd Day,Milwaukee Bucks,Arkansas
+9,Clarence Weatherspoon,Philadelphia 76ers,Southern Mississippi
+10,Adam Keefe,Atlanta Hawks,Stanford
+11,Robert Horry,Houston Rockets,Alabama
+24,Latrell Sprewell,Golden State Warriors,Alabama

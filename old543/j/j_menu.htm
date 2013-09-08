@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<TITLE>一些日語目錄</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<script language="JavaScript">
+<!--
+
+function Mswitch(OBJ){
+    sIndex = OBJ.selectedIndex;
+    SRC = OBJ.options[sIndex].value;
+    if (SRC != 'nolink'){
+        if (navigator.appName == 'Microsoft Internet Explorer'){
+            text.location = SRC; /* text is iframe name */
+        }
+        else if (navigator.appName == 'Netscape'){
+            document.layers["text"].src = SRC;
+        }
+    }
+}
+
+//-->
+</script>
+</HEAD>
+<BASE target="text">
+
+<BODY>
+<FORM name="menuForm">
+<SELECT NAME="menu" onChange="javascript:Mswitch(this)">
+<OPTION value="nolink">請選擇您要瀏覽的部份</OPTION>
+<OPTION value="nolink">----以下是五十音表----</OPTION>
+<OPTION value="j_pinfake.htm">平假名</OPTION>
+<OPTION value="j_panfake.htm">片假名</OPTION>
+<OPTION value="nolink">----以下是日文歌詞----</OPTION>
+<OPTION value="j_firstlove.htm">First Love</OPTION>
+<OPTION value="j_lovelove.htm">Love Love Love</OPTION>
+<OPTION value="j_endlessrain.htm">Endless Rain</OPTION>
+<OPTION value="j_departures.htm">DEPARTURES</OPTION>
+<OPTION value="j_tryagain.htm">TRY AGAIN</OPTION>
+<OPTION value="j_loveheart.htm">突擊ьйгみЬ</OPTION>
+<OPTION value="nolink">----****----</OPTION>
+<OPTION value="j_normal.htm">基本用語</OPTION>
+<OPTION value="j_install.htm">日文字型安裝</OPTION>
+<OPTION value="j_index.htm">一些日語首頁</OPTION></SELECT>
+<!INPUT TYPE="button" VALUE="切換" onClick="javascript:Mswitch()">
+</form>
+<LAYER src="j_index.htm" name="text" height="1000"></LAYER>
+<IFRAME src="j_index.htm" name="text" height="85%" width="100%" scrolling="auto" frameborder="no"></IFRAME>
+</BODY>
+</HTML>

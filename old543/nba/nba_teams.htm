@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>NBA 球員資料庫測試頁</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<SCRIPT LANGUAGE="JavaScript" SRC="nbaplayers.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" SRC="nbateams.js"></SCRIPT>
+<SCRIPT LANGUAGE="JavaScript" SRC="nbafunctions.js"></SCRIPT>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var titleColor='skyblue';
+var playerColor1='#C0C0C0';
+var playerColor2='';
+var ourTable='';
+var ourSelect='';
+var ourTeam='';
+
+var ourData=new Array();
+for (var i=1;i<=8;i++){ourData[i]=0;}
+ourData[3]=true;
+
+var ourPlayers=new Array();
+var ourTeams=new Array();
+var playerNo=0;
+
+
+function Start(){
+reSet();
+changeHeight(ourPlayers,5,9);
+buildForm(true,false); //第一項變數為隊伍查詢，第二項為資料查詢
+//buildTable();
+Show('playersForm','playersForm','playersTable','playersTable',true);
+}
+
+//-->
+</SCRIPT>
+<STYLE TYPE="text/css">
+<!--
+td{font-size:10pt}
+-->
+</STYLE>
+
+</HEAD>
+<BODY onLoad="Start();" oncontextmenu="window.event.returnValue=false">
+<p>您現在所在的位置是：<a href="nba.htm">NBA Zone</a>/<a href="nba_data.htm">NBA 資料庫</a>/<b>NBA球隊列表</b></p>
+<DIV NAME="playersForm" ID="playersForm"></DIV>
+<LAYER NAME="playersForm"></LAYER>
+<DIV NAME="playersTable" ID="playersTable"></DIV>
+<LAYER NAME="playersTable" TOP="100"></LAYER>
+
+</BODY>
+</HTML>

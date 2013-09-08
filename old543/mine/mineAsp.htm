@@ -1,0 +1,412 @@
+<HTML><HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=big5">
+<TITLE>線上踩地雷</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+imgMine=new Image();
+imgMine.src='mine.gif';
+imgRedmine=new Image();
+imgRedmine.src='redmine.gif';
+imgWrong=new Image();
+imgWrong.src='wrong.gif';
+imgFlag=new Image();
+imgFlag.src='flag.gif';
+
+imgSmile=new Image();
+imgSmile.src='smile.gif';
+imgSmile_clear=new Image();
+imgSmile_clear.src='smile_clear.gif';
+imgSmile_over=new Image();
+imgSmile_over.src='smile_over.gif';
+
+imgWallNW=new Image();
+imgWallNW.src='wallNW.gif';
+imgWallN=new Image();
+imgWallN.src='wallN.gif';
+imgWallNE=new Image();
+imgWallNE.src='wallNE.gif';
+imgWallW=new Image();
+imgWallW.src='wallW.gif';
+imgWallE=new Image();
+imgWallE.src='wallE.gif';
+imgWallSW=new Image();
+imgWallSW.src='wallSW.gif';
+imgWallS=new Image();
+imgWallS.src='wallS.gif';
+imgWallSE=new Image();
+imgWallSE.src='wallSE.gif';
+imgNo=new Array();
+imgNo[0]=new Image();
+imgNo[0].src='no0.gif';
+imgNo[1]=new Image();
+imgNo[1].src='no1.gif';
+imgNo[2]=new Image();
+imgNo[2].src='no2.gif';
+imgNo[3]=new Image();
+imgNo[3].src='no3.gif';
+imgNo[4]=new Image();
+imgNo[4].src='no4.gif';
+imgNo[5]=new Image();
+imgNo[5].src='no5.gif';
+imgNo[6]=new Image();
+imgNo[6].src='no6.gif';
+imgNo[7]=new Image();
+imgNo[7].src='no7.gif';
+imgNo[8]=new Image();
+imgNo[8].src='no8.gif';
+imgNo[9]=new Image();
+imgNo[9].src='redmine.gif';
+imgRed=new Array();
+for (var n=0;n<=9;n++){
+imgRed[n]=new Image();
+imgRed[n].src='red'+n+'.gif';
+}
+
+imgBlank=new Image();
+imgBlank.src='blank.gif';
+
+
+var Xsize=11;//地雷區寬
+var Ysize=11;//地雷區高
+var mineNo=20;//地雷數量
+var mineSize=Xsize*Ysize;//地雷區面積
+var allSize=mineSize+2*Xsize+2*Ysize+4;//全部面積，地雷區加邊框
+var unFlagMine=mineNo;//剩餘地雷數
+var Time=0;//已過時間
+var mineTimer=false;//計時器
+var notOpened=(mineSize)-mineNo;//未開啟數，非地雷的
+var GameOver=false;
+var Index=0; //字串中代入第幾個圖片
+
+var minePosition=new Array();//儲存地雷位置
+var numPosition=new Array();//儲存每一格的數字
+for (var t=0;t<allSize;t++){numPosition[t]=0;}
+var flagPosition=new Array();//儲存旗標位置
+for (var t=0;t<allSize;t++){flagPosition[t]=0;}
+
+function Build(){
+var mineTempString=''+mineNo;
+if (mineTempString.length==1){mineTempString='00'+mineTempString;}
+if (mineTempString.length==2){mineTempString='0'+mineTempString;}
+var mTS100=mineTempString.substring(0,1);
+var mTS10=mineTempString.substring(1,2);
+var mTS1=mineTempString.substring(2,3);
+var mineString='<TABLE CELLPADDING="0" CELLSPACING="0" BORDER="0">';
+mineString+='<TR><TD><IMG SRC="'+imgRed[eval(mTS100)].src+'"></TD>'+
+            '<TD><IMG SRC="'+imgRed[eval(mTS10)].src+'"></TD>'+
+            '<TD><IMG SRC="'+imgRed[eval(mTS1)].src+'"></TD></TR></TABLE>';
+/*
+var smileString='<IMG SRC=';
+smileString+=''+
+             ''+
+*/
+
+var timeString='<TABLE CELLPADDING="0" CELLSPACING="0" BORDER="0">';
+timeString+='<TR><TD><IMG SRC="'+imgRed[0].src+'"></TD>'+
+            '<TD><IMG SRC="'+imgRed[0].src+'"></TD>'+
+            '<TD><IMG SRC="'+imgRed[0].src+'"></TD></TR></TABLE>';
+Index+=7; //重要！之前有七個圖片
+
+tableString='<TABLE CELLPADDING="0" CELLSPACING="0" BORDER="0">';
+ tableString+='<TR><TD><IMG SRC="'+imgWallNW.src+'" BORDER="0"></TD>';
+ for (var n=1;n<=Xsize;n++){
+   tableString+='<TD><IMG SRC="'+imgWallN.src+'" BORDER="0"></TD>';
+ }
+ tableString+='<TD><IMG SRC="'+imgWallNE.src+'" BORDER="0"></TD></TR>';
+ Index+=Xsize+1;
+for (var n=1;n<=Ysize;n++){
+  tableString+='<TR><TD><IMG SRC="'+imgWallW.src+'" BORDER="0"></TD>';
+  Index+=1;
+  for (var i=1;i<=Xsize;i++){
+    tableString+='<TD><IMG SRC="'+imgBlank.src+'" BORDER="0" onClick="Open('+(Index+i)+')" ondblclick="sideOpen('+(Index+i)+')" onMouseDown="Mark('+(Index+i)+')" HEIGHT="16" WIDTH="16"></TD>';
+  }
+  tableString+='<TD><IMG SRC="'+imgWallE.src+'" BORDER="0"></TD></TR>';
+  Index+=1;
+  Index+=Xsize;
+}
+ tableString+='<TR><TD><IMG SRC="'+imgWallSW.src+'" BORDER="0"></TD>';
+ for (var n=1;n<=Xsize;n++){
+   tableString+='<TD><IMG SRC="'+imgWallS.src+'" BORDER="0"></TD>';
+ }
+ tableString+='<TD><IMG SRC="'+imgWallSE.src+'" BORDER="0" onLoad="statusTurn()"></TD></TR>';
+
+tableString+='</TABLE>';
+
+mineDiv.innerHTML=mineString;
+mineDiv.style.left=mainDiv.style.pixelLeft+10;
+timeDiv.innerHTML=timeString;
+timeDiv.style.left=mainDiv.style.pixelLeft+((Xsize)*16)+12-(13*3);
+smileDiv.style.left=mainDiv.style.pixelLeft+((Xsize)*8)+12-12;
+//testDiv.innerHTML=timeDiv.style.pixelLeft+' '+mineDiv.style.pixelLeft+' '+smileDiv.style.pixelLeft;
+//16是blank的寬度、12是wall的寬度、13是red的寬度、23是笑臉的寬度
+mainDiv.innerHTML=tableString;
+}
+
+function reStart(){
+//改回笑臉
+document.images[3].src=imgSmile.src;
+
+unFlagMine=mineNo;
+clearTimeout(mineTimer);
+Time=0;
+mineTimer=false;
+notOpened=(mineSize)-mineNo;
+GameOver=false;
+tableString='';
+Index=0;
+
+for (var t=0;t<allSize;t++){numPosition[t]=0;}
+for (var t=0;t<allSize;t++){flagPosition[t]=0;}
+
+var mineTempString=''+mineNo;
+if (mineTempString.length==1){mineTempString='00'+mineTempString;}
+if (mineTempString.length==2){mineTempString='0'+mineTempString;}
+var mTS100=mineTempString.substring(0,1);
+var mTS10=mineTempString.substring(1,2);
+var mTS1=mineTempString.substring(2,3);
+
+document.images[0].src=imgRed[eval(mTS100)].src;
+document.images[1].src=imgRed[eval(mTS10)].src;
+document.images[2].src=imgRed[eval(mTS1)].src;
+
+document.images[4].src=imgRed[0].src;
+document.images[5].src=imgRed[0].src;
+document.images[6].src=imgRed[0].src;
+
+var tempIndex=7;
+tempIndex+=Xsize+2;
+
+ for (var i=tempIndex;i<allSize+tempIndex-2*(Xsize+2);i++){
+   if ((i-tempIndex)%(Xsize+2)!=0&&(i-tempIndex)%(Xsize+2)!=(Xsize+1)){
+    document.images[i].src=imgBlank.src;
+   }
+ }
+
+putMine(allSize,mineNo);
+}
+
+
+function Start(){
+  Build();
+  putMine(allSize,mineNo);
+}
+
+function Random(Area){
+var numberTemp=Math.floor(Math.random()*Area);
+return numberTemp;
+}
+
+function putMine(Area,mNo){
+var n=0;
+  while (n<mNo){
+    var mineTemp=Random(Area);
+    if (numPosition[mineTemp]<9&&document.images[mineTemp].src==imgBlank.src){
+      minePosition[n]=mineTemp;
+      numPosition[mineTemp]=9;
+      n++
+    }
+  }
+//document.title=minePosition; //讓標題顯示地雷在那裡
+  for (var mm=0;mm<minePosition.length;mm++){
+    var PP=minePosition[mm];
+    countMine(PP,1);
+  }
+}
+
+function countMine(P,whatFor){
+numPosition[P+1]+=whatFor;
+numPosition[P-1]+=whatFor;
+numPosition[P+(Xsize+2)]+=whatFor;
+numPosition[P+(Xsize+3)]+=whatFor;
+numPosition[P+(Xsize+1)]+=whatFor;
+numPosition[P-(Xsize+2)]+=whatFor;
+numPosition[P-(Xsize+3)]+=whatFor;
+numPosition[P-(Xsize+1)]+=whatFor;
+}
+
+
+function Open(NO){ //開啟
+
+if (!GameOver&&document.images[NO].src==imgBlank.src){
+if (!mineTimer){Timer();}
+var numTemp=numPosition[NO];
+  if (numTemp>=9){
+  //第一次不得為地雷
+    if (notOpened==(mineSize)-mineNo){
+      reStart();
+      Open(NO);
+    }
+    else{
+      GameOver=true;
+      document.images[NO].src=imgNo[9].src;
+      Over();
+    }
+  }
+  else if (numTemp==0){
+    document.images[NO].src=imgNo[0].src;
+    notOpened--; //剩餘未開啟數
+    blankOpen(NO); //開啟周圍
+  }
+  else {
+    document.images[NO].src=imgNo[numTemp].src;
+    notOpened--;
+    Check();
+  }
+}}
+
+function blankOpen(NO){ //周圍全開
+if (document.images[NO+1].src==imgBlank.src){Open(NO+1);}
+if (document.images[NO-1].src==imgBlank.src){Open(NO-1);}
+if (document.images[NO+(Xsize+2)].src==imgBlank.src){Open(NO+(Xsize+2));}
+if (document.images[NO+(Xsize+1)].src==imgBlank.src){Open(NO+(Xsize+1));}
+if (document.images[NO+(Xsize+3)].src==imgBlank.src){Open(NO+(Xsize+3));}
+if (document.images[NO-(Xsize+2)].src==imgBlank.src){Open(NO-(Xsize+2));}
+if (document.images[NO-(Xsize+1)].src==imgBlank.src){Open(NO-(Xsize+1));}
+if (document.images[NO-(Xsize+3)].src==imgBlank.src){Open(NO-(Xsize+3));}
+}
+
+function sideOpen(NO){
+var selfNum=numPosition[NO];
+  if (selfNum==flagPosition[NO]){ //如果周圍已標記為地雷的格數，與其自身的數字相同
+    blankOpen(NO);
+  }
+}
+
+function countFlag(NO,whatFor){
+flagPosition[NO+1]+=whatFor;
+flagPosition[NO-1]+=whatFor;
+flagPosition[NO+(Xsize+2)]+=whatFor;
+flagPosition[NO+(Xsize+3)]+=whatFor;
+flagPosition[NO+(Xsize+1)]+=whatFor;
+flagPosition[NO-(Xsize+2)]+=whatFor;
+flagPosition[NO-(Xsize+3)]+=whatFor;
+flagPosition[NO-(Xsize+1)]+=whatFor;
+}
+
+function Check(){
+//document.title=notOpened;
+if (notOpened==0){Clear();}
+}
+
+function Timer(){
+Time++;
+var timeTS=''+Time;
+if (timeTS.length==1){timeTS='00'+timeTS;}
+if (timeTS.length==2){timeTS='0'+timeTS;}
+var timeTS100=timeTS.substring(0,1);
+var timeTS10=timeTS.substring(1,2);
+var timeTS1=timeTS.substring(2,3);
+document.images[4].src=imgRed[eval(timeTS100)].src;
+document.images[5].src=imgRed[eval(timeTS10)].src;
+document.images[6].src=imgRed[eval(timeTS1)].src;
+mineTimer=setTimeout('Timer()',1000);
+}
+
+function Miner(NO){
+unFlagMine+=NO;
+var unFMtemp=''+unFlagMine;
+if (unFMtemp.length==1){unFMtemp='00'+unFMtemp;}
+if (unFMtemp.length==2){unFMtemp='0'+unFMtemp;}
+var unFMT100=unFMtemp.substring(0,1);
+var unFMT10=unFMtemp.substring(1,2);
+var unFMT1=unFMtemp.substring(2,3);
+document.images[0].src=imgRed[eval(unFMT100)].src;
+document.images[1].src=imgRed[eval(unFMT10)].src;
+document.images[2].src=imgRed[eval(unFMT1)].src;
+}
+
+
+function Mark(NO){
+ if (event.button==2&&!GameOver){
+  if (event.srcElement.src==imgBlank.src&&unFlagMine>0){
+    countFlag(NO,1);
+    Miner(-1);
+    event.srcElement.src=imgFlag.src;
+  }
+  else if (event.srcElement.src==imgFlag.src){
+    countFlag(NO,-1);
+    Miner(1);
+    event.srcElement.src=imgBlank.src;
+  }
+ }
+ else if (event.button==3){
+   sideOpen(NO);
+ }
+}
+
+
+function Clear(){
+  for (var ll=0;ll<minePosition.length;ll++){
+   var showMine=minePosition[ll];
+   
+   if (document.images[showMine].src==imgBlank.src){
+     document.images[showMine].src=imgFlag.src;
+   }
+  }
+//地雷數歸零
+  document.images[0].src=imgRed[0].src;
+  document.images[1].src=imgRed[0].src;
+  document.images[2].src=imgRed[0].src;
+  clearTimeout(mineTimer);
+
+//window.alert('Clear!!');
+//改笑臉
+  document.images[3].src=imgSmile_clear.src;
+
+//要取得這個值，必須是在網址的情形下，檔案位置則會有問題…
+  var LastT=parent.right.document.form1.last.value;
+
+  if (Time<=LastT){ //如果時間可以進排行榜
+    var userName='';
+    userName=prompt("請輸入您的大名","不具名");
+    
+    var hrefHead="";
+    var fileName="mineRank.asp";
+    var queryValue="?mode=rank&time="+Time+"&name="+userName;
+    parent.right.location=hrefHead+fileName+queryValue;
+  }
+}
+
+
+function Over(){
+ for (var ll=0;ll<minePosition.length;ll++){
+  var showMine=minePosition[ll];
+  if (document.images[showMine].src==imgBlank.src){
+    document.images[showMine].src=imgMine.src;
+  }
+ }
+
+ for (var kk=0;kk<allSize;kk++){
+  if (document.images[kk].src==imgFlag.src){
+   if (numPosition[kk]<9){document.images[kk].src=imgWrong.src;}
+  }
+ }
+
+ clearTimeout(mineTimer);
+
+//window.alert('Game Over!!');
+//改笑臉
+ document.images[3].src=imgSmile_over.src;
+}
+
+
+function statusTurn(){
+  statusDiv.innerText="讀取完畢";
+  mineDiv.style.visibility="visible";
+  smileDiv.style.visibility="visible";
+  timeDiv.style.visibility="visible";
+  mainDiv.style.visibility="visible";
+}
+
+//-->
+</SCRIPT>
+</HEAD>
+<BODY BGCOLOR="silver" oncontextmenu="window.event.returnValue=false" onLoad="Start();">
+<DIV ID="statusDiv" STYLE="position:absolute ; left:200 ; top:10 ;">圖片讀取中，請稍候</DIV>
+<DIV ID="mineDiv" STYLE="position:absolute ; left:210 ; top:70 ; visibility:hidden ;"></DIV>
+<DIV ID="smileDiv" STYLE="position:absolute ; left:263 ; top:70 ; visibility:hidden ;">
+<IMG SRC="smile.gif" BORDER="0" onClick="reStart();">
+</DIV>
+<DIV ID="timeDiv" STYLE="position:absolute ; left:300 ; top:70 ; visibility:hidden ;"></DIV>
+<DIV ID="mainDiv" STYLE="position:absolute ; left:200 ; top:100 ; visibility:hidden ;"></DIV>
+</BODY></HTML>

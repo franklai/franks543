@@ -1,0 +1,176 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<TITLE>NeoRAGEx使用說明</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<STYLE TYPE="text/css">
+<!--
+h2{color:brown ; cursor : nw-resize;}
+.h{color:brown ; cursor : nw-resize; text-decoration:underline}
+-->
+</STYLE>
+<script language="JavaScript">
+<!--
+var ImgArray=new Array(6);
+ImgArray[0]="neoragex_op.gif"
+ImgArray[1]="neoragex_dir.gif"
+ImgArray[2]="neoragex_video.gif"
+ImgArray[3]="neoragex_audio.gif"
+ImgArray[4]="neoragex_machi.gif"
+ImgArray[5]="neoragex_shot.gif"
+
+function WinOpen(ddd) {
+   msg=window.open("","_blank","toolbar=no,directories=no,menubar=no,width=440,height=320")
+   msg.document.open("text/html");
+   msg.document.write('<HTML><HEAD><TITLE>這是Frank自己抓的圖片喔！</TITLE></HEAD>')
+   msg.document.write("<BODY><CENTER><IMG src="+ImgArray[ddd]+" border='0'></CENTER></BODY></HTML>")
+   msg.document.close();
+}
+
+function ShowStatus(){
+window.status='按一下可以看到圖片！'
+}
+
+function OffStatus(){
+window.status=''
+}
+
+// -->
+</script>
+
+</HEAD>
+
+<BODY>
+<p>您現在所在的位置是：<a href="nonsense.htm">亂寫一通</a>/<b>NeoRAGEx使用說明</b></p>
+<p>　　NeoRAGEx需要<b>主程式</b>和<b>BIOS</b>兩個壓縮檔，如果沒有的話請到<a href="../soft/soft_emu.htm">這一頁</a>去下載，如果都有了的話，就可以開始玩了， 
+  <b>等一下</b>，只有模擬器沒有ROM玩啥，請看<a href="nonsense_neogeo.htm">NEOGEO使用方法</a>， 
+  裡面有寫如何處理ROM的方法。一切準備就緒，進入NeoRAGEx吧 </p>
+
+<img src="neoragex_main.gif" width="600" height="400" alt="NeoRAGEx主畫面"> 
+<p>
+　　上面的圖就是NeoRAGEx的主畫面，左上方的GAMELIST是<b>遊戲列表</b>，
+如果有偵測到遊戲的話，遊戲名稱會變成白色。左下方是<b>預覽</b>，因為空間有限，
+所以本站提供的NeoRAGEx是沒有預覽的。<BR>
+　　右下方是<b>事件</b>，在其上方的三個按鈕分別是<b>發射</b>、<b>輸入</b>、<b>離開</b>。
+<BR>
+<LI>在<b>遊戲列表</b>點選好要執行的遊戲，再按下<b>發射</b>，NeoRAGEx就會開始執行了。
+<BR>
+<LI>當ROM已經放在指定的資料夾，而遊戲列表沒有出現遊戲的話，就要按<b>輸入</b>這個鈕了。
+<BR>
+<LI><b>離開</b>，這個不用多做介紹了吧...
+</p>
+<hr size="4" width="100%" title="這是分隔線">
+<p>
+<H2 onClick="WinOpen(0)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">OPTIONS畫面</H2>
+<LI><B>CONTROLS</B>：就是設定搖桿、鍵盤的地方。
+<LI><B>DIRECTORIES</B>：設定放遊戲的目錄以及其他目錄。
+<LI><B>VIDEO OPTIONS</B>：畫面影像的設定。
+<LI><B>AUDIO OPTIONS</B>：聲音的設定。
+<LI><B>MACHINE SETTINGS</B>：機器設定？
+<LI><B>SHOTS FACTORY</B>：平時是灰色的，功用是抓圖，後面會有解說。
+</p>
+
+<p>
+<H2 onClick="WinOpen(1)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">DIRECTORIES畫面</H2>
+<LI><B>ROMPATH</B>：遊戲位置，\是指和NeoRAGEx主程式同資料夾。
+<LI><B>PREVIEW PATH</B>：預覽位置。
+<LI><B>SHOTS PATH</B>：抓下來的圖位置
+<LI><B>STATE PATH</B>：???
+<LI><B>HISCORE PATH</B>：最高分紀錄位置
+<LI><B>WAVES PATH</B>：抓下來的聲音位置
+</p>               
+
+<P>
+<H2 onClick="WinOpen(2)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">VIDEO OPTIONS畫面</H2>
+<LI><b>COLOR DEPTH</b>：顏色深度？有16BIT/8BIT兩種選項，選擇8BIT時，INTERPOLATION無法使用
+<LI><b>SCANLINES</b>：掃瞄線，模擬電視機會有的線條，有YES/NO/50%三種選項，當COLOR DEPTH選擇8BIT時，沒有50%可選
+<LI><b>INTERPOLATION</b>也不知道是什麼，選YES後畫面比較矇矓
+<LI><b>EDGE ENHANCEMENT</b>邊緣修飾，讓畫面看起來比較圓滑
+<LI><b>TRIPPLE BUFFERING</b>不知道，選NO時VSYNC無法使用
+<LI><b>FRAMESKIP</b>頁框略過？有AUTO/0~11可選
+<LI><b>VSYNC</b>還是不知道，有YES/NO可選
+</P>
+
+<P>
+<H2 onClick="WinOpen(3)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">AUDIO OPTIONS畫面</H2>
+<LI><b>MAIN VOLUME</b>：就是聲音大小，往右邊拉大聲，往左小聲
+<LI><b>SOUND</b>：選擇只有音效/只有音樂/兩者都有
+<LI><b>OUTPUT CHANNELS</b>：以STEREO或MONO來播放
+<LI><b>SAMPLE SIZE</b>：???
+<LI><b>SAMPLE RATE</b>：???
+<LI><b>INTERPOLATED SOUND</b>：???
+</P>
+
+<P>
+<H2 onClick="WinOpen(4)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">MACHINE SETTINGS畫面</H2>
+<LI><b>LANGUAGE</b>：選擇語系，有US/JAPAN/EUROPEAN可選
+<LI><b>SYSTEM</b>：選擇家用CONSOLE/大型電玩ARCADE
+<LI><b>MVS SETTINGS</b>：大型主機設定是否開啟
+<LI><b>FREEPLAY</b>：大型主機免投幣是否開啟
+</P>
+
+<P>
+<H2 onClick="WinOpen(5)" title="按一下可以看到圖片" onMouseOver="ShowStatus()" onMouseOut="OffStatus()">SHOT FACTORY</H2>
+SHOT FACTORY在平時是灰色的，無法點選，使用時機是在進入遊戲後，
+按<B>Tab</B>鍵，選SHOT FACTORY，就會出現SHOT FACTORY的編輯視窗，
+抓下來的圖片會放在DIRECTORIES設定的SHOTS PATH裡。
+<LI><B>OBJECT</B>：每一張圖的OBJECT數量都不一樣，把╳取消掉，會有一些東西不見
+<LI><B>MAKE ALL</B>：OBJECT全部打╳，代表整張畫面都擷取
+<LI><B>CLEAR ALL</B>：OBJECT全部不打╳，
+<LI><B>FRONT LAYER</B>：把╳取消掉，字會不見(例如下方的CREDITS)
+<LI><B>ALT. BACKCOLOR</B>：???
+<LI><B>NEXT FRAME</B>：???
+<LI><B>SAVE SHOT</B>：就是把圖給儲存起來
+</P>
+
+<P>
+<H2 title="這個沒有圖片了">Tab鍵的使用</H2>
+除了抓圖之外，Tab鍵還有一些其他的用途，例如：當已經進入遊戲後，才想到要改按鍵設定，
+如果跳出遊戲來解決的話，再進入遊戲又得等上一會兒，這時候只要按Tab鍵跳到設定畫面，
+就可以改要改的設定了！<BR>
+<FONT COLOR="red">(注意！！如果要改MACHINE SETTINGS的設定，改完後必須按RESET才會作用。)</FONT>
+</P>
+
+<P>
+<H2 title="這個沒有圖片了">如何無限接關</H2>
+　　Frank功力太差，正常地玩越南大戰沒幾關就GAME OVER了，可是Frank還是有辦法玩到全破，
+不要以為是用修改大師，Frank太窮了買不起，以下要介紹的就是讓再肉腳的人也能全破的方法－
+<B><U>無限接關</U></B><BR>
+　　首先要改<B>MACHINE SETTINGS</B>，把SYSTEM選成ARCADE，FREE PLAY選成ON，
+然後再進入遊戲，您就會發現不論死了多少次還是能接關。<BR>
+<FONT COLOR="RED">如果您使用上述方法後不能無限接關，可能是BIOS的關係，
+請<I>下載本站的BIOS </I>。</FONT>
+</P>
+
+<P>
+<H2 title="這個沒有圖片了">熱鍵</H2>
+　　雖然遊戲進行到一半時想改設定的話，只要按Tab鍵跳出來改就好，但是有人還是覺得太慢了，
+所以NeoRAGEx有所謂"熱鍵"的設計，
+以下就是熱鍵用,[]代表解釋,<FONT color="blue">{}內為原文</FONT>：<br>
+<LI><B>TAB</B>：切換進/出系統選單[就是上面講的設定畫面]<FONT COLOR=#0000FF>{Toggle in/out to system menu}</FONT>
+<LI><B>1</B>：玩家1的開始鍵<FONT color="blue">{start 1 player game}</FONT>
+<LI><B>2</B>：玩家2的開始鍵<FONT color="blue">{start 2 player game}</FONT>
+<LI><B>3</B>：玩家1的投幣鍵<FONT color="blue">{Coin1/Select}</FONT>
+<LI><B>4</B>：玩家2的投幣鍵<FONT color="blue">{Coin2/select}</FONT>
+<LI><B>5</B>：聲音調小聲<FONT color="blue">{Volume - }</FONT>
+<LI><B>6</B>：聲音調大聲<FONT color="blue">{Volume + }</FONT>
+<LI><B>7</B>：記錄聲音輸出<FONT color="blue">{Record sound output}</FONT>
+<LI><B>8</B>：顯示/隱藏 頁框/每秒<FONT color="blue">{Show/Hide frames/Sec}</FONT>
+<LI><B>9</B>：全速？(開/關)<FONT color="blue">{Full throttle (ON/OFF)}</FONT>
+<LI><B>0</B>：儲存預覽圖片(只有8-bit下可行)<FONT color="blue">{Save preview shot (8-bit only)}</FONT>
+<LI><B>F1</B>：Reset或切換進/出MVS設定[如果MVS SETTINGS選ON的話]<br>
+　　　<FONT color="blue">{Reset (Toggle in/out to MVS-settings)}</FONT>
+<LI><B>F2</B>：切換聲音設定(音效與音樂/音樂/音效/都沒有)<FONT color="blue">{Audio setting (ADPCM/FM/OFF)}</FONT>
+<LI><B>F3</B>：聲音8/16-bit切換<FONT color="blue">{8/16-bit audio output}</FONT>
+<LI><B>F4</B>：聲音頻道(普通/立體)<FONT color="blue">{Audio channels (MONO/STEREO)}</FONT>
+<LI><B>F5</B>：8/16-bit顏色深度切換?<FONT color="blue">{8/16-bit colordepth}</FONT>
+<LI><B>F6</B>：掃瞄線(開/50%/關)<FONT color="blue">{Scanlines (ON/50%/OFF)}</FONT>
+<LI><B>F7</B>：畫面模糊?<FONT color="blue">{Interpolation (ON/OFF)}</FONT>
+<LI><B>F8</B>：邊緣修飾(開/關)<FONT color="blue">{Edge enhancement (ON/OFF)}</FONT>
+<LI><B>F9</B>：抓圖鍵<FONT color="blue">{Take Screenshot}</FONT>
+<LI><B>F11</B>：儲存<FONT color="blue">{Save state menu}</FONT>
+<LI><B>F12</B>：載入<FONT color="blue">{Load state menu}</FONT>
+<LI><B>ESC</B>：嗯...這個鍵能做什麼？<FONT color="blue">{Hmmmm... shat might this key do?}</FONT>
+</P>
+</BODY>
+</HTML>

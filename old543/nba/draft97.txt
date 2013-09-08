@@ -1,0 +1,11 @@
+Pick:INT,No:INT,Name,Team,Height,Weight:INT,School
+1,21,Tim Duncan,San Antonio Spurs,7-0,248,Wake Forest
+2,44,Keith Van Horn,Philadelphia 76ers,6-10,250,Utah
+3,2,Chauncey Billups,Boston Celtics,6-3,202,Colorado 
+4,33,Antonio Daniels,Vancouver Grizzlies,6-4,200,Bowling Green 
+5,4,Tony Battie,Denver Nuggets,6-11,240,Texas Tech
+6,5,Ron Mercer,Boston Celtics,6-7,210,Kentucky 
+7,5,Tim Thomas,New Jersey Nets,6-10,230,Villanova 
+8,31,Adonal Foyle,Golden State Warrories,6-10,250,Colgate 
+9,1,Tracy McGrady,Toronto Raptors,6-8,210,High School 
+10,27,Danny Fortson,Milwaukee Bucks,6-7,260,Cincinnati 

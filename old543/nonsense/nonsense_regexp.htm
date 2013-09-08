@@ -1,0 +1,120 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<TITLE>Regular Expression</TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+<STYLE TYPE="text/css">
+.code{color:yellow ; background-color:black}
+</STYLE>
+</HEAD>
+<BODY>
+<p>您現在所在的位置是：<a href="nonsense.htm">亂寫一通</a>/<b>Regular Expression</b></p>
+　　JScript下的Regular Expression，可以用來搜尋、取代複雜的字串，是很好用的工具，
+不過挺複雜的，所以就自己整理一下，以後要查閱也比較方便。<BR>
+　　基本上，有兩種表示法：<BR>
+
+<FONT COLOR="green"><B>　Syntax 1</B></FONT><BR>
+<DIV CLASS="code">　　re = /pattern/[flags]</DIV>
+<FONT COLOR="green"><B>　Syntax 2</B></FONT><BR>
+<DIV CLASS="code">　　re = new RegExp("pattern",["flags"]) </DIV>
+<P>
+re是變數名稱，pattern就是格式，下面會有完整的列表。<BR>
+flags則是有g、i、m三種：<BR>
+　g：global－全域，有出現都算<BR>
+　i：ignore case－不分大小寫<BR>
+　m：multiline search－多行搜尋<BR>
+<BR>
+pattern可用的有：<BR>
+<TABLE BORDER="1" CELLSPACING="0" CELLPADDING="3" bordercolor="#000000">
+  <TR>
+    <TD width="60">^</TD>
+    <TD> 加在最前方，例如<SPAN CLASS="code">^cd</SPAN>，就是cd要在字串的開頭，才算match</TD>
+  </TR>
+  <TR>
+    <TD>$</TD>
+    <TD>加在最後方，例如<span class="code">cd$</span>，就是cd要在字串的結尾，才算match</TD>
+  </TR>
+  <TR>
+    <TD>*</TD>
+    <TD>接在*前面的字元，符合０次或多次即算match，例如<span class="code">bo*</span>代表b或boo都算match
+    </TD>
+  </TR>
+  <TR>
+    <TD>+</TD>
+    <TD>接在+前面的字元，符合１次或多次即算match，例如<span class="code">bo+</span>代表bo或boo都算match，但b不算
+    </TD>
+  </TR>
+  <TR>
+    <TD>?</TD>
+    <TD>接在?前面的字元，符合０次或１次即算match，例如<span class="code">do(es)?</span>代表do或does都算match
+    </TD>
+  </TR>
+  <TR>
+    <TD>{n}</TD>
+    <TD>接在{n}前面的字元，符合n的數字的次數即算match，例如<span class="code">o{3}</span>代表ooo算match
+    </TD>
+  </TR>
+  <TR>
+    <TD>{n,}</TD>
+    <TD>接在{n,}前面的字元，符合n的數字的次數以上即算match，例如<span class="code">o{3,}</span>代表ooo或oooo都算match</TD>
+  </TR>
+  <TR>
+    <TD>{n,m}</TD>
+    <TD>n<=m，接在{n,m}前面的字元，符合n以上、m以下即算match，例如<span class="code">o{0,1}</span>就等於<span class="code">o?</span>
+    </TD>
+  </TR>
+  <TR>
+    <TD>.</TD>
+    <TD>代表任何單一字元，除了\n(換行字元)之外，</TD>
+  </TR>
+  <TR>
+    <TD>x|y</TD>
+    <TD>符合x或y即可，例如<span class="code">z|food</span>代表z或food符合，<span class="code">(z|f)ood</span>代表zood或food符合</TD>
+  </TR>
+  <TR>
+    <TD>[xyz]</TD>
+    <TD>在[]中的x,y,z只要有任何一個符合，即算match。例如<span class="code">[d]</span>在abcd會傳回d。bracket</TD>
+  </TR>
+  <TR>
+    <TD>[^xyz]</TD>
+    <TD><b>反的意思</b>，不符合在[]中的x,y,z，即算match並傳回該字元。例如<span class="code">[d]</span>在abcd會傳回a(沒有加入global的情形下)</TD>
+  </TR>
+  <TR>
+    <TD>[a-z]</TD>
+    <TD>在a-z的範圍中，只要有任何一個符合，即傳回該字元</TD>
+  </TR>
+  <TR>
+    <TD>[^a-z]</TD>
+    <TD>不屬於在a-z的範圍中，任何一個符合，即傳回該字元</TD>
+  </TR>
+  <TR>
+    <TD>\b</TD>
+    <TD>\b用來做為一個單字的分界，即字元與空白之間，例如<span class="code">er/b</span>在never會傳回er，verb則不會傳回</TD>
+  </TR>
+  <TR>
+    <TD>\B</TD>
+    <TD>與\b相反，不是字元與空白之間才傳回，例如<span class="code">er/b</span>在never不傳回，verb才傳回er</TD>
+  </TR>
+  <TR>
+    <TD>\d</TD>
+    <TD>代表一個數字，等於<span class="code">[0-9]</span></TD>
+  </TR>
+  <TR>
+    <TD>\D</TD>
+    <TD>代表任何一個不是數字的字元，等於<span class="code">[^0-9]</span></TD>
+  </TR>
+  <TR>
+    <TD>\w</TD>
+    <TD>代表任何一般字元？，等於<span class="code">[A-Za-z0-9_]</span></TD>
+  </TR>
+  <TR>
+    <TD>\W</TD>
+    <TD>就是反上面那個啦，等於<span class="code">[^A-Za-z0-9_]</span></TD>
+  </TR>
+</TABLE>
+
+<BR>
+結論是
+
+</BODY>
+</HTML>

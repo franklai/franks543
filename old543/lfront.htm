@@ -1,0 +1,138 @@
+<html>
+<head>
+<title>選項首頁</title>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<style>
+<!--
+a{color:#FFFF00 ; text-decoration:none;}
+a:hover{color:#083194 ;}
+a:active{color:#083194 ;}
+td {
+background-color:green ;
+border-style:double ;
+cursor : pointer;
+text-align: center ;
+}
+.Link1{color:yellow ; border-color:White Black Black White;}
+.Link2{color:black ; border-color:Black White White Black;}
+.Link3{color:lightgreen ; border-color:Black White White Black;}
+-->
+</style>
+
+<script language="JavaScript">
+<!--
+//以下是選單的陣列
+var nn=0;
+var Box=new Array();
+Box[nn++]=new makeMenu('首頁','再看一下有什麼更新吧！','test.htm');
+Box[nn++]=new makeMenu('關於本站','本站導覽','about/about.htm');
+Box[nn++]=new makeMenu('軟體下載','裡面是Frank愛用的軟體','soft/soft.htm');
+Box[nn++]=new makeMenu('一些日語','五十音表、歌詞','j/j_menu.htm');
+Box[nn++]=new makeMenu('網站連結','這些站都不錯喔！','link/link.htm');
+Box[nn++]=new makeMenu('亂寫一通','這算是教學文章嗎？','nonsense/nonsense.htm');
+Box[nn++]=new makeMenu('換裝!?!?','這裡有桌布和面版','cloth/cloth.htm');
+Box[nn++]=new makeMenu('NBA Zone','介紹NBA Live 2000及NBA的相關資料','nba/nba.htm');
+Box[nn++]=new makeMenu('KIMO留言','來盡情的留言吧！','http://tw.home.yahoo.com/member/cgi-bin/board.z?tid=franks543@B977995363&m=S');
+Box[nn++]=new makeMenu('亞卓留言','來盡情的留言吧！','http://cgi.educities.edu.tw/franklai/gb/book.cgi');
+Box[nn]=new makeMenu('亞卓留資','檢查用','http://cgi.educities.edu.tw/franklai/gb/book.db');
+
+
+function makeMenu(Name,Tip,Url){
+   this.Name=Name;
+   this.Tip=Tip;
+   this.Url=Url;
+}
+
+
+//以下為表格變色函式(按下後不回復)
+/*
+var push=-1;
+function change(n){ // onMouseOver
+   if( push != n ) {
+      eval('L'+n+'.className="Link3"');
+      StatusShow(n);
+   }
+}
+
+function origin(n){ // onMouseOut
+   if( push != n ) {
+      eval('L'+n+'.className="Link1"');
+      window.status="";
+   }
+}
+
+function down(n){ // onMouseDown
+   if( push != n ){
+      if( push != -1 )
+         eval('L'+push+'.className="Link1"');
+      
+      eval('L'+n+'.className="Link2"');
+      push=n;
+   }
+}
+*/
+//表格變色函式(按下後不回復)結束
+
+//表格變色函式(按下僅變色)開始
+var push=-1;
+function change(n){ // onMouseOver
+   eval('L'+n+'.className="Link3"');
+   StatusShow(n);
+}
+
+function origin(n){ // onMouseOut
+   eval('L'+n+'.className="Link1"');
+   window.status="";
+}
+
+function down(n){ // onMouseDown
+   eval('L'+n+'.className="Link2"');
+}
+//表格變色函式(按下僅變色)結束
+
+//以下為狀態列顯示函數
+function StatusShow(txt){
+   window.status=Box[txt].Tip;
+}
+
+// oncontextmenu="window.event.returnValue=false"
+
+//-->
+</script>
+
+</head>
+<base target="right">
+<body bgcolor="#CCEEFF" text="#FFFF00" link="#FFFF00" alink="navy" vlink="#FFFF00">
+<table border="1" width="95%" align="center" cellspacing="0" cellpadding="5">
+<script language="JavaScript">
+<!--
+var tableString="";
+
+for (var i=0;i<Box.length;i++){
+   if (navigator.appName=='Microsoft Internet Explorer'){
+      tableString+='<a href=' + Box[i].Url + '><tr>';
+      tableString+='<td id="L' + i + '" class="Link1" onMouseOver="change(' + i + ');return true"';
+      tableString+=' onMouseOut="origin(' + i + ')" onMouseDown="down(' + i + ')">' + Box[i].Name + '</td></tr>';
+   }
+   else if (navigator.appName=='Netscape'){
+      tableString+='<tr><td class="Link1"><a href='+Box[i].Url+'>'+Box[i].Name+'</a></td></tr>';
+   }
+   else {
+      tableString+='<tr><td><a href="'+Box[i].Url+'">'+Box[i].Name+'</a></td></tr>';
+   }
+}
+
+document.open("text/html");
+document.write(tableString);
+document.close();
+//-->
+</script>
+</table>
+<!--
+<p>
+<center>
+<a href="../forLocation/selfI.htm" target="_self" style="color:black ;">切換</a>
+</center>
+-->
+</body>
+</html>

@@ -1,0 +1,56 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=big5">
+<TITLE></TITLE>
+<LINK REL="StyleSheet" TYPE="text/css" HREF="../samelink.css">
+</HEAD>
+
+<BODY>
+<p>您現在所在的位置是：<a href="nonsense.htm">亂寫一通</a>/<b>讓NBA Live 2000的自設球員用自己的相片</b></p>
+　　話說NBA Live系列的自設球員可以讓大家製作心目中的最佳球員，
+但是當進入練習模式時，只能看到一個有背景沒人的相片，
+總覺得怪怪的，如果能把自己的相片擺上去，那該有多好啊！<P>
+
+<H3>事前準備：</H3>
+　　大部分的NBA Live系列工具都需要在遊戲是<b>"完整安裝"</b>下才能正常運作，
+所以請先確定遊戲是完整安裝，如果不是，請重新安裝。<br>
+　　再來，進入遊戲，製作你要的自設球員，完成後，存成球員檔。<br>
+　　然後要下載幾個檔案，<A href="http://home.pchome.com.tw/computer/50robinson/software/bl00v09.zip">Blotch2000</A>
+、<A href="http://home.pchome.com.tw/computer/50robinson/software/eage091.zip">EA Graphics Editor</A>。
+<H3>開始製作：</H3>
+　　然後準備一個140x140的相片，用EA Graphics Editor開啟，然後轉存成FSH格式(檔名長度最多七個字！)
+<p><img src="nbapic_saveas.gif" width="407" height="294" alt="轉存成FSH格式"></p>
+<p><img src="nbapic_fsh.gif" width="479" height="285" alt="FSH格式"></p>
+　　把相片轉成FSH格式後，複製一份到NBA Live 2000的目錄下，
+把Blotch2000壓縮檔內的Blotch00.exe也解壓縮到NBA Live 2000的目錄下，
+再寫一個bat檔，內容為：<p>
+blotch00 saves 姓,名 lp FSH檔名<br>
+blotch00 saves 姓,名 ir t<br>
+blotch00 saves 姓,名 ic f<br>
+Move FSH檔名 art\ingame\players\update<p>
+　　假設現在有一個自設球員的姓名是Tim Jordan，FSH檔名是TiJorda.fsh，
+那bat檔的內容就是：<p>
+blotch00 saves Jordan,Tim lp TiJorda.fsh<br>
+blotch00 saves Jordan,Tim ir t<br>
+blotch00 saves Jordan,Tim ic f<br>
+Move TiJorda.fsh art\ingame\players\update<p>
+<font color="red">　　注意事項：FSH檔名的長度最多只能七個字！</font><p>
+<H3>額外(可以略過)：</H3>
+　　當初會寫這篇是因為有人在問，大概看了一下從NLSC抓下的Cyberface Tutorial，
+就寫了之前的版本，也沒有特別去測試各個模式，結果導致存檔出現問題，
+雖然現在這一版跟原來的沒有太大的變動，也沒有努力地搞出bug，
+不過之前的季賽問題很可能是因為NLSC的球員更新檔v6.05，
+問題人物Detlef Schrempf本來要退休，所以被放到九零明星三隊，
+但是本季又突然復出了，所以拓荒者也必須要有Schrempf，
+球員更新檔v6.05的001及002存檔，季賽進行選秀的話，
+選秀會上會有一個Schrempf，但是拓荒者又一定會有Schrempf，
+變成拓荒者會有16個球員，造成問題。<br>
+　　而利用Blotch2000是在saves資料夾中搜尋各個檔案，
+如果有找到所指定的姓名就會進行更改，
+lp是L_PORT (large portrait)，
+ir是ISROM，
+ic是ISCREATED，
+ir、ic後面的t、f就是true、false，
+詳細的內容在Blotch2000的readme裡。
+</BODY>
+</HTML>
