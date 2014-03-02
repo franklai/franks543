@@ -17,6 +17,14 @@
     <![endif]-->
   
     <style type="text/css">
+    @media all and  (min-width: 1000px) {
+        body {
+            background-image: url(lighthouse.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+    }
+
     .panel {
         width: 300px;
         margin-left: 20px;
@@ -24,6 +32,7 @@
     body {
         max-width: 1200px;
         padding-top: 80px;
+        background-color: skyblue;
     }
     a.list-group-item:hover {
         text-decoration: underline;
@@ -34,9 +43,12 @@
         left: 0;
         right: 0;
         background-color: white;
-        padding: 10px 20px;
+        padding: 6px 10px;
         z-index: 1030;
+        border-radius: 6px;
+        margin: 6px 10px;
     }
+/*
     ul.nav:after {
         background-image: linear-gradient(#ffffff,rgba(255,255,255,0));
         width: 100%;
@@ -44,6 +56,7 @@
         position: relative;
         height: 8px;
     }
+*/
     .col-md-1 {
         padding: 0;
     }
@@ -199,3 +212,4 @@
     <script src="bootstrap.min.js"></script>
   </body>
 </html>
+<!-- vim: set expandtab: -->
