@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Bootstrap Popover test</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+    crossorigin="anonymous">
+
+  <style type="text/css">
+    p {
+      margin: 6px;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      background-color: #EEE;
+    }
+
+    .menu {
+      width: 360px;
+    }
+
+    .content {
+      width: 720px;
+      position: relative;
+      overflow: hidden;
+      background-color: skyblue;
+      padding: 10px;
+    }
+
+    .item-list>div {
+      float: left;
+      width: 110px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      border: 1px solid grey;
+      margin: 1px;
+      cursor: pointer;
+      padding: 6px;
+      background-color: azure;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>Bootstrap 3.3.4 popover test</h1>
+  <p>Click 2nd column, some popovers will be placed in the left. and clipped due to overflow: hidden;</p>
+  <p>popover() options of container is set to ".content"</p>
+  <p>Switch to <a href="bootstrap-popover-3.3.7.html">Bootstrap 3.3.7 page</a></p>
+
+  <div class="container">
+    <div class="menu">
+      <div>Singles</div>
+      <div>Albums</div>
+      <div>Best Albums</div>
+      <div>Mini Albums</div>
+    </div>
+    <div class="content">
+      <p>.content</p>
+      <div class="item-list">
+        <div>約束はいらない</div>
+        <div>Gift</div>
+        <div>奇跡の海</div>
+        <div>走る</div>
+        <div>プラチナ</div>
+        <div>指輪</div>
+        <div>しっぽのうた</div>
+        <div>マメシバ</div>
+        <div>ヘミソフィア</div>
+        <div>gravity</div>
+        <div>tune the rainbow</div>
+        <div>ループ</div>
+        <div>風待ちジェット/スピカ</div>
+        <div>さいごの果実</div>
+        <div>トライアングラー</div>
+        <div>雨が降る</div>
+        <div>マジックナンバー</div>
+        <div>DOWN TOWN/やさしさに包まれたなら</div>
+        <div>Buddy</div>
+        <div>おかえりなさい</div>
+        <div>モアザンワーズ</div>
+        <div>はじまりの海</div>
+        <div>SAVED./Be mine!</div>
+        <div>レプリカ</div>
+        <div>幸せについて私が知っている5つの方法/色彩</div>
+        <div>あなたを保つもの/まだうごく</div>
+        <div>Million Clouds</div>
+        <div>CLEAR</div>
+      </div>
+      <div style="clear: both; height: 50px;"></div>
+      <div class="item-list">
+        <div>グレープフルーツ</div>
+        <div>DIVE</div>
+        <div>Lucy</div>
+        <div>少年アリス</div>
+        <div>夕凪LOOP</div>
+        <div>かぜよみ</div>
+        <div>You can't catch me</div>
+        <div>シンガーソングライター</div>
+        <div>FOLLOW ME UP</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" integrity="sha384-EKxMxgJ+EnnZ5yB3ygGPe1lXaPvlAzKFXU+wW7kO9Bn9ZCgFRrc3wWtCnsDHbemf"
+    crossorigin="anonymous"></script>
+
+  <script type="application/javascript">
+
+    $(".item-list div").click(function () {
+      $(".popover").hide();
+
+      $(this).popover({
+        placement: 'auto right',
+        trigger: 'click',
+        content: function () { return $(this).html() },
+        html: true,
+        container: '.content',
+      }).popover('toggle');
+
+    });
+  </script>
+
+</body>
+
+</html>
