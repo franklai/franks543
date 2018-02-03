@@ -1,15 +1,18 @@
+<!doctype html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=big5">
-<title>����ઽ��</title>
+<meta charset="utf-8">
+<title>橫書轉直書</title>
 <style type="text/css">
 textarea {
 	font-size:10pt;
 	white-space: normal;
 	width: 600px;
-	height: 200px;}
+	height: 200px;
+}
 input#delimiter {
-	width: 20px;}
+	width: 20px;
+}
 </style>
 
 <script type="text/javascript">
@@ -65,7 +68,7 @@ function Convert()
 			
 			if (i < longest){
 				for (; i < longest; i++){
-					vertical[i] = "�@" + delimiter + vertical[i];
+					vertical[i] = "　" + delimiter + vertical[i];
 				}
 			}
 		}
@@ -76,7 +79,7 @@ function Convert()
 			
 			if (i < longest){
 				for (; i < longest; i++){
-					vertical[i] += "�@" + delimiter;
+					vertical[i] += "　" + delimiter;
 				}
 			}
 		}
@@ -131,15 +134,15 @@ function listMember(obj, tail)
 
 
 <form id="form1">
-<textarea id="taInput">�n�|���ӡ@�@�@�@�����A
+<textarea id="taInput">登鸛雀樓　　　　王之渙
 
-�դ�̤s�ɡA���e�J���y�Q
-���a�d���ءA��W�@�h�ӡC</textarea>
+白日依山盡，黃河入海流﹔
+欲窮千里目，更上一層樓。</textarea>
 <br />
-<input type="radio" name="mode" id="rtl" checked="checked" /><label for="rtl">�ѥk�쥪��X</label>
-<input type="radio" name="mode" id="ltr" /><label for="ltr">�ѥ���k��X</label>
-�@���j�r��<input type="text" id="delimiter" value=" " />
-<input type="button" id="buttonSubmit" value="�e�X" />
+<input type="radio" name="mode" id="rtl" checked="checked" /><label for="rtl">由右到左輸出</label>
+<input type="radio" name="mode" id="ltr" /><label for="ltr">由左到右輸出</label>
+　分隔字元<input type="text" id="delimiter" value=" " />
+<input type="button" id="buttonSubmit" value="送出" />
 <br />
 <textarea id="taOutput"></textarea>
 
