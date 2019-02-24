@@ -1,0 +1,713 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="Expires" content="0">
+<title>日文轉換(BIG5碼、Unicode)</title>
+<script language="JavaScript">
+<!--
+
+//建字典檔 , 字典檔使用版本為 路克的1.01
+var big5 = new Array();
+for (var x = 0; x < 65535; x++)
+    big5[x] = 0;
+for (var x = 63223; x <= 63305; x++) // 平假名部分
+    big5[x] = x - 50870;
+for (var x = 63306; x <= 63388; x++) // 片假名部分
+    big5[x] = x - 50857;
+big5[63216] = 12293;
+big5[27683] = 27671 ; big5[20841] = 20001 ; big5[32396] = 32154 ; big5[27493] = 27497 ; big5[29544] = 29420 ; big5[25622] = 25594 ; big5[35320] = 35302 ; big5[24291] = 24195 ; big5[25300] = 25244 ; big5[22285] = 22258 ; big5[34389] = 20966 ; big5[27138] = 27005 ; big5[24392] = 24382 ; big5[32160] = 32209 ; big5[38991] = 38996 ; big5[32882] = 22768 ; big5[23622] = 23626 ; big5[35722] = 22793 ; big5[25681] = 25524 ; big5[23526] = 23455 ; big5[26371] = 20250 ; big5[24421] = 24422 ; big5[35258] = 35226 ; big5[20358] = 26469 ; big5[39493] = 39366 ; big5[36953] = 36965 ; big5[31383] = 31379 ; big5[30433] = 23613 ; big5[35695] = 35379 ; big5[25088] = 24651 ; big5[25150] = 25147 ; big5[21367] = 24059 ; big5[28415] = 28288 ; big5[27745] = 27738 ; big5[30526] = 34886 ; big5[25976] = 25968 ; big5[36106] = 36059 ; big5[27243] = 27178 ; big5[28122] = 28057 ; big5[37168] = 38563 ; big5[20056] = 20055 ; big5[27512] = 24112 ; big5[39515] = 39365 ; big5[61112] = 20124 ; big5[25628] = 25436 ; big5[30332] = 30330 ; big5[23522] = 23517 ; big5[32363] = 32331 ; big5[27544] = 27531 ; big5[20659] = 20253 ; big5[23531] = 20889 ; big5[32085] = 32118 ; big5[23565] = 23550 ; big5[32147] = 32076 ; big5[8212] = 12540 ; big5[27387] = 26716 ; big5[29128] = 28783 ; big5[34395] = 34394 ; big5[38577] = 38560 ; big5[39662] = 39658 ; big5[28712] = 28716 ; big5[24817] = 24745 ; big5[21934] = 21336 ; big5[23542] = 23453 ; big5[29376] = 29366 ; big5[36404] = 36362 ; big5[37002] = 36794 ; big5[38960] = 38956 ; big5[33836] = 19975 ; big5[24034] = 24035 ; big5[25079] = 25040 ; big5[21237] = 21169 ; big5[27171] = 27096 ; big5[40860] = 20096 ; big5[32893] = 32884 ; big5[22686] = 22679 ; big5[35712] = 35501 ; big5[40670] = 28857 ; big5[40643] = 40644 ; big5[24801] = 24746 ; big5[40657] = 40658 ; big5[30862] = 30741 ; big5[32227] = 32257 ; big5[28212] = 28167 ; big5[30070] = 24403 ; big5[27298] = 26908 ; big5[38364] = 38306 ; big5[30059] = 30011 ; big5[29518] = 22888 ; big5[25033] = 24540 ; big5[20839] = 20869 ; big5[24478] = 24467 ; big5[37636] = 37682 ; big5[25799] = 25246 ; big5[27402] = 27177 ; big5[25136] = 25126 ; big5[23560] = 23554 ; big5[25802] = 25731 ; big5[38360] = 39717
+big5[32362] = 32117 ; big5[28331] = 28201 ; big5[35498] = 35500 ; big5[21443] = 21442 ; big5[38570] = 38522 ; big5[27599] = 27598 ; big5[20540] = 20516 ; big5[33067] = 33073 ; big5[23660] = 23646 ; big5[25282] = 25173 ; big5[31840] = 36796 ; big5[36978] = 36933 ; big5[36629] = 36605 ; big5[39636] = 20307 ; big5[36681] = 36578 ; big5[36011] = 36016 ; big5[25884] = 25658 ; big5[24118] = 24111 ; big5[26039] = 26029 ; big5[37666] = 37549 ; big5[32291] = 30476 ; big5[37129] = 37111 ; big5[24396] = 24357 ; big5[36067] = 22770 ; big5[25928] = 21177 ; big5[24646] = 24658 ; big5[26366] = 26365 ; big5[36783] = 24321 ; big5[32317] = 32207 ; big5[20820] = 20814 ; big5[27511] = 27508 ; big5[23500] = 20904 ; big5[25581] = 25522 ; big5[35037] = 35013 ; big5[23416] = 23398 ; big5[33126] = 33075 ; big5[28399] = 28382 ; big5[24501] = 24500 ; big5[31281] = 31216 ; big5[38519] = 38501 ; big5[29151] = 21942 ; big5[38620] = 38609 ; big5[22296] = 22243 ; big5[22781] = 23551 ; big5[21214] = 21172 ; big5[39511] = 39443 ; big5[28639] = 28168 ; big5[40613] = 40614 ; big5[29138] = 28988 ; big5[22294] = 22259 ; big5[22750] = 22730 ; big5[25910] = 21454 ; big5[20729] = 20385 ; big5[22291] = 20870 ; big5[24090] = 31634 ; big5[20098] = 20081 ; big5[31319] = 31298 ; big5[40664] = 40665 ; big5[36084] = 38972 ; big5[22283] = 22269 ; big5[29351] = 29344 ; big5[24800] = 24693 ; big5[28041] = 28169 ; big5[37323] = 37320 ; big5[39479] = 39442 ; big5[23532] = 23515 ; big5[23559] = 23558 ; big5[29229] = 20105 ; big5[38622] = 40335 ; big5[38617] = 21452 ; big5[29986] = 29987 ; big5[23020] = 23019 ; big5[22767] = 22766 ; big5[21240] = 21223 ; big5[31150] = 31036 ; big5[33139] = 33050 ; big5[21312] = 21306 ; big5[25844] = 25313 ; big5[27794] = 27809 ; big5[25812] = 25285 ; big5[36781] = 36766 ; big5[40786] = 27503 ; big5[34399] = 21495 ; big5[35261] = 35239 ; big5[30095] = 30094 ; big5[24282] = 21416 ; big5[22986] = 22985 ; big5[27590] = 27572 ; big5[38568] = 38543 ; big5[33290] = 26087 ; big5[34255] = 34101 ; big5[20551] = 20206 ; big5[25406] = 25375 ; big5[27506] = 27507 ; big5[34277] = 34220 ; big5[37291] = 21307 ; big5[30428] = 30423 ; big5[35731] = 35698 ; big5[28154] = 27973 ; big5[22099] = 22040
+big5[26205] = 26172 ; big5[25142] = 25144 ; big5[27489] = 27475 ; big5[38442] = 22338 ; big5[33293] = 33294 ; big5[38748] = 38745 ; big5[31929] = 31883 ; big5[25620] = 25531 ; big5[37257] = 37204 ; big5[26855] = 26719 ; big5[40573] = 22633 ; big5[37706] = 37676 ; big5[27155] = 27004 ; big5[20121] = 20120 ; big5[20126] = 20124 ; big5[20315] = 20175 ; big5[20760] = 20397 ; big5[20465] = 20534 ; big5[20745] = 20537 ; big5[20818] = 20816 ; big5[21133] = 21091 ; big5[21137] = 21092 ; big5[21085] = 21093 ; big5[21097] = 21104 ; big5[21235] = 21234 ; big5[21371] = 21364 ; big5[22196] = 21427 ; big5[25944] = 21465 ; big5[21555] = 21577 ; big5[21650] = 21610 ; big5[21854] = 21782 ; big5[22225] = 22065 ; big5[22218] = 22178 ; big5[22280] = 22287 ; big5[22739] = 22311 ; big5[22702] = 22549 ; big5[22744] = 22593 ; big5[22756] = 22732 ; big5[22777] = 22769 ; big5[22778] = 22775 ; big5[23067] = 23087 ; big5[23363] = 23330 ; big5[22575] = 23597 ; big5[23650] = 23649 ; big5[24022] = 24012 ; big5[24307] = 24193 ; big5[24290] = 24259 ; big5[36852] = 24315 ; big5[36858] = 24316 ; big5[36019] = 24336 ; big5[24465] = 24452 ; big5[24503] = 24499 ; big5[24709] = 24742 ; big5[24920] = 24808 ; big5[25138] = 25135 ; big5[25308] = 25309 ; big5[25818] = 25312 ; big5[33289] = 25369 ; big5[25554] = 25407 ; big5[25885] = 25666 ; big5[25898] = 25785 ; big5[40778] = 25993 ; big5[40779] = 25998 ; big5[26185] = 26187 ; big5[26313] = 26241 ; big5[26310] = 26278 ; big5[27051] = 26528 ; big5[27166] = 26530 ; big5[26597] = 26619 ; big5[27370] = 26627 ; big5[27054] = 26628 ; big5[27292] = 26727 ; big5[27310] = 26812 ; big5[39729] = 27421 ; big5[27472] = 27431 ; big5[27580] = 27579 ; big5[20912] = 27703 ; big5[28136] = 27972 ; big5[28657] = 27996 ; big5[28644] = 28059 ; big5[28678] = 28060 ; big5[28544] = 28171 ; big5[28330] = 28179 ; big5[28771] = 28286 ; big5[28629] = 28287 ; big5[28497] = 28300 ; big5[28711] = 28381 ; big5[28748] = 28485 ; big5[28507] = 28508 ; big5[29200] = 28809 ; big5[28976] = 28948 ; big5[29433] = 29421 ; big5[29557] = 29471 ; big5[35948] = 29482 ; big5[35987] = 29483 ; big5[29563] = 29486 ; big5[29560] = 29539 ; big5[30090] = 30067 ; big5[30246] = 30185 ; big5[30347] = 30352
+big5[31018] = 30778 ; big5[31014] = 30783 ; big5[31001] = 30861 ; big5[31152] = 31074 ; big5[31153] = 31095 ; big5[31103] = 31108 ; big5[31146] = 31109 ; big5[31237] = 31246 ; big5[31291] = 31282 ; big5[31337] = 31311 ; big5[31344] = 31331 ; big5[31434] = 31363 ; big5[35918] = 31466 ; big5[31774] = 31658 ; big5[32901] = 31899 ; big5[32380] = 32153 ; big5[32361] = 32260 ; big5[32305] = 32294 ; big5[32406] = 32330 ; big5[37885] = 32333 ; big5[32880] = 32865 ; big5[33213] = 32966 ; big5[33247] = 33235 ; big5[33302] = 33303 ; big5[33399] = 33398 ; big5[33686] = 33550 ; big5[33674] = 33624 ; big5[33802] = 33713 ; big5[34085] = 33905 ; big5[34083] = 33931 ; big5[34224] = 34219 ; big5[34282] = 34222 ; big5[34722] = 34509 ; big5[34875] = 34542 ; big5[34796] = 34633 ; big5[34847] = 34635 ; big5[34821] = 34687 ; big5[35122] = 34996 ; big5[38712] = 35207 ; big5[35264] = 35251 ; big5[35709] = 35465 ; big5[35563] = 35532 ; big5[35616] = 35617 ; big5[35738] = 35715 ; big5[35726] = 35728 ; big5[36068] = 36046 ; big5[36368] = 36341 ; big5[36544] = 36527 ; big5[36999] = 36841 ; big5[36958] = 36883 ; big5[37297] = 37271 ; big5[37292] = 37284 ; big5[37312] = 37304 ; big5[37476] = 37390 ; big5[37941] = 37444 ; big5[37555] = 37613 ; big5[37964] = 37618 ; big5[37956] = 37619 ; big5[38321] = 38322 ; big5[38728] = 38666 ; big5[38968] = 38938 ; big5[31310] = 38964 ; big5[39023] = 38997 ; big5[39506] = 39464 ; big5[39635] = 39620 ; big5[40407] = 40206 ; big5[40367] = 40236 ; big5[40572] = 40568 ; big5[40628] = 40633 ; big5[40629] = 40634 ; big5[40801] = 40802 ; big5[21243] = 21250 ; big5[21585] = 21534 ; big5[61412] = 24651 ; big5[60901] = 23626 ; big5[61164] = 24613 ; big5[61790] = 25144 ; big5[61393] = 26469 ; big5[61367] = 22793 ; big5[61368] = 27497 ; big5[61407] = 25147 ; big5[61146] = 27005 ; big5[61305] = 32154 ; big5[61158] = 27671 ; big5[61403] = 28057 ; big5[61275] = 32118 ; big5[61307] = 23550 ; big5[59843] = 28857 ; big5[61402] = 32209 ; big5[61793] = 38996 ; big5[57613] = 23453 ; big5[39717] = 38360 ; big5[57537] = 22338 ; big5[61792] = 20882 ; big5[61194] = 38522 ; big5[61373] = 25265 ; big5[58972] = 24693 ; big5[61267] = 25968 ; big5[57786] = 26228 ; big5[58085] = 30528
+big5[61229] = 25448 ; big5[61119] = 38560 ; big5[61342] = 35501 ; big5[61247] = 20055 ; big5[61783] = 27178 ; big5[61177] = 39366 ; big5[61390] = 27096 ; big5[57483] = 21494 ; big5[65105] = 12289 ; big5[62382] = 20250 ; big5[61765] = 25524 ; big5[61434] = 38635 ; big5[57435] = 21253 ; big5[57865] = 27703 ; big5[61144] = 35226 ; big5[62396] = 22768 ; big5[61172] = 38911 ; big5[59861] = 36796 ; big5[61293] = 31379 ; big5[61389] = 25594 ; big5[61259] = 23613 ; big5[61653] = 30495 ; big5[62403] = 23455 ; big5[61384] = 35379 ; big5[61037] = 32870 ; big5[61445] = 21250 ; big5[57598] = 24195 ; big5[59993] = 36578 ; big5[57670] = 24375 ; big5[8231] = 12539 ; big5[24492] = 24439 ; big5[61263] = 31298 ; big5[58155] = 21682 ; big5[61139] = 32117 ; big5[62493] = 20955 ; big5[61260] = 22259 ; big5[61334] = 24403 ; big5[20956] = 20955 ; big5[61251] = 32260 ; big5[60053] = 20916 ; big5[61113] = 24746 ; big5[26202] = 26217 ; big5[61249] = 21104 ; big5[61165] = 25312 ; big5[57755] = 25658 ; big5[58442] = 36215 ; big5[61235] = 28171 ; big5[61309] = 28382 ; big5[61216] = 38609 ; big5[61315] = 22022 ; big5[61381] = 28288 ; big5[26312] = 30643 ; big5[61272] = 38745 ; big5[61320] = 26172 ; big5[21855] = 21843 ; big5[27785] = 27784 ; big5[65109] = 65306 ; big5[8211] = 12540 ; big5[57344] = 21764 ; big5[22169] = 22107 ; big5[39345] = 39364 ; big5[34269] = 33464 ; big5[36447] = 36321 ; big5[38584] = 38583
+// ;&#65381 ．
+var unicode = new Array();
+for (var y = 0; y < 65535; y++)
+    unicode[y] = 0;
+for (var y = 12353; y <= 12435; y++) // 平假名部分
+    unicode[y] = y + 50870;
+for (var y = 12449; y <= 12531; y++) // 片假名部分
+    unicode[y] = y + 50857;
+unicode[12293] = 63216;
+unicode[27671] = 27683 ; unicode[20001] = 20841 ; unicode[32154] = 32396 ; unicode[27497] = 27493 ; unicode[29420] = 29544 ; unicode[25594] = 25622 ; unicode[24195] = 24291 ; unicode[25244] = 25300 ; unicode[22258] = 22285 ; unicode[20966] = 34389 ; unicode[27005] = 27138 ; unicode[12540] = 63219 ; unicode[24382] = 24392 ; unicode[32209] = 32160 ; unicode[27096] = 27171 ; unicode[38996] = 38991 ; unicode[22768] = 32882 ; unicode[23626] = 23622 ; unicode[25524] = 25681 ; unicode[23455] = 23526 ; unicode[20250] = 26371 ; unicode[35226] = 35258 ; unicode[39366] = 39493 ; unicode[36965] = 36953 ; unicode[31379] = 31383 ; unicode[23613] = 30433 ; unicode[35379] = 35695 ; unicode[24651] = 25088 ; unicode[25147] = 25150 ; unicode[24059] = 21367 ; unicode[28288] = 28415 ; unicode[27738] = 27745 ; unicode[34886] = 30526 ; unicode[25968] = 25976 ; unicode[36059] = 36106 ; unicode[27178] = 27243 ; unicode[28057] = 28122 ; unicode[38563] = 37168 ; unicode[20055] = 20056 ; unicode[24112] = 27512 ; unicode[39365] = 39515 ; unicode[31452] = 40845 ; unicode[25436] = 25628 ; unicode[30330] = 30332 ; unicode[23517] = 23522 ; unicode[32331] = 32363 ; unicode[27531] = 27544 ; unicode[20889] = 23531 ; unicode[32118] = 32085 ; unicode[23550] = 23565 ; unicode[32076] = 32147 ; unicode[26716] = 27387 ; unicode[28783] = 29128 ; unicode[34394] = 34395 ; unicode[38560] = 38577 ; unicode[39658] = 39662 ; unicode[28716] = 28712 ; unicode[24745] = 24817 ; unicode[21336] = 21934 ; unicode[23453] = 23542 ; unicode[29366] = 29376 ; unicode[36794] = 37002 ; unicode[38956] = 38960 ; unicode[24035] = 24034 ; unicode[25040] = 25079 ; unicode[21169] = 21237 ; unicode[20096] = 40860 ; unicode[32884] = 32893 ; unicode[22679] = 22686 ; unicode[35501] = 35712 ; unicode[28857] = 40670 ; unicode[22793] = 35722 ; unicode[40644] = 40643 ; unicode[24746] = 24801 ; unicode[40658] = 40657 ; unicode[30741] = 30862 ; unicode[32257] = 32227 ; unicode[28167] = 28212 ; unicode[26469] = 20358 ; unicode[24403] = 30070 ; unicode[26908] = 27298 ; unicode[38306] = 38364 ; unicode[30011] = 30059 ; unicode[22888] = 29518 ; unicode[24540] = 25033 ; unicode[20869] = 20839 ; unicode[24467] = 24478 ; unicode[37682] = 37636 ; unicode[25246] = 25799 ; unicode[27177] = 27402 ; unicode[25126] = 25136 ; unicode[23554] = 23560 ; unicode[25731] = 25802 ; unicode[32117] = 32362 ; unicode[28201] = 28331 ; unicode[35500] = 35498 ; unicode[21442] = 21443 ; unicode[38522] = 38570 ; unicode[27598] = 27599
+unicode[20516] = 20540 ; unicode[33073] = 33067 ; unicode[23646] = 23660 ; unicode[25173] = 25282 ; unicode[36796] = 31840 ; unicode[36933] = 36978 ; unicode[36605] = 36629 ; unicode[36578] = 36681 ; unicode[25658] = 25884 ; unicode[24111] = 24118 ; unicode[26029] = 26039 ; unicode[37549] = 37666 ; unicode[30476] = 32291 ; unicode[37111] = 37129 ; unicode[24422] = 24421 ; unicode[24357] = 24396 ; unicode[22770] = 36067 ; unicode[26465] = 26781 ; unicode[30528] = 33879 ; unicode[21177] = 25928 ; unicode[32207] = 32317 ; unicode[20814] = 20820 ; unicode[27508] = 27511 ; unicode[25522] = 25581 ; unicode[35013] = 35037 ; unicode[23398] = 23416 ; unicode[33075] = 33126 ; unicode[28382] = 28399 ; unicode[24500] = 24501 ; unicode[31216] = 31281 ; unicode[38501] = 38519 ; unicode[21942] = 29151 ; unicode[38609] = 38620 ; unicode[27810] = 28580 ; unicode[22243] = 22296 ; unicode[23551] = 22781 ; unicode[21172] = 21214 ; unicode[39443] = 39511 ; unicode[28168] = 28639 ; unicode[40614] = 40613 ; unicode[28988] = 29138 ; unicode[22259] = 22294 ; unicode[22730] = 22750 ; unicode[21454] = 25910 ; unicode[20385] = 20729 ; unicode[20870] = 22291 ; unicode[31634] = 24090 ; unicode[20081] = 20098 ; unicode[31298] = 31319 ; unicode[40665] = 40664 ; unicode[38972] = 36084 ; unicode[22269] = 22283 ; unicode[29344] = 29351 ; unicode[24693] = 24800 ; unicode[28169] = 28041 ; unicode[37320] = 37323 ; unicode[39442] = 39479 ; unicode[23515] = 23532 ; unicode[23558] = 23559 ; unicode[20105] = 29229 ; unicode[40335] = 38622 ; unicode[21452] = 38617 ; unicode[29987] = 29986 ; unicode[23019] = 23020 ; unicode[22766] = 22767 ; unicode[21223] = 21240 ; unicode[31036] = 31150 ; unicode[33050] = 33139 ; unicode[21306] = 21312 ; unicode[25313] = 25844 ; unicode[27809] = 27794 ; unicode[25285] = 25812 ; unicode[36766] = 36781 ; unicode[27503] = 40786 ; unicode[21495] = 34399 ; unicode[35239] = 35261 ; unicode[30094] = 30095 ; unicode[21416] = 24282 ; unicode[22985] = 22986 ; unicode[27572] = 27590 ; unicode[38543] = 38568 ; unicode[26087] = 33290 ; unicode[34101] = 34255 ; unicode[20206] = 20551 ; unicode[25375] = 25406 ; unicode[27507] = 27506 ; unicode[34220] = 34277 ; unicode[21307] = 37291 ; unicode[30423] = 30428 ; unicode[22040] = 22099 ; unicode[35698] = 35731 ; unicode[27973] = 28154 ; unicode[26172] = 26205 ; unicode[25144] = 25142 ; unicode[27475] = 27489 ; unicode[22338] = 38442 ; unicode[33294] = 33293 ; unicode[38745] = 38748 ; unicode[31883] = 31929 ; unicode[25531] = 25620
+unicode[37204] = 37257 ; unicode[26719] = 26855 ; unicode[22633] = 40573 ; unicode[37676] = 37706 ; unicode[27004] = 27155 ; unicode[20010] = 20491 ; unicode[20120] = 20121 ; unicode[20124] = 20126 ; unicode[20175] = 20315 ; unicode[20397] = 20760 ; unicode[20534] = 20465 ; unicode[20537] = 20745 ; unicode[20816] = 20818 ; unicode[20904] = 23500 ; unicode[21091] = 21133 ; unicode[21092] = 21137 ; unicode[21093] = 21085 ; unicode[21104] = 21097 ; unicode[21234] = 21235 ; unicode[21364] = 21371 ; unicode[21427] = 22196 ; unicode[21465] = 25944 ; unicode[21577] = 21555 ; unicode[21610] = 21650 ; unicode[21782] = 21854 ; unicode[22065] = 22225 ; unicode[22178] = 22218 ; unicode[22287] = 22280 ; unicode[22311] = 22739 ; unicode[22549] = 22702 ; unicode[22593] = 22744 ; unicode[22732] = 22756 ; unicode[22769] = 22777 ; unicode[22775] = 22778 ; unicode[22885] = 22887 ; unicode[23087] = 23067 ; unicode[23330] = 23363 ; unicode[23597] = 22575 ; unicode[23649] = 23650 ; unicode[24012] = 24022 ; unicode[24193] = 24307 ; unicode[24259] = 24290 ; unicode[24315] = 36852 ; unicode[24316] = 36858 ; unicode[24336] = 36019 ; unicode[24452] = 24465 ; unicode[24499] = 24503 ; unicode[24742] = 24709 ; unicode[24808] = 24920 ; unicode[25135] = 25138 ; unicode[25309] = 25308 ; unicode[25312] = 61165 ; unicode[25369] = 33289 ; unicode[25407] = 25554 ; unicode[25666] = 25885 ; unicode[25785] = 25898 ; unicode[25993] = 40778 ; unicode[25998] = 40779 ; unicode[26187] = 26185 ; unicode[26241] = 26313 ; unicode[26278] = 26310 ; unicode[26365] = 26366 ; unicode[26528] = 27051 ; unicode[26530] = 27166 ; unicode[26619] = 26597 ; unicode[26627] = 27370 ; unicode[26628] = 27054 ; unicode[26727] = 27292 ; unicode[26812] = 27310 ; unicode[27421] = 39729 ; unicode[27431] = 27472 ; unicode[27579] = 27580 ; unicode[27703] = 20912 ; unicode[27972] = 28136 ; unicode[27996] = 28657 ; unicode[28059] = 28644 ; unicode[28060] = 28678 ; unicode[28171] = 28544 ; unicode[28179] = 28330 ; unicode[28286] = 28771 ; unicode[28287] = 28629 ; unicode[28300] = 28497 ; unicode[28381] = 28711 ; unicode[28485] = 28748 ; unicode[28508] = 28507 ; unicode[28809] = 29200 ; unicode[28948] = 28976 ; unicode[29421] = 29433 ; unicode[29471] = 29557 ; unicode[29482] = 35948 ; unicode[29483] = 35987 ; unicode[29486] = 29563 ; unicode[29539] = 29560 ; unicode[30067] = 30090 ; unicode[30185] = 30246 ; unicode[30352] = 30347 ; unicode[30778] = 31018 ; unicode[30783] = 31014 ; unicode[30861] = 31001 ; unicode[31074] = 31152
+unicode[31095] = 31153 ; unicode[31108] = 31103 ; unicode[31109] = 31146 ; unicode[31246] = 31237 ; unicode[31282] = 31291 ; unicode[31311] = 31337 ; unicode[31331] = 31344 ; unicode[31363] = 31434 ; unicode[31466] = 35918 ; unicode[31658] = 31774 ; unicode[31899] = 32901 ; unicode[32153] = 32380 ; unicode[32260] = 32361 ; unicode[32294] = 32305 ; unicode[32330] = 32406 ; unicode[32333] = 37885 ; unicode[32865] = 32880 ; unicode[32966] = 33213 ; unicode[33031] = 33029 ; unicode[33235] = 33247 ; unicode[33303] = 33302 ; unicode[33304] = 39208 ; unicode[33398] = 33399 ; unicode[33550] = 33686 ; unicode[33624] = 33674 ; unicode[33713] = 33802 ; unicode[33747] = 26524 ; unicode[33905] = 34085 ; unicode[33931] = 34083 ; unicode[34219] = 34224 ; unicode[34222] = 34282 ; unicode[34509] = 34722 ; unicode[34542] = 34875 ; unicode[34633] = 34796 ; unicode[34635] = 34847 ; unicode[34687] = 34821 ; unicode[34996] = 35122 ; unicode[35207] = 38712 ; unicode[35251] = 35264 ; unicode[35465] = 35709 ; unicode[35532] = 35563 ; unicode[35617] = 35616 ; unicode[35715] = 35738 ; unicode[35728] = 35726 ; unicode[36046] = 36068 ; unicode[36341] = 36368 ; unicode[36527] = 36544 ; unicode[36841] = 36999 ; unicode[36883] = 36958 ; unicode[37271] = 37297 ; unicode[37284] = 37292 ; unicode[37304] = 37312 ; unicode[37390] = 37476 ; unicode[37444] = 37941 ; unicode[37613] = 37555 ; unicode[37618] = 37964 ; unicode[37619] = 37956 ; unicode[38322] = 38321 ; unicode[38666] = 38728 ; unicode[38938] = 38968 ; unicode[38964] = 31310 ; unicode[38997] = 39023 ; unicode[39464] = 39506 ; unicode[39620] = 39635 ; unicode[40206] = 40407 ; unicode[40236] = 40367 ; unicode[40568] = 40572 ; unicode[40633] = 40628 ; unicode[40634] = 40629 ; unicode[40802] = 40801 ; unicode[21250] = 21243 ; unicode[38360] = 39717 ; unicode[21494] = 57483 ; unicode[38635] = 61434 ; unicode[32870] = 61037 ; unicode[12539] = 8231 ; unicode[21682] = 58155 ; unicode[20955] = 20956 ; unicode[20916] = 60053 ; unicode[26217] = 26202 ; unicode[22253] = 22290 ; unicode[20390] = 20597 ; unicode[22242] = 22296 ; unicode[21843] = 21855 ; unicode[22107] = 22169 ; unicode[39364] = 39345 ; unicode[38583] = 38584 ; unicode[65393] = 63307 ; unicode[65394] = 63309 ; unicode[65395] = 63311 ; unicode[65396] = 63313 ; unicode[65397] = 63315 ; unicode[65398] = 63316 ; unicode[65399] = 63318 ; unicode[65400] = 63320 ; unicode[65401] = 63322 ; unicode[65402] = 63324 ; unicode[65403] = 63326 ; unicode[65404] = 63328 ; unicode[65405] = 63330
+unicode[65406] = 63332 ; unicode[65407] = 63334 ; unicode[65408] = 63336 ; unicode[65409] = 63338 ; unicode[65410] = 63341 ; unicode[65411] = 63343 ; unicode[65412] = 63345 ; unicode[65413] = 63347 ; unicode[65414] = 63348 ; unicode[65415] = 63349 ; unicode[65416] = 63350 ; unicode[65417] = 63351 ; unicode[65418] = 63352 ; unicode[65419] = 63355 ; unicode[65420] = 63358 ; unicode[65421] = 63361 ; unicode[65422] = 63364 ; unicode[65423] = 63367 ; unicode[65424] = 63368 ; unicode[65425] = 63369 ; unicode[65426] = 63370 ; unicode[65427] = 63371 ; unicode[65428] = 63373 ; unicode[65429] = 63375 ; unicode[65430] = 63377 ; unicode[65431] = 63378 ; unicode[65432] = 63379 ; unicode[65433] = 63380 ; unicode[65434] = 63381 ; unicode[65435] = 63382 ; unicode[65436] = 63384 ; unicode[65382] = 63387 ; unicode[65383] = 63306 ; unicode[65384] = 63308 ; unicode[65385] = 63310 ; unicode[65386] = 63312 ; unicode[65387] = 63314 ; unicode[65391] = 63340 ; unicode[65388] = 63372 ; unicode[65389] = 63374 ; unicode[65390] = 63376
+// 以下Frank自訂
+unicode[65381] = 65294 ;
+unicode[12532] = 63389 ; big5[63389] = 12532 ;
+unicode[12539] = 65294 ;
+unicode[36796] = 59075 ; big5[59075] = 36796 ;
+unicode[21682] = 38283 ; big5[38283] = 21682 ;
+unicode[38635] = 28404 ;
+unicode[20384] = 20448;
+
+function B2U(sourceStr)
+{
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+        if (tempStr.length == 6){
+          var tempNo = big5[HexCal(tempStr.substring(2,6), 16)];
+          if (tempNo != 0)
+              partStr = dec2char(tempNo);
+        }
+        resultStr += partStr;
+    }
+    Display(resultStr);
+}
+
+
+function U2B(sourceStr)
+{
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+        if (tempStr.length == 6){
+          var tempNo = unicode[HexCal(tempStr.substring(2,6), 16)];
+          if (tempNo != 0)
+              partStr = dec2char(tempNo);
+        }
+        resultStr += partStr;
+    }
+    Display(resultStr);
+}
+
+
+function U2Bneo(sourceStr)
+{
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+        if (tempStr.length == 6){
+          var tempNo = unicode[HexCal(tempStr.substring(2,6), 16)];
+          if (tempNo != 0)
+              partStr = dec2char(tempNo);
+        }
+        resultStr += partStr;
+    }
+	var formatStr = escape(resultStr);
+	formatStr = formatStr.replace(/%0D%0A%0D%0A/g,"\n");
+	formatStr = formatStr.replace(/%0D%0A/g," ");
+    resultStr = unescape(formatStr);
+    Display(resultStr);
+}
+
+
+function toLatin(sourceStr)
+{
+    var tempStr = escape(sourceStr);
+    Display(tempStr);
+}
+
+
+function toLatinBr(sourceStr)
+{
+    var tempStr = escape(sourceStr);
+    tempStr = tempStr.replace(/%0D%0A/g,"\n");
+    tempStr = tempStr.replace(/%0A/g,"\n");
+    Display(tempStr);
+}
+
+
+function Latin2U(sourceStr)
+{
+    var tempStr = unescape(sourceStr);
+    Display(tempStr);
+}
+
+
+function allCharCodeAt(sourceStr)
+{
+	var tempStr = "";
+	
+	for (var x = 0; x < sourceStr.length; x++){
+		tempStr += sourceStr.charCodeAt(x);
+	}
+	
+	Display(tempStr);
+}
+
+
+function allCharCodeAtFormat(sourceStr)
+{
+	var tempStr = "";
+	
+	for (var x = 0; x < sourceStr.length; x++){
+		tempStr += sourceStr.charCodeAt(x) + " ";
+	}
+	
+	Display(tempStr);
+}
+
+
+function allFromCharCodeFormat(sourceStr)
+{
+	var tempArray = new Array();
+	var tempStr = "";
+	
+	tempArray = sourceStr.split(" ");
+
+	for (var x = 0; x < tempArray.length; x++){
+		tempStr += String.fromCharCode(tempArray[x]);
+	}
+	
+	Display(tempStr);
+}
+
+
+function U2URIencode(sourceStr)
+{
+    var tempStr = encodeURI(sourceStr);
+    Display(tempStr);
+}
+function URIencode2U(sourceStr)
+{
+    var tempStr = decodeURI(sourceStr);
+    Display(tempStr);
+}
+
+
+function U2URICencode(sourceStr)
+{
+    var tempStr = encodeURIComponent(sourceStr);
+    Display(tempStr);
+}
+function URICencode2U(sourceStr)
+{
+    var tempStr = decodeURIComponent(sourceStr);
+    Display(tempStr);
+}
+
+
+
+function U2UTF(sourceStr)
+{ // &#12525;
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+
+        if (tempStr.length == 6){
+          var tempNo1 = HexCal(tempStr.substring(2,6), 16);
+          var tempNo2 = unicode[tempNo1];
+
+          if (tempNo2 == 0)
+              resultStr += partStr;
+          else
+              resultStr += "&#" + tempNo1 + "\;";
+          
+          continue;
+        }
+        resultStr += partStr;
+    }
+    Display(resultStr);
+}
+
+
+function toUTFa(sourceStr)
+{ // &#12525;
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+
+        if (tempStr.length == 6){
+			// HexCal return string
+			//var tempNo1 = HexCal(tempStr.substring(2,6), 16);
+			//resultStr += "&#" + tempNo1 + "\;";
+			resultStr += "0x" + tempStr.substring(2, 6) + " ";
+			continue;
+        }
+        resultStr += partStr;
+    }
+    Display(resultStr);
+}
+
+
+function UTF2U(sourceStr)
+{ // &#12525;
+/*
+先搜尋「&#」的位置，抓2+5+1共8個字
+*/
+    var resultStr = "";
+    var partStr = "";
+    var utfP = 0;
+    var lastUtfP = 0;
+    while ((utfP = sourceStr.indexOf("&#",utfP)) != -1) {
+        partStr = sourceStr.substr(utfP+2, 5);
+        //alert(partStr);
+        resultStr += sourceStr.substring(lastUtfP, utfP) + unescape("%u" + HexCal(partStr, 10));
+        lastUtfP = utfP + 8;
+        utfP++;
+    }
+    resultStr += sourceStr.substring(lastUtfP, sourceStr.length);
+
+    Display(resultStr);
+}
+
+
+function dec2char(CHAR)
+{
+    var number = eval(CHAR);
+    var str = HexCal(CHAR,10);
+    str = "%u" + str;
+    return unescape(str);
+}
+
+
+function Display(STR)
+{
+    document.form1.textarea2.value = STR;
+    var resultDiv = document.getElementById("resultDiv");
+    
+    if (document.form1.checkbox1.checked){
+        resultDiv.innerHTML = STR.replace(/\n/g,"<br />");
+    }
+    else {
+        resultDiv.innerHTML = "";
+    }
+}
+
+
+function HexCal(STR,FLAG)
+{ //傳入字串，也傳回字串。FLAG為16時，從16轉為10，為10時，從10轉為16。不固定字串長度，即不補0
+  var hexArray=new Array();
+  hexArray[0]="0";
+  hexArray[1]="1";
+  hexArray[2]="2";
+  hexArray[3]="3";
+  hexArray[4]="4";
+  hexArray[5]="5";
+  hexArray[6]="6";
+  hexArray[7]="7";
+  hexArray[8]="8";
+  hexArray[9]="9";
+  hexArray[10]="A";
+  hexArray[11]="B";
+  hexArray[12]="C";
+  hexArray[13]="D";
+  hexArray[14]="E";
+  hexArray[15]="F";
+
+  if (FLAG == 16){
+    //把16位元轉為10進位；30C3
+    var decResult=0;
+    
+    for (var x=0;x<STR.length;x++){
+      var workChar=STR.substring(x,x+1);
+      var workInt=0;
+
+      for (var y=0;y<16;y++){ //分別改為10進位
+	      if (workChar==hexArray[y]){
+		      workInt=y;
+		    }
+  	  }
+  	  
+  	  //將轉換後的數字，乘上其所在的位數乘於16
+  	  for (var z=STR.length;z>=x+2;z--){
+	  	  workInt*=16;
+	  	}
+	  	
+	  	decResult+=workInt;
+	  }
+	  
+	  return ""+decResult;
+  }
+  else if (FLAG == 10){
+    //把10進位轉為16進位；12483
+    var workNum=eval(STR);
+    var hexResult="";
+    
+    while (workNum>0){
+	    var workMod=workNum%16;
+	    
+	    hexResult=hexArray[workMod]+hexResult;
+	    workNum=Math.floor(workNum/16);
+	  }
+
+	  return hexResult;
+  }
+}
+
+
+function showDictionary()
+{
+    var resultStr = "";
+    var i = 0;
+    for (var x = 0; x < 65535; x++){
+        if (unicode[x] != 0){
+            resultStr += unescape("%u" + HexCal(x,10)) + "->" + unescape("%u" + HexCal(unicode[x],10)) + "  ";
+            i++;
+        }
+        if (i == 8){
+            resultStr += "\n";
+            i = 0;
+        }
+    }
+    document.form1.textarea1.value = resultStr;
+
+    resultStr = "";
+    for (var x = 0; x < 65535; x++){
+        if (big5[x] != 0){
+            resultStr += unescape("%u" + HexCal(x,10)) + "->" + unescape("%u" + HexCal(big5[x],10)) + "  ";
+            i++;
+        }
+        if (i == 8){
+            resultStr += "\n";
+            i = 0;
+        }
+    }
+    document.form1.textarea2.value = resultStr;
+}
+
+
+function Exchange()
+{
+    var temp = document.form1.textarea1.value;
+    document.form1.textarea1.value = document.form1.textarea2.value;
+    document.form1.textarea2.value = temp;
+}
+
+
+function Test(sourceStr)
+{
+    var resultStr = "";
+
+    var n = 0;
+    while (n < sourceStr.length){
+        var tempStr = escape(sourceStr.substr(n++,1));
+        if (tempStr.length == 6){
+            if (tempStr == "%u3000")
+                resultStr += '\n';
+            else
+                resultStr += tempStr;
+        }
+        else {
+            resultStr += tempStr;
+        }
+    }
+    resultStr = resultStr.replace(/%0D%0A%0D%0A/g, "\n");
+    resultStr = resultStr.replace(/%0D%0A/g, "");
+
+    resultStr = unescape(resultStr);
+    B2U(resultStr);
+    Display(resultStr);
+}
+
+
+function Test2(sourceStr)
+{
+/* old
+    var resultStr = "";
+    var n = 0;
+    while (n < sourceStr.length){
+        var tempStr = escape(sourceStr.substr(n++,1));
+        resultStr += tempStr + " ";
+    }
+*/
+/*
+    var resultStr = "";
+    for (var x = 0; x < sourceStr.length; x++){
+        var partStr = sourceStr.substring(x, x+1);
+        var tempStr = escape(partStr);
+        if (tempStr.length == 6){
+          var tempNo = unicode[HexCal(tempStr.substring(2,6), 16)];
+          if (tempNo != 0)
+              partStr = dec2char(tempNo);
+        }
+        resultStr += partStr;
+    }
+*/
+    U2B(sourceStr);
+    document.form1.textarea2.select();
+     var strObj = document.selection.createRange();
+     sss = strObj.execCommand("copy",true);
+    //Display(resultStr);
+    
+}
+
+
+function Select(fun_name)
+{
+    eval(fun_name);
+}
+
+function wy_decode($str)
+{
+    // $str = Advb5566Sj#rpWn#n#oAABrDEG#u#x#pi#drdL#j#p#g
+    var $str = new String($str);
+    var $real_path = "";
+    var $f = 0;
+    var $flg = 0;
+    for (var $i=0; $i<$str.length; $i++)
+    {
+        $code = $str.charCodeAt($i);
+        if ($code != 35) // 35 is #
+        {
+            if ($f != 0 && $f == $i - 1)
+            {
+                $real_path += $str.charAt($i);
+            }
+            else // first go here
+            {
+
+                $code = $code - $flg;
+                $real_path += String.fromCharCode($code);
+                //
+            }
+            $flg ++;
+        }
+        else
+        {
+            $f = $i;
+        }
+    }
+    return $real_path;
+}
+
+function U2htmlspecialchars(sourceStr)
+{
+	var resultStr = sourceStr;
+
+	// new_string = source_string.replace(RegExp, replacement);
+	resultStr = resultStr.replace(/&/g, "&amp;");
+	resultStr = resultStr.replace(/</g, "&lt;");
+	resultStr = resultStr.replace(/>/g, "&gt;");
+	//resultStr = resultStr.replace(/\"/g, "&quot;");
+	//resultStr = resultStr.replace(/\'/g, "&#039;");
+
+	Display(resultStr);
+}
+
+function htmlspecialchars2U(sourceStr)
+{
+	var resultStr = sourceStr;
+
+	// new_string = source_string.replace(RegExp, replacement);
+	resultStr = resultStr.replace(/&amp;/g, "&");
+	resultStr = resultStr.replace(/&lt;/g, "<");
+	resultStr = resultStr.replace(/&gt;/g, ">");
+	resultStr = resultStr.replace(/&quot;/g, "\"");
+	resultStr = resultStr.replace(/&#039;/g, "\'");
+
+	Display(resultStr);
+	return resultStr;
+}
+
+function beautifyXML(sourceStr)
+{
+	var resultStr = sourceStr;
+
+	// replace special chars back ( &lt; to <)
+	resultStr = htmlspecialchars2U(resultStr);
+
+	// beautify, indent
+	resultStr = resultStr.replace(/></g, '>\r\n<');
+
+	Display(resultStr);
+}
+
+function forWY(sourceStr)
+{
+	
+}
+
+
+/**
+*
+* Base64 encode / decode
+* http://www.webtoolkit.info/
+*
+**/
+
+var Base64 = {
+
+    // private property
+    _keyStr : "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
+
+    // public method for encoding
+    encode : function (input) {
+        var output = "";
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+        var i = 0;
+
+        input = Base64._utf8_encode(input);
+
+        while (i < input.length) {
+
+            chr1 = input.charCodeAt(i++);
+            chr2 = input.charCodeAt(i++);
+            chr3 = input.charCodeAt(i++);
+
+            enc1 = chr1 >> 2;
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);
+            enc4 = chr3 & 63;
+
+            if (isNaN(chr2)) {
+                enc3 = enc4 = 64;
+            } else if (isNaN(chr3)) {
+                enc4 = 64;
+            }
+
+            output = output +
+            this._keyStr.charAt(enc1) + this._keyStr.charAt(enc2) +
+            this._keyStr.charAt(enc3) + this._keyStr.charAt(enc4);
+
+        }
+
+        return output;
+    },
+
+    // public method for decoding
+    decode : function (input) {
+        var output = "";
+        var chr1, chr2, chr3;
+        var enc1, enc2, enc3, enc4;
+        var i = 0;
+
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");
+
+        while (i < input.length) {
+
+            enc1 = this._keyStr.indexOf(input.charAt(i++));
+            enc2 = this._keyStr.indexOf(input.charAt(i++));
+            enc3 = this._keyStr.indexOf(input.charAt(i++));
+            enc4 = this._keyStr.indexOf(input.charAt(i++));
+
+            chr1 = (enc1 << 2) | (enc2 >> 4);
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+            chr3 = ((enc3 & 3) << 6) | enc4;
+
+            output = output + String.fromCharCode(chr1);
+
+            if (enc3 != 64) {
+                output = output + String.fromCharCode(chr2);
+            }
+            if (enc4 != 64) {
+                output = output + String.fromCharCode(chr3);
+            }
+
+        }
+
+        output = Base64._utf8_decode(output);
+
+        return output;
+
+    },
+
+    // private method for UTF-8 encoding
+    _utf8_encode : function (string) {
+        string = string.replace(/\r\n/g,"\n");
+        var utftext = "";
+
+        for (var n = 0; n < string.length; n++) {
+
+            var c = string.charCodeAt(n);
+
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            }
+            else if((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+
+        }
+
+        return utftext;
+    },
+
+    // private method for UTF-8 decoding
+    _utf8_decode : function (utftext) {
+        var string = "";
+        var i = 0;
+        var c = c1 = c2 = 0;
+
+        while ( i < utftext.length ) {
+
+            c = utftext.charCodeAt(i);
+
+            if (c < 128) {
+                string += String.fromCharCode(c);
+                i++;
+            }
+            else if((c > 191) && (c < 224)) {
+                c2 = utftext.charCodeAt(i+1);
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
+                i += 2;
+            }
+            else {
+                c2 = utftext.charCodeAt(i+1);
+                c3 = utftext.charCodeAt(i+2);
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
+                i += 3;
+            }
+
+        }
+
+        return string;
+    }
+
+}
+
+//-->
+</script>
+</head>
+<body bgcolor="skyblue">
+
+<form name="form1">
+<textarea name="textarea1" rows="10" cols="100" style="font-size:12pt; font-family: sans-serif;" wrap="off"></textarea>
+<br />
+<select name="select1">
+<option value="beautifyXML(document.form1.textarea1.value)" selected>Beautify XML of CurrentURIMetaData</option>
+<option value="U2htmlspecialchars(document.form1.textarea1.value)" >htmlspecialchars encode</option>
+<option value="htmlspecialchars2U(document.form1.textarea1.value)">htmlspecialchars decode</option>
+<option value="Display(Base64.encode(document.form1.textarea1.value))">base64 Encode</option>
+<option value="Display(Base64.decode(document.form1.textarea1.value))">base64 Decode</option>
+<option value="Latin2U(document.form1.textarea1.value)">[unescape]Latin-1 -> unicode</option>
+<option value="U2URIencode(document.form1.textarea1.value)">URI encode</option>
+<option value="URIencode2U(document.form1.textarea1.value)">URI decode</option>
+<option value="U2URICencode(document.form1.textarea1.value)">URIComponent encode</option>
+<option value="URICencode2U(document.form1.textarea1.value)">URIComponent decode</option>
+<option value="B2U(document.form1.textarea1.value)">big5 -> unicode</option>
+<option value="U2B(document.form1.textarea1.value)">unicode -> big5</option>
+<option value="U2Bneo(document.form1.textarea1.value)">unicode -> big5(for neowing)</option>
+<option value="U2UTF(document.form1.textarea1.value)">unicode -> UTF (selected)</option>
+<option value="toUTFa(document.form1.textarea1.value)">[&#;] -> UTF (all)</option>
+<option value="UTF2U(document.form1.textarea1.value)">UTF -> unicode</option>
+<option value="toLatinBr(document.form1.textarea1.value)">[escape] -> Latin-1 (break)</option>
+<option value="toLatin(document.form1.textarea1.value)">[escape] -> Latin-1 (one line)</option>
+<option value="allCharCodeAt(document.form1.textarea1.value)">all to charCodeAt</option>
+<option value="allCharCodeAtFormat(document.form1.textarea1.value)">all to charCodeAt (format)</option>
+<option value="allFromCharCodeFormat(document.form1.textarea1.value)">fromCharCode (space split)</option>
+
+
+<option value="showDictionary()">show dictionary</option>
+</select>
+<input type="button" name="buttonTranslate" value="translate" onClick="Select(document.form1.select1.value)" />
+<input type="button" name="buttonExchange" value="↑↓" onClick="Exchange()" />
+　｜　
+<input type="checkbox" name="checkbox1" />使用DIV
+<input type="button" name="buttonTest" value="Test" onClick="alert(wy_decode('Advb5566Sj#rpWn#n#oAABrDEG#u#x#pi#drdL#j#p#g'))" />
+<input type="button" name="buttonTest2" value="Test2" onClick="Test2(document.form1.textarea1.value)" />
+<br />
+<textarea name="textarea2" rows="20" cols="100" style="font-size:12pt; font-family: sans-serif;" wrap="off"></textarea>
+</form>
+
+
+<div id="resultDiv" style="background-color:lightblue ; height:10 ;">
+
+</div>
+</body>
+</html>
