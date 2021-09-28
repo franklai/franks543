@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="zh-TW">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>P幣 扣稅 計算程式 (2021)</title>
+
+    <style type="text/css">
+      body {
+        font-size: 1.5rem;
+      }
+      input[type="number"] {
+        font-size: 1.5rem;
+      }
+      p {
+        font-size: 1rem;
+      }
+      textarea {
+        width: 600px;
+        height: 200px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      你要付出（稅前）：
+      <input type="number" id="before_tax" value="" min="0" max="999999" />
+    </div>
+    <div>
+      對方收到（稅後）：
+      <input type="number" id="after_tax" value="" min="0" max="999999" />
+    </div>
+    <div>
+      <p>稅率說明：截自 Ptt 使用手冊 第八章 娛樂休閒</p>
+      <textarea readonly>
+                                                                               
+　　△ 給其他人Ptt幣：                                                          
+                                                                    
+　　　這裡提供把p幣送人的功能（使用者名單按 g 也可以），但是會被系統扣         
+　　　稅，稅率為 10% 無條件進位。                                              
+                                                                    
+　　　在輸入金額時，可按 TAB 切換輸入稅前/稅後金額。                           
+　　　為了避免誤按或是惡意詐騙，在完成交易前要重新確認您的身份。               
+                                                                          
+　　　交易完成後，可自行修改紅包袋，修改方法跟編輯文章一樣。                   
+                                                     
+      </textarea>
+    </div>
+
+    <script type="application/javascript">
+      const $ = (selector) => document.querySelector(selector);
+
+      const beforeTax = $("#before_tax");
+      const afterTax = $("#after_tax");
+
+      const validate = (value) => {
+        if (isNaN(value)) {
+          return false;
+        }
+        if (value < 0) {
+          return false;
+        }
+        return true;
+      };
+
+      const fromBeforeTax = (event) => {
+        const value = event.target.value;
+        if (!validate(value)) {
+          afterTax.value = 0;
+          return;
+        }
+
+        const tax = Math.ceil(value / 10);
+        afterTax.value = value - tax;
+      };
+
+      const fromAfterTax = (event) => {
+        const value = event.target.value;
+        if (!validate(value)) {
+          beforeTax.value = 0;
+          return;
+        }
+
+        const beforeValue = Math.ceil((value / 9) * 10);
+        beforeTax.value = beforeValue;
+      };
+
+      ["keyup", "change", "paste"].forEach((eventName) => {
+        beforeTax.addEventListener(eventName, fromBeforeTax);
+        afterTax.addEventListener(eventName, fromAfterTax);
+      });
+    </script>
+  </body>
+</html>
