@@ -6,6 +6,7 @@
 - [豬豬](http://www.zzrbl.com/wordpress/?cat=11)
 - [日菁](http://www.mytvbt.net/forumdisplay.php?fid=6)
 - [TVBOXNOW](http://www.tvboxnow.com/forum-10-1.html)
+- [BTDigg](https://btdig.com/search?order=2&q=FIX%E5%AD%97%E5%B9%95%E4%BE%A0)
 
 ## BitTorrent
 - [share.dmhy.org](https://share.dmhy.org/); [dmhy.anoneko.com](https://dmhy.anoneko.com/)
